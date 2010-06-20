@@ -1,0 +1,8 @@
+Django==1.2.1
+
+bpython==0.9.6.2
+django-staticfiles==0.2.0
+django-extensions==0.5
+python-memcached==1.45
+simplejson==2.1.1
+Werkzeug==0.6
