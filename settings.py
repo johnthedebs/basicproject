@@ -40,6 +40,8 @@ MEDIA_URL = '/site_media/media/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'site_media', 'static')
 STATIC_URL = '/site_media/static/'
 
+STATICFILES_DIRS = ( os.path.join(PROJECT_ROOT, 'site_media', 'static'), )
+
 ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, 'admin/')
 
 SECRET_KEY = '6#6n8iw^^_omeljfmgs55+=-rnl5zc^cs2zp7ctoeja6v8w#9z'
