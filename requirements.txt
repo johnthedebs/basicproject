@@ -1,6 +1,6 @@
-Django==1.2.2
+Django==1.2.3
 
-bpython==0.9.6.2
+bpython==0.9.7.1
 django-debug-toolbar==0.8.3
 django-extensions==0.5
 django-staticfiles==0.2.0
