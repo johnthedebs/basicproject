@@ -36,3 +36,4 @@ To Rename
 =========
 
 Change instances of "basicproject" to your project name (the directory name and in settings.py).
+
