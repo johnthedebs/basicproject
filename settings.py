@@ -80,7 +80,7 @@ INSTALLED_APPS = (
     "django.contrib.sessions",
     "django.contrib.sites",
     "django.contrib.messages",
-    
+
     "debug_toolbar",
     "django_extensions",
     "staticfiles",
