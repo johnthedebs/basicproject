@@ -16,14 +16,12 @@ To Get Started
 
 From your terminal:
 
-    git clone git@github.com:johnthedebs/basicproject.git
-    cd basicproject
-    mkvirtualenv basicproject --no-site-packages # optional
+    git clone git@github.com:johnthedebs/basicproject.git project_name
+    cd project_name
+    mkvirtualenv project_name --no-site-packages # optional
     pip install -r requirements.txt
     python manage.py syncdb
     python manage.py runserver
-
-Then change instances of "basicproject" to your project name (the project directory name and twice in settings.py).
 
 After that, you're ready to go!
 
@@ -40,3 +38,4 @@ Advantages over a vanilla `django-admin.py startproject` include:
  * An index page is set up (with the latest jQuery and jQueryUI)
  * A few common Django apps are included
  * A basic Compass project is set up
+ * Rename project directory without configuration (useful for deployment!)

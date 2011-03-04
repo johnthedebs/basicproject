@@ -2,6 +2,7 @@ import os.path
 import posixpath
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+PROJECT_NAME = os.path.split(PROJECT_ROOT)[1]
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -59,7 +60,7 @@ MIDDLEWARE_CLASSES = (
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 )
 
-ROOT_URLCONF = "basicproject.urls"
+ROOT_URLCONF = "%s.urls" % PROJECT_NAME
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, "templates"),
