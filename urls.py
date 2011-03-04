@@ -6,8 +6,8 @@ from staticfiles.urls import staticfiles_urlpatterns
 
 admin.autodiscover()
 
-urlpatterns = patterns("",
-    url(r"^$", "basicproject.views.index", name="home"),
+urlpatterns = patterns("%s.views" % settings.PROJECT_NAME,
+    url(r"^$", "index", name="home"),
     url(r"^admin/", include(admin.site.urls)),
 )
 
