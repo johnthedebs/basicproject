@@ -8,8 +8,10 @@ admin.autodiscover()
 
 urlpatterns = patterns("%s.views" % settings.PROJECT_NAME,
     url(r"^$", "index", name="home"),
+)
+
+urlpatters += patterns("",
     url(r"^admin/", include(admin.site.urls)),
 )
 
-if settings.DEBUG:
-    urlpatterns += staticfiles_urlpatterns()
+urlpatterns += staticfiles_urlpatterns()
