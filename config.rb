@@ -6,9 +6,9 @@ output_style = :compact
 line_comments = false
 # Set this to the root of your project when deployed:
 http_path = "/"
-css_dir = "css"
-sass_dir = "sass"
-images_dir = "img"
-javascripts_dir = "js"
+css_dir = "static_media/css"
+sass_dir = "static_media/sass"
+images_dir = "static_media/img"
+javascripts_dir = "static_media/js"
 # To enable relative paths to assets via compass helper functions:
 relative_assets = true
