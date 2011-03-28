@@ -1,15 +1,17 @@
 This Is
 =======
 
-A Django skeleton project set up the way I like to roll. The requirements file will install Django with the following apps:
+A Django skeleton project set up the way I like to roll. The
+requirements file will install Django with the following apps:
 
     django-debug-toolbar
     django-extensions
-    django-staticfiles
 
-as well as some supporting packages. See `requirements.txt` for a more complete list.
+as well as some supporting packages. See `requirements.txt` for a more
+complete list.
 
-It also takes care of the initial Django configuration that needs to be done for most projects, so that you can get started quickly.
+It also takes care of the initial Django configuration that needs to be
+done for most projects, so that you can get started quickly.
 
 To Get Started
 ==============
@@ -32,7 +34,7 @@ Advantages over a vanilla `django-admin.py startproject` include:
 
  * The settings.py file is configured with the essentials
  * The Django admin is enabled with autodiscover
- * The django-staticfiles app is install and set up
+ * The Django's staticfiles is installed and set up
  * The django-debug-toolbar app is installed and set up (but disabled by default)
  * An apps/ directory is set up for your apps
  * An index page is set up (with the latest jQuery and jQueryUI)
