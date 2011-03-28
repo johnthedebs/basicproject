@@ -1,8 +1,7 @@
-Django==1.2.5
+Django==1.3
 
 bpython==0.9.7.1
 django-debug-toolbar==0.8.4
 django-extensions==0.6
-django-staticfiles==1.0b1
 simplejson==2.1.3
 Werkzeug==0.6.2
