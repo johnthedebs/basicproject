@@ -18,16 +18,16 @@ done for most projects, so that you can get started quickly.
 To Get Started
 ==============
 
-From your terminal:
+From your terminal with pip, virtualenv, and virtualenvwrapper installed:
 
-    git clone git@github.com:johnthedebs/basicproject.git project_name
-    cd project_name
-    mkvirtualenv project_name --no-site-packages
+    git clone git@github.com:johnthedebs/basicproject.git <project_name>
+    cd <project_name>
+    mkvirtualenv <project_name> --no-site-packages
     pip install -r requirements.txt
     python manage.py syncdb
     python manage.py runserver
 
-After that, you're ready to go!
+That's it! Visit http://localhost:8000/ to see the fruits of your labor.
 
 Guidelines
 ==========
@@ -49,8 +49,7 @@ Advantages over a vanilla `django-admin.py startproject` include:
  * The Django admin is enabled with autodiscover
  * Django's staticfiles is installed and set up
  * The django-debug-toolbar app is installed and set up (but disabled by default)
- * An apps/ directory is set up for your apps
  * An index page is set up (with the latest jQuery and jQueryUI)
- * A few common Django apps are included
+ * Several common Django apps are included
  * A basic Compass project is set up
- * Rename project directory without configuration (useful for deployment!)
+ * You can rename the project directory without configuration
