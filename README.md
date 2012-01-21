@@ -29,6 +29,17 @@ From your terminal:
 
 After that, you're ready to go!
 
+Guidelines
+==========
+
+The project starts with one app, core, which serves as the main app. It
+contains the root URLconf and a basic index view to start with; you can
+expand it as you see fit.
+
+New custom apps should be at the same level in the directory hierarchy
+as core. You can run `django-admin.py startapp <app_name>` from the root
+of your project to add new apps.
+
 Benefits
 ========
 
@@ -36,7 +47,7 @@ Advantages over a vanilla `django-admin.py startproject` include:
 
  * The settings.py file is configured with the essentials
  * The Django admin is enabled with autodiscover
- * The Django's staticfiles is installed and set up
+ * Django's staticfiles is installed and set up
  * The django-debug-toolbar app is installed and set up (but disabled by default)
  * An apps/ directory is set up for your apps
  * An index page is set up (with the latest jQuery and jQueryUI)

@@ -40,9 +40,9 @@ SITE_ID = 1
 USE_I18N = False
 USE_L10N = False
 
-MEDIA_ROOT   = os.path.join(PROJECT_ROOT, "site_media", "media")
+MEDIA_ROOT   = os.path.join(PROJECT_ROOT, "..", "site_media", "media")
 MEDIA_URL    = "/media/"
-STATIC_ROOT  = os.path.join(PROJECT_ROOT, "site_media", "static")
+STATIC_ROOT  = os.path.join(PROJECT_ROOT, "..", "site_media", "static")
 STATIC_URL   = "/static/"
 COMPRESS_URL = STATIC_URL
 
@@ -111,8 +111,8 @@ INTERNAL_IPS = (
 )
 
 DEBUG_TOOLBAR_CONFIG = {
-    "INTERCEPT_REDIRECTS": False,
-    "SHOW_TOOLBAR_CALLBACK": False,
+    "INTERCEPT_REDIRECTS"   : False,
+    "SHOW_TOOLBAR_CALLBACK" : False,
 }
 
 try:
