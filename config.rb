@@ -6,10 +6,10 @@ line_comments = false
 
 # Set this to the root of your project when deployed:
 http_path       = "/"
-sass_dir        = "source/sass"
-css_dir         = "static/css"
-images_dir      = "static/img"
-javascripts_dir = "static/js"
+sass_dir        = "ui_source/styles"
+css_dir         = "static/styles"
+images_dir      = "static/images"
+javascripts_dir = "static/scripts"
 # To enable relative paths to assets via compass helper functions:
 relative_assets = true
 
