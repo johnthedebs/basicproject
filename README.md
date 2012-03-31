@@ -29,8 +29,8 @@ From your terminal with pip, virtualenv, and virtualenvwrapper installed:
 
 That's it! Visit http://localhost:8000/ to see the fruits of your labor.
 
-Guidelines
-==========
+Guidelines & Assumptions
+========================
 
 The project starts with one app, core, which serves as the main app. It
 contains the root URLconf and a basic index view to start with; you can
@@ -39,6 +39,10 @@ expand it as you see fit.
 New custom apps should be at the same level in the directory hierarchy
 as core. You can run `django-admin.py startapp <app_name>` from the root
 of your project to add new apps.
+
+The folders `static/scripts` and `static/styles` are set to be ignored by git,
+with the assumption that their contents are generated using something like
+CoffeeScript and Compass, respectively.
 
 Benefits
 ========
