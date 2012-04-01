@@ -18,6 +18,7 @@ CACHE
 *.sassc
 *.swp
 *.tmproj
+.vagrant
 local_settings.py
 pip-log.txt
 
