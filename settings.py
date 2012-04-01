@@ -32,21 +32,21 @@ DATABASES = {
     }
 }
 
-TIME_ZONE = "US/Eastern"
-LANGUAGE_CODE = "en-us"
-
 SITE_ID = 1
 
+TIME_ZONE = "UTC"
+USE_TZ    = True
+
+LANGUAGE_CODE = "en-us"
 USE_I18N = False
 USE_L10N = False
 
-MEDIA_ROOT   = os.path.join(PROJECT_ROOT, "..", "site_media", "media")
 MEDIA_URL    = "/media/"
-STATIC_ROOT  = os.path.join(PROJECT_ROOT, "..", "site_media", "static")
 STATIC_URL   = "/static/"
 COMPRESS_URL = STATIC_URL
 
-ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
+MEDIA_ROOT   = os.path.join(PROJECT_ROOT, "..", "site_media", "media")
+STATIC_ROOT  = os.path.join(PROJECT_ROOT, "..", "site_media", "static")
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, "static"),

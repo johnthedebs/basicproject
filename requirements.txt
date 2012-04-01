@@ -1,3 +1,6 @@
+# Use this if PyPI is problematic
+#-i http://crate.io/s/
+
 Django==1.4
 Fabric==1.4.0
 Pillow==1.7.6
