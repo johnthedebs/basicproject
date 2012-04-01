@@ -20,7 +20,8 @@ To Get Started
 
 From your terminal with pip, virtualenv, virtualenvwrapper, and django 1.4+ installed:
 
-    django-admin.py startproject --template=https://github.com/johnthedebs/basicproject.git <project_name>
+    git clone https://github.com/johnthedebs/basicproject.git
+    django-admin.py startproject --template=./basicproject/ <project_name>
     cd <project_name>
     mkvirtualenv <project_name>
     pip install -r requirements.txt
