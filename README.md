@@ -18,11 +18,11 @@ done for most projects, so that you can get started quickly.
 To Get Started
 ==============
 
-From your terminal with pip, virtualenv, and virtualenvwrapper installed:
+From your terminal with pip, virtualenv, virtualenvwrapper, and django 1.4+ installed:
 
-    git clone git@github.com:johnthedebs/basicproject.git <project_name>
+    django-admin.py startproject --template=https://github.com/johnthedebs/basicproject.git <project_name>
     cd <project_name>
-    mkvirtualenv <project_name> --no-site-packages
+    mkvirtualenv <project_name>
     pip install -r requirements.txt
     python manage.py syncdb
     python manage.py runserver
