@@ -95,14 +95,14 @@ INSTALLED_APPS = (
     "django.contrib.sites",
     "django.contrib.staticfiles",
 
-    # 3rd-party apps
+    # External apps
     "compressor",
     "debug_toolbar",
     "django_extensions",
     #"south",
     "uni_form",
 
-    # Our apps
+    # Internal apps
     "core",
 )
 

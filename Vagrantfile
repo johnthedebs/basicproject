@@ -1,6 +1,6 @@
 Vagrant::Config.run do |config|
-    config.vm.box = "lucid32"
-    config.vm.box_url = "http://files.vagrantup.com/lucid32.box"
+    config.vm.box = "precise32"
+    config.vm.box_url = "http://files.vagrantup.com/precise32.box"
     config.vm.forward_port 80, 8080
     config.vm.share_folder "basicproject", "/var/www/basicproject/basicproject/", "."
     config.vm.customize [
@@ -42,9 +42,10 @@ Vagrant::Config.run do |config|
           },
           "ubuntu_python_packages" => ["python-setuptools", "python-dev", "libpq-dev"],
           "pip_python_packages" => {
-              "virtualenv" => "1.7.1.2",
-              "virtualenvwrapper" => "3.0.1",
-              "mercurial" => "2.0.2"
+                "virtualenv" => "1.9.1",
+                "virtualenvwrapper" => "4.0",
+                "pip" => "1.3.1",
+                "mercurial" => "2.6"
           },
       }
     end

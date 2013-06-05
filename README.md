@@ -7,7 +7,6 @@ requirements file will install Django with the following apps:
     django-compressor
     django-debug-toolbar
     django-extensions
-    django-uni-form
 
 as well as some supporting packages. See `requirements.txt` for a more
 complete list.
