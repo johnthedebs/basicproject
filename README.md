@@ -18,7 +18,7 @@ From your terminal with git and django 1.4+ installed:
     vagrant ssh
     runserver
 
-That's it! Visit http://localhost:8080/ to see the fruits of your labor.
+That's it! Visit [http://localhost:8080/](http://localhost:8080/) to see the fruits of your labor.
 
 
 Guidelines & Assumptions
