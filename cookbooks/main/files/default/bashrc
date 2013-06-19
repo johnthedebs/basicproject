@@ -24,8 +24,12 @@ if [ -s /usr/local/rvm/scripts/rvm ]; then
     source /usr/local/rvm/scripts/rvm;
 fi
 
+alias cdlogs="cd /var/www/basicproject/logs/"
+alias cdproject="cd /var/www/basicproject/basicproject/"
+alias killzombies="sudo pkill -9 python; sudo pkill -9 gunicorn; echo 'All done.'"
+alias purge_pyc="find . -name '*.pyc' -exec rm -rf {} \;"
+alias runserver="python manage.py runserver"
 alias ssv="sudo supervisorctl"
-alias cdlive="cd /var/www/basicproject/live"
 
 umask 0002
 
@@ -125,4 +129,10 @@ if [ -n "$PS1" ]; then
     if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
         . /etc/bash_completion
     fi
+fi
+
+cd /var/www/basicproject/basicproject/
+
+if [ -d /var/www/envs/basicproject/ ]; then
+    source /var/www/envs/basicproject/bin/activate
 fi
