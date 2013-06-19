@@ -8,7 +8,7 @@ end
 script "Install supervisor" do
     interpreter "bash"
     user "root"
-    cwd "/tmp/src/"
+    cwd "/tmp/"
     code <<-EOH
     pip install supervisor cElementTree
     #update-rc.d supervisord defaults

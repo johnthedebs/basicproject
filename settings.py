@@ -99,8 +99,7 @@ INSTALLED_APPS = (
     "compressor",
     "debug_toolbar",
     "django_extensions",
-    #"south",
-    "uni_form",
+    "south",
 
     # Internal apps
     "core",

@@ -22,7 +22,7 @@ end
 
 node[:pip_python_packages].each_pair do |pkg, version|
     execute "install-#{pkg}" do
-        command "pip install -U -i http://crate.io/s/ #{pkg}==#{version}"
+        command "pip install -U #{pkg}==#{version}"
         not_if "[ `pip freeze | grep #{pkg} | cut -d'=' -f3` = '#{version}' ]"
     end
 end

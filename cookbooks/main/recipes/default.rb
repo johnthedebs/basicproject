@@ -12,6 +12,13 @@ node[:base_packages].each do |pkg|
     end
 end
 
+# Install standard packages
+package "htop"
+package "ntp"
+package "tig"
+package "tmux"
+package "vim"
+
 ### Users/groups
 
 # Does the following setup for each user defined in node.json:
