@@ -44,6 +44,18 @@ directory "/var/www/basicproject/site_media/media/" do
     mode 0775
 end
 
+cookbook_file "/etc/nginx/sites-available/basicproject" do
+    source "nginx/sites-available/basicproject.conf"
+    owner "root"
+    group "root"
+    mode 0644
+end
+
+link "/etc/nginx/sites-enabled/basicproject" do
+    to "/etc/nginx/sites-available/basicproject"
+    notifies :restart, resources(:service => "nginx")
+end
+
 cookbook_file "/home/vagrant/.bashrc" do
     source "bashrc"
     owner "vagrant"

@@ -26,6 +26,7 @@ Vagrant.configure("2") do |config|
         ]
     end
 
+    config.vm.provision :shell, :inline => "gem install chef --no-ri --no-rdoc"
     config.vm.provision :chef_solo do |chef|
         chef.cookbooks_path = "cookbooks"
 
