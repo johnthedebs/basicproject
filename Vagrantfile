@@ -32,6 +32,7 @@ Vagrant.configure("2") do |config|
 
         chef.add_recipe "build-essential::default"
         chef.add_recipe "main::default"
+        #chef.add_recipe "main::security"
         chef.add_recipe "main::python"
         chef.add_recipe "main::nodejs"
         chef.add_recipe "main::compass"
