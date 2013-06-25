@@ -1,9 +1,8 @@
 syntax: glob
 
 # Directories
-site_media/media
-static/scripts
-static/styles
+site_media
+static_files
 search_index
 .sass-cache
 CACHE
