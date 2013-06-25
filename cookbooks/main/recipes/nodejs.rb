@@ -2,7 +2,6 @@ script "Add nodejs PPA" do
     interpreter "bash"
     user "root"
     code <<-EOH
-    aptitude install -y python-software-properties
     add-apt-repository ppa:chris-lea/node.js
     aptitude update
     EOH

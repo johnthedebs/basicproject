@@ -8,15 +8,6 @@ Vagrant.configure("2") do |config|
     config.vm.synced_folder ".", "/var/www/basicproject/basicproject/"
     config.ssh.forward_agent = true
 
-    # Create a private network, which allows host-only access to the machine
-    # using a specific IP.
-    # config.vm.network :private_network, ip: "192.168.33.10"
-
-    # Create a public network, which generally matched to bridged network.
-    # Bridged networks make the machine appear as another physical device on
-    # your network.
-    # config.vm.network :public_network
-
     config.vm.provider :virtualbox do |vb|
         vb.customize [
             "modifyvm", :id,
@@ -30,7 +21,6 @@ Vagrant.configure("2") do |config|
     config.vm.provision :chef_solo do |chef|
         chef.cookbooks_path = "cookbooks"
 
-        chef.add_recipe "build-essential::default"
         chef.add_recipe "main::default"
         #chef.add_recipe "main::security"
         chef.add_recipe "main::python"
@@ -56,7 +46,7 @@ Vagrant.configure("2") do |config|
                     "members" => ["root", "basicproject", "www-data", "vagrant"]
                 }
             },
-            "ubuntu_python_packages" => ["python-setuptools", "python-dev", "libpq-dev"],
+            "ubuntu_python_packages" => ["python-setuptools", "python-dev", "python-software-properties"],
             "pip_python_packages" => {
                     "virtualenv" => "1.9.1",
                     "virtualenvwrapper" => "4.0",

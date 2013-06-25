@@ -6,6 +6,7 @@ package "postgresql-9.1-postgis"
 package "postgresql-server-dev-9.1"
 package "libproj-dev"
 package "gdal-bin"
+package "libpq-dev"
 
 service "postgresql" do
     enabled true
@@ -38,17 +39,6 @@ cookbook_file "/etc/postgresql/9.1/main/pg_hba.conf" do
     group "postgres"
     mode 0644
     notifies :reload, resources(:service => "postgresql"), :immediately
-end
-
-
-# More PostgreSQL Setup
-
-cookbook_file "/etc/postgresql/9.1/main/postgresql.conf" do
-    source "postgresql/postgresql_default.conf"
-    owner "root"
-    group "root"
-    mode 0644
-    notifies :restart, resources(:service => "postgresql")
 end
 
 # TODO: This user shouldn't need to be a superuser

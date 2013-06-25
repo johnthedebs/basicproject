@@ -6,11 +6,22 @@
 # Just base packages required by the whole system here, please.
 # Dependencies for other recipes should live in those recipes.
 
+execute "apt-get update" do
+    action :run
+end
+
 node[:base_packages].each do |pkg|
     package pkg do
         :upgrade
     end
 end
+
+# Install build-essential packages
+package "build-essential"
+package "binutils-doc"
+package "autoconf"
+package "flex"
+package "bison"
 
 # Install standard packages
 package "htop"
@@ -70,8 +81,3 @@ node[:groups].each_pair do |name, info|
         members info[:members]
     end
 end
-
-execute "apt-get update" do
-    action :run
-end
-

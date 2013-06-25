@@ -92,3 +92,12 @@ script "Install Requirements" do
     /var/www/envs/basicproject/bin/pip install -r /var/www/basicproject/basicproject/requirements.txt --exists-action=w
     EOH
 end
+
+script "Syncdb and migrate" do
+    interpreter "bash"
+    user "vagrant"
+    cwd "/var/www/basicproject/basicproject/"
+    code <<-EOH
+    /var/www/envs/basicproject/bin/python manage.py syncdb --migrate --noinput
+    EOH
+end
