@@ -1,5 +1,6 @@
 import fcntl
 import os
+import shutil
 import subprocess
 import sys
 import time
@@ -28,6 +29,16 @@ def watch():
     """
     processes = []
 
+    # Clear existing static files and copy over stuff that doesn't need
+    # to be processed.
+    if os.path.exists("./static_files"):
+        print "Clearing current static files..."
+        shutil.rmtree("./static_files")
+    print "Copying library and image files..."
+    shutil.copytree("./static_source/lib", "./static_files/lib")
+    shutil.copytree("./static_source/img", "./static_files/img")
+
+    print "Starting watchers...\n"
     for command in commands:
         processes.append(subprocess.Popen(
             command,
@@ -45,7 +56,7 @@ def watch():
                 sys.stdout.write(line)
             line = ''.join([nb_readline(p.stdout) for p in processes])
             [p.stdout.flush() for p in processes]
-            time.sleep(0.1)
+            time.sleep(0.4)
         except KeyboardInterrupt:
             break
     [p.wait() for p in processes]
