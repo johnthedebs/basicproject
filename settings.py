@@ -49,7 +49,7 @@ MEDIA_ROOT   = os.path.join(PROJECT_ROOT, "..", "site_media", "media")
 STATIC_ROOT  = os.path.join(PROJECT_ROOT, "..", "site_media", "static")
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, "static"),
+    os.path.join(PROJECT_ROOT, "static_files"),
 )
 
 STATICFILES_FINDERS = (
@@ -71,7 +71,6 @@ MIDDLEWARE_CLASSES = (
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    #"debug_toolbar.middleware.DebugToolbarMiddleware",
 )
 
 ROOT_URLCONF = "core.urls"
@@ -82,6 +81,8 @@ TEMPLATE_DIRS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.csrf",
+    "django.core.context_processors.debug",
     "django.core.context_processors.static",
 )
 
@@ -97,7 +98,7 @@ INSTALLED_APPS = (
 
     # External apps
     "compressor",
-    "debug_toolbar",
+    #"debug_toolbar",
     "django_extensions",
     "raven.contrib.django.raven_compat",
     "rest_framework",
@@ -113,49 +114,46 @@ INTERNAL_IPS = (
 
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS"   : False,
-    "SHOW_TOOLBAR_CALLBACK" : False,
 }
 
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': True,
-    'formatters': {
-        'verbose': {
-            'datefmt' : '%Y-%m-%d %H:%M:%S',
-            'format'  : '[%(asctime)s] [%(levelname)s] [%(module)s] %(message)s',
+    "version": 1,
+    "disable_existing_loggers": True,
+    "formatters": {
+        "verbose": {
+            "datefmt" : "%Y-%m-%d %H:%M:%S",
+            "format"  : "[%(asctime)s] [%(levelname)s] [%(module)s] %(message)s",
         },
     },
-    'handlers': {
-        'sentry': {
-            'level' : 'INFO',
-            'class' : 'raven.contrib.django.handlers.SentryHandler',
+    "handlers": {
+        "sentry": {
+            "level" : "INFO",
+            "class" : "raven.contrib.django.handlers.SentryHandler",
         },
-        'console': {
-            'level'     : 'DEBUG',
-            'class'     : 'logging.StreamHandler',
-            'formatter' : 'verbose',
+        "console": {
+            "level"     : "DEBUG",
+            "class"     : "logging.StreamHandler",
+            "formatter" : "verbose",
         },
     },
-    'root': {
-        'level'    : 'INFO',
-        'handlers' : ['sentry'],
+    "root": {
+        "level"    : "INFO",
+        "handlers" : ["sentry"],
     },
-    'loggers': {
-        'django': {
-            'level'     : 'INFO',
-            'handlers'  : ['sentry'],
+    "loggers": {
+        "django": {
+            "level"     : "INFO",
+            "handlers"  : ["sentry"],
         },
-        'raven': {
-            'level'     : 'DEBUG',
-            'handlers'  : ['console'],
-            'propagate' : False,
+        "raven": {
+            "level"     : "DEBUG",
+            "handlers"  : ["console"],
+            "propagate" : False,
         },
-        'sentry.errors': {
-            'level'     : 'DEBUG',
-            'handlers'  : ['console'],
-            'propagate' : False,
+        "sentry.errors": {
+            "level"     : "DEBUG",
+            "handlers"  : ["console"],
+            "propagate" : False,
         },
     },
 }
