@@ -56,6 +56,13 @@ link "/etc/nginx/sites-enabled/basicproject" do
     notifies :restart, resources(:service => "nginx")
 end
 
+cookbook_file "/home/vagrant/.django_bash_completion" do
+    source "django_bash_completion"
+    owner "vagrant"
+    group "vagrant"
+    mode 0755
+end
+
 cookbook_file "/home/vagrant/.bashrc" do
     source "bashrc"
     owner "vagrant"

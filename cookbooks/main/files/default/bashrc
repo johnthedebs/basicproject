@@ -136,3 +136,6 @@ cd /var/www/basicproject/basicproject/
 if [ -d /var/www/envs/basicproject/ ]; then
     source /var/www/envs/basicproject/bin/activate
 fi
+
+# Support for autocompletion of django management commands
+source $HOME/.django_bash_completion
