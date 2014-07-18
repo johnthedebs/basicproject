@@ -48,10 +48,11 @@ Vagrant.configure("2") do |config|
             },
             "ubuntu_python_packages" => ["python-setuptools", "python-dev", "python-software-properties"],
             "pip_python_packages" => {
-                    "virtualenv" => "1.11.1",
-                    "virtualenvwrapper" => "4.2",
-                    "pip" => "1.5.1",
-                    "mercurial" => "2.8.2"
+                    "virtualenv" => "1.11.6",
+                    "virtualenvwrapper" => "4.3",
+                    "pip" => "1.5.6",
+                    "pip-tools" => "0.3.4",
+                    "mercurial" => "3.0.1"
             },
         }
     end

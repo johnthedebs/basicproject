@@ -10,7 +10,7 @@ script "Install supervisor" do
     user "root"
     cwd "/tmp/"
     code <<-EOH
-    pip install supervisor cElementTree
+    pip install supervisor
     #update-rc.d supervisord defaults
     EOH
     not_if "which supervisorctl"

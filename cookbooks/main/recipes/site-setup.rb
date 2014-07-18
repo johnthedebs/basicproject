@@ -90,6 +90,15 @@ execute "Create virtualenv" do
     not_if "test -f /var/www/envs/basicproject/bin/python"
 end
 
+# TODO: This is purged because of a permission conflict.
+# There may be a better way of handling that conflict.
+script "Purge pip cache" do
+    interpreter "bash"
+    user "root"
+    cwd "/tmp/"
+    code "rm -rf pip"
+end
+
 script "Install Requirements" do
     interpreter "bash"
     user "vagrant"
