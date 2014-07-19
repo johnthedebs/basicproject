@@ -16,8 +16,12 @@ MANAGERS = ADMINS
 
 CACHES = {
     "default": {
-        "BACKEND"  : "django.core.cache.backends.dummy.DummyCache",
-        "LOCATION" : "",
+        "BACKEND"  : "redis_cache.cache.RedisCache",
+        "LOCATION" : "127.0.0.1:6379:1",
+    },
+    "sessions": {
+        "BACKEND"  : "redis_cache.cache.RedisCache",
+        "LOCATION" : "127.0.0.1:6379:2",
     }
 }
 
@@ -31,6 +35,9 @@ DATABASES = {
         "PORT"     : "",
     }
 }
+
+SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+SESSION_CACHE_ALIAS = "sessions"
 
 POSTGIS_VERSION = (2, 1, 2)
 

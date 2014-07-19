@@ -21,12 +21,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         chef.cookbooks_path = "cookbooks"
 
         chef.add_recipe "main::default"
-        #chef.add_recipe "main::security"
         chef.add_recipe "main::python"
         chef.add_recipe "main::nodejs"
         chef.add_recipe "main::compass"
         chef.add_recipe "main::supervisor"
         chef.add_recipe "main::postgresql"
+        chef.add_recipe "main::redis"
         chef.add_recipe "main::nginx"
         chef.add_recipe "main::site-setup"
 
