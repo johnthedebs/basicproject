@@ -1,9 +1,10 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.configure("2") do |config|
-    config.vm.box = "precise32"
-    config.vm.box_url = "http://files.vagrantup.com/precise32.box"
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    config.vm.box = "ubuntu/trusty64"
     config.vm.network :forwarded_port, guest: 80, host: 8080
     config.vm.synced_folder ".", "/var/www/basicproject/basicproject/"
     config.ssh.forward_agent = true
@@ -12,12 +13,10 @@ Vagrant.configure("2") do |config|
         vb.customize [
             "modifyvm", :id,
             "--name", "basicproject",
-            "--memory", "512",
-            "--nictype1", "Am79C973"
+            "--memory", "512"
         ]
     end
 
-    config.vm.provision :shell, :inline => "gem install chef --no-ri --no-rdoc"
     config.vm.provision :chef_solo do |chef|
         chef.cookbooks_path = "cookbooks"
 
@@ -46,7 +45,7 @@ Vagrant.configure("2") do |config|
                     "members" => ["root", "basicproject", "www-data", "vagrant"]
                 }
             },
-            "ubuntu_python_packages" => ["python-setuptools", "python-dev", "python-software-properties"],
+            "ubuntu_python_packages" => ["python-setuptools", "python-dev", "software-properties-common"],
             "pip_python_packages" => {
                     "virtualenv" => "1.11.6",
                     "virtualenvwrapper" => "4.3",

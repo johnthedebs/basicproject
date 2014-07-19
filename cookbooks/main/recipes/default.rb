@@ -30,6 +30,16 @@ package "tig"
 package "tmux"
 package "vim"
 
+script "Set hostname" do
+    interpreter "bash"
+    user "root"
+    cwd "/tmp/"
+    code <<-EOH
+    hostname vagrant-trust-64
+    sh -c "echo 'vagrant-trusty-64' > /etc/hostname"
+    EOH
+end
+
 ### Users/groups
 
 # Does the following setup for each user defined in node.json:

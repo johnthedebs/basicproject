@@ -32,6 +32,8 @@ DATABASES = {
     }
 }
 
+POSTGIS_VERSION = (2, 1, 2)
+
 SITE_ID = 1
 
 TIME_ZONE = "UTC"
