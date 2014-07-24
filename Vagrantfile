@@ -24,6 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         chef.add_recipe "main::python"
         chef.add_recipe "main::nodejs"
         chef.add_recipe "main::compass"
+        chef.add_recipe "main::closure-compiler"
         chef.add_recipe "main::supervisor"
         chef.add_recipe "main::postgresql"
         chef.add_recipe "main::redis"
@@ -48,7 +49,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             "ubuntu_python_packages" => ["python-setuptools", "python-dev", "software-properties-common"],
             "pip_python_packages" => {
                     "virtualenv" => "1.11.6",
-                    "virtualenvwrapper" => "4.3",
+                    "virtualenvwrapper" => "4.3.1",
                     "pip" => "1.5.6",
                     "pip-tools" => "0.3.4",
                     "mercurial" => "3.0.1"

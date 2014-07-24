@@ -125,6 +125,16 @@ DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS"   : False,
 }
 
+
+COMPRESS_PARSER = "compressor.parser.HtmlParser"
+COMPRESS_CSS_FILTERS = [
+    "compressor.filters.css_default.CssAbsoluteFilter",
+    "compressor.filters.cssmin.CSSMinFilter",
+]
+COMPRESS_JS_FILTERS = ["compressor.filters.closure.ClosureCompilerFilter"]
+COMPRESS_CLOSURE_COMPILER_BINARY = "java -jar /usr/bin/compiler.jar"
+
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,

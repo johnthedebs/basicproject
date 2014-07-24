@@ -35,8 +35,8 @@ script "Set hostname" do
     user "root"
     cwd "/tmp/"
     code <<-EOH
-    hostname vagrant-trust-64
-    sh -c "echo 'vagrant-trusty-64' > /etc/hostname"
+    hostname trusty64
+    sh -c "echo 'trusty64' > /etc/hostname"
     EOH
 end
 
