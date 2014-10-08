@@ -1,0 +1,28 @@
+---
+- name: Install PostgreSQL and PostGIS system packages
+  apt: name={{ item }} state=present
+  with_items:
+    - postgresql-9.3-postgis-2.1
+    - postgresql-server-dev-9.3
+    - gdal-bin
+    - libproj-dev
+    - libpq-dev
+    - libgeoip1
+    - python-psycopg2
+
+- name: Make sure postgresql is running
+  service: name=postgresql state=started enabled=yes
+
+- name: Install postgresql config file
+  template: src="postgresql/pg_hba.conf" backup=yes
+            dest="/etc/postgresql/9.3/main/pg_hba.conf"
+            owner=postgres group=postgres mode=0640
+  register: postgresql_config
+
+- name: Create backup directoy
+  file: name=/var/lib/postgresql/backups/ state=directory
+        owner=postgres group=postgres mode=0755
+
+- name: Reload postgresql
+  service: name=postgresql state=reloaded
+  when: postgresql_config.changed

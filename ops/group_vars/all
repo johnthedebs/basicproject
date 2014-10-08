@@ -1,0 +1,4 @@
+---
+host_name: basicproject.com
+site_name: basicproject
+site_path: /var/www/basicproject/basicproject/

@@ -1,0 +1,49 @@
+---
+- name: Set hostname
+  hostname: name={{ hostname }}
+
+- name: Install system packages
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+    - bash-completion
+    - git
+    - ntp
+
+- name: Install build packages
+  apt: name={{ item }} state=present
+  with_items:
+    - build-essential
+    - binutils-doc
+    - autoconf
+    - flex
+    - bison
+
+- name: Install utility packages
+  apt: name={{ item }} state=present
+  with_items:
+    - htop
+    - tig
+    - tmux
+    - vim
+
+- name: Create deploy user
+  user: name={{ user }} shell=/bin/bash
+
+- name: Add public key to the server
+  authorized_key: user={{ user }}
+                  key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+- name: Install bashrc
+  template: src=bashrc
+            dest="/home/{{ user }}/.bashrc"
+            owner={{ user }} group={{ user }} mode=0755
+
+- name: Install vimrc
+  template: src=vimrc
+            dest="/home/{{ user }}/.vimrc"
+            owner={{ user }} group={{ user }} mode=0755
+
+- name: Install django bash completion
+  copy: src=django_bash_completion
+        dest=/home/{{ user }}/.django_bash_completion
+        owner={{ user }} group={{ user }} mode=0755

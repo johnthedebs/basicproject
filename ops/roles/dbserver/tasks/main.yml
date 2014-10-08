@@ -1,0 +1,5 @@
+---
+- include: elasticsearch.yml
+  when: install_elasticsearch
+- include: postgresql.yml
+- include: redis.yml

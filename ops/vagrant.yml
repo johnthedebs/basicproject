@@ -1,0 +1,13 @@
+---
+- hosts: default
+  remote_user: vagrant
+  sudo: yes
+  gather_facts: no
+  vars:
+    env: development
+    site_user: vagrant
+
+  roles:
+    - common
+    - dbserver
+    - webserver

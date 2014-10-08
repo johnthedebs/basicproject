@@ -1,0 +1,52 @@
+set nocompatible
+set modelines=0
+set encoding=utf-8
+set autoindent
+set smartindent
+set ignorecase
+set smartcase
+set smarttab
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set shiftround
+set showmatch
+set showmode
+set ruler
+set title
+set wildmenu
+set wildmode=list:longest
+set wildignore+=*.pyc,*.o,*.obj,*.rbc,.git,.svn,.hg,.sass-cache
+set nolist
+set listchars=tab:▸\ ,eol:¬,trail:·
+set showbreak=↪
+set fileformats=unix,dos,mac
+set scrolloff=0
+set sidescrolloff=3
+set sidescroll=1
+set history=1000
+set linespace=0
+set incsearch
+set hlsearch
+set gdefault
+set nowrap
+set paste
+set backspace=indent,eol,start
+set cursorline
+set textwidth=130
+set visualbell
+set binary noeol
+set noequalalways
+set nofoldenable
+set autoread
+set statusline=%f\ %m%r\ [%Y]%=%(\ %l,%v\ @\ %p%%\ of\ %L\ %)
+set laststatus=2
+set hidden
+
+syntax on
+nohlsearch
+
+" Make j/k move by display line, rather than by file line
+nnoremap j gj
+nnoremap k gk

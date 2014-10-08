@@ -1,24 +1,26 @@
-{% load compress %}<!DOCTYPE html>
+{% load static from staticfiles %}<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>{% block title %}{% endblock %}</title>
-    {% compress css %}
-        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}styles/style.css" />
-    {% endcompress %}
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/app.css" %}" />
+    {% block css %}{% endblock %}
 </head>
-<body>
-    {% block content %}{% endblock %}
+<body class="{% block body_class %}{% endblock %}">
+    <div id="main-wrapper">
+        {% block content %}{% endblock %}
+    </div>
 
-    {% compress js %}
-        <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery-1.10.1.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}libs/django-csrf-helper.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}libs/underscore-1.4.4.js"></script>
-        <script type="text/javascript" src="{{ STATIC_URL }}libs/backbone-1.0.0.js"></script>
-    {% endcompress %}
+    {% if debug %}
+        <script>console.clear();</script>
+        <script src="http://localhost:35729/livereload.js"></script>
+    {% endif %}
 
-    {% compress js %}
-        {% block js %}{% endblock %}
-    {% endcompress %}
+    {% block prejs %}{% endblock %}
+    <script src="{% static "js/global-deps.js" %}"></script>
+    <script src="{% static "js/app.js" %}"></script>
+    {% block js %}{% endblock %}
 </body>
 </html>

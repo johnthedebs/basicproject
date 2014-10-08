@@ -1,12 +1,9 @@
 import os.path
 
 
-PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
-
-COMPRESS = not DEBUG
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
     # ("Your Name", "your_email@domain.com"),
@@ -16,13 +13,19 @@ MANAGERS = ADMINS
 
 CACHES = {
     "default": {
-        "BACKEND"  : "redis_cache.cache.RedisCache",
+        "BACKEND"  : "django_redis.cache.RedisCache",
         "LOCATION" : "127.0.0.1:6379:1",
+        "OPTIONS"  : {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
     },
     "sessions": {
-        "BACKEND"  : "redis_cache.cache.RedisCache",
+        "BACKEND"  : "django_redis.cache.RedisCache",
         "LOCATION" : "127.0.0.1:6379:2",
-    }
+        "OPTIONS"  : {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    },
 }
 
 DATABASES = {
@@ -41,6 +44,11 @@ SESSION_CACHE_ALIAS = "sessions"
 
 POSTGIS_VERSION = (2, 1, 2)
 
+AUTH_USER_MODEL = "core.User"
+
+SILENCED_SYSTEM_CHECKS = [
+]
+
 SITE_ID = 1
 
 TIME_ZONE = "UTC"
@@ -54,46 +62,59 @@ MEDIA_URL    = "/media/"
 STATIC_URL   = "/static/"
 COMPRESS_URL = STATIC_URL
 
-MEDIA_ROOT   = os.path.join(PROJECT_ROOT, "..", "site_media", "media")
-STATIC_ROOT  = os.path.join(PROJECT_ROOT, "..", "site_media", "static")
+MEDIA_ROOT   = os.path.join(BASE_DIR, os.pardir, "site_media", "media")
+STATIC_ROOT  = os.path.join(BASE_DIR, os.pardir, "site_media", "static")
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_ROOT, "static_files"),
+    os.path.join(BASE_DIR, "static_files"),
 )
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    "compressor.finders.CompressorFinder",
 )
+
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
 SECRET_KEY = "{{ secret_key }}"
 
-TEMPLATE_LOADERS = (
-    "django.template.loaders.filesystem.Loader",
-    "django.template.loaders.app_directories.Loader",
-)
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+          os.path.join(BASE_DIR, "templates"),
+        ],
+        "APP_DIRS": False,
+        "OPTIONS": {
+            "debug": DEBUG,
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.template.context_processors.static",
+            ],
+            "loaders": [
+                "django.template.loaders.filesystem.Loader",
+                "django.template.loaders.app_directories.Loader",
+            ],
+        },
+    }
+]
 
 MIDDLEWARE_CLASSES = (
-    "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.security.SecurityMiddleware",
 )
 
 ROOT_URLCONF = "core.urls"
 
-TEMPLATE_DIRS = (
-    os.path.join(PROJECT_ROOT, "templates"),
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.csrf",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.static",
-)
+WSGI_APPLICATION = "wsgi.application"
 
 INSTALLED_APPS = (
     "django.contrib.admin",
@@ -106,34 +127,30 @@ INSTALLED_APPS = (
     "django.contrib.staticfiles",
 
     # External apps
-    "compressor",
+    "authtools",
     #"debug_toolbar",
     "django_extensions",
     "raven.contrib.django.raven_compat",
     "rest_framework",
-    "south",
 
     # Internal apps
     "core",
 )
 
-INTERNAL_IPS = (
-    "127.0.0.1",
-)
+INTERNAL_IPS = ("127.0.0.1",)
 
-DEBUG_TOOLBAR_CONFIG = {
-    "INTERCEPT_REDIRECTS"   : False,
-}
+DEBUG_TOOLBAR_CONFIG = { "INTERCEPT_REDIRECTS" : False }
 
-
-COMPRESS_PARSER = "compressor.parser.HtmlParser"
-COMPRESS_CSS_FILTERS = [
-    "compressor.filters.css_default.CssAbsoluteFilter",
-    "compressor.filters.cssmin.CSSMinFilter",
+IPYTHON_ARGUMENTS = [
+    "--ext", "django_extensions.management.notebook_extension",
+    "--ip", "0.0.0.0",
 ]
-COMPRESS_JS_FILTERS = ["compressor.filters.closure.ClosureCompilerFilter"]
-COMPRESS_CLOSURE_COMPILER_BINARY = "java -jar /usr/bin/compiler.jar"
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.SessionAuthentication",
+    )
+}
 
 LOGGING = {
     "version": 1,
@@ -165,7 +182,7 @@ LOGGING = {
             "handlers"  : ["sentry"],
         },
         "raven": {
-            "level"     : "DEBUG",
+            "level"     : "WARNING",
             "handlers"  : ["console"],
             "propagate" : False,
         },

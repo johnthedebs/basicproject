@@ -1,0 +1,44 @@
+---
+- name: Add nginx apt repository
+  apt_repository: repo="ppa:nginx/stable" state=present
+
+- name: Install nginx
+  apt: name=nginx state=present
+
+- name: Make sure nginx is running
+  service: name=nginx state=started enabled=yes
+
+- name: Install nginx config file
+  template: src=nginx/nginx.conf backup=yes
+            dest=/etc/nginx/nginx.conf
+            owner=root group=root mode=0644
+  register: nginx_config
+
+- name: Install nginx default site config
+  template: src=nginx/sites/default.conf backup=yes
+            dest=/etc/nginx/sites-available/default
+  register: nginx_default_site
+
+- name: Disable nginx default site config
+  file: path=/etc/nginx/sites-enabled/default state=absent
+  register: nginx_default_site_enabled
+  when: enable_nginx_default_site == False
+
+- name: Enable nginx default site config
+  file: path=/etc/nginx/sites-enabled/default state=link
+        src=/etc/nginx/sites-available/default
+  register: nginx_default_site_enabled
+  when: enable_nginx_default_site
+
+- name: Create directory for nginx default site
+  file: path=/var/www/default/ state=directory
+            owner=root group=root mode=0775
+
+- name: Create index page for nginx default site
+  template: src=nginx/index.html
+            dest=/var/www/default/index.html
+            owner=root group=root mode=0644
+
+- name: Reload nginx
+  service: name=nginx state=reloaded
+  when: nginx_config.changed or nginx_default_site.changed or nginx_default_site_enabled.changed

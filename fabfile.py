@@ -1,62 +1,210 @@
-import fcntl
-import os
-import shutil
-import subprocess
-import sys
-import time
+from fabric.api import (
+    cd,
+    env,
+    execute,
+    local,
+    run,
+    sudo,
+    task,
+)
+from fabric.colors          import green, red
+from fabric.contrib.console import confirm
+from fabric.contrib.files   import exists
+from fabric.operations      import get
 
-from fabric.api import task
+
+env.host           = ""
+env.hosts          = [env.host]
+env.user           = "deploy"
+env.password       = ""
+env.repo_url       = "git@github.com:johnthedebs/basicproject.git"
+env.project_id     = "basicproject"
+env.project_dir    = "/var/www/{project_id}/{project_id}/".format(**env)
+env.site_dir       = "/var/www/{project_id}/".format(**env)
+env.virtualenv_dir = "/var/www/envs/{project_id}/".format(**env)
+env.forward_agent  = True
 
 
-commands = [
-    "compass watch --relative-assets --sass-dir static_source/styles/ --css-dir static_files/css/ --images-dir static_files/img/ --javascripts-dir static_files/js/",
-    "coffee -o static_files/js/ -w static_source/scripts/",
-]
-
-def nb_readline(output):
-    fd = output.fileno()
-    fl = fcntl.fcntl(fd, fcntl.F_GETFL)
-    fcntl.fcntl(fd, fcntl.F_SETFL, fl | os.O_NONBLOCK)
-    try:
-        return output.readline()
-    except:
-        return ""
+#
+# Tasks
+#
 
 @task
-def watch():
+def collect_static():
     """
-    Watch coffee and sass files for changes
+    Collect static files
     """
-    processes = []
+    _manage("collectstatic --noinput")
 
-    # Clear existing static files and copy over stuff that doesn't need
-    # to be processed.
-    if os.path.exists("./static_files"):
-        print "Clearing current static files..."
-        shutil.rmtree("./static_files")
-    print "Copying library and image files..."
-    shutil.copytree("./static_source/lib", "./static_files/lib")
-    shutil.copytree("./static_source/img", "./static_files/img")
 
-    print "Starting watchers...\n"
-    for command in commands:
-        processes.append(subprocess.Popen(
-            command,
-            shell  = True,
-            stdout = subprocess.PIPE,
-            stderr = subprocess.STDOUT,
+@task
+def deploy():
+    """
+    Run all deploy tasks
+    """
+    execute(update_repo)
+    execute(install_requirements)
+    execute(run_migrations)
+    execute(collect_static)
+    execute(restart_app)
+
+
+@task
+def db_to_local():
+    """
+    This task needs to be run from within the Vagrant VM!...
+    after the DB has been deleted and recreated with as little data as
+    possible. Usually, this means doing the following:
+
+        sudo su postgres
+        dropdb <db_name> && createdb <db_name>
+    """
+    local_db_name      = env.project_id
+    local_db_user      = env.project_id
+    local_db_password  = env.project_id
+    remote_db_name     = env.project_id
+    remote_db_user     = env.project_id
+    remote_db_password = env.project_id
+
+    ask = confirm(red("""
+Are you sure you want to overwrite your local database "{}"
+with database "{}" from host "{}"?""".format(
+        local_db_name,
+        remote_db_name,
+        env.hosts[0],
+    )), default=False)
+
+    if ask:
+        run("pg_dump --user %s %s | gzip > /tmp/%s.sql.gz" % (
+            remote_db_user,
+            remote_db_name,
+            remote_db_name
         ))
+        # TODO: Add some safeguards against running this outside vagrant
+        # TODO: Clear and recreate an empty DB
+        get("/tmp/%s.sql.gz" % remote_db_name, "/tmp/%s.sql.gz" % remote_db_name)
+        local("gunzip < /tmp/%s.sql.gz | psql --user %s -d %s" % (
+            local_db_name,
+            local_db_user,
+            local_db_name
+        ), capture=False)
 
-    line = ''.join([nb_readline(p.stdout) for p in processes])
-    [p.stdout.flush() for p in processes]
 
-    while any(processes):
-        try:
-            if line != "":
-                sys.stdout.write(line)
-            line = ''.join([nb_readline(p.stdout) for p in processes])
-            [p.stdout.flush() for p in processes]
-            time.sleep(0.4)
-        except KeyboardInterrupt:
-            break
-    [p.wait() for p in processes]
+@task
+def install_requirements():
+    """
+    Install the project's python requirements
+    """
+    run("%(virtualenv_dir)sbin/pip install -r %(project_dir)srequirements.txt --exists-action=w" % env)
+
+
+@task
+def manage(command):
+    """
+    Run an arbitrary management command (eg, `fab manage:run_migrations`)
+    """
+    _manage(command)
+
+
+#@task
+#def media_to_local():
+    #get("%(site_dir)s/site_media/media/*" % env, "%(site_dir)s/site_media/media/" % env)
+
+
+@task
+def ping():
+    """
+    Test connection
+    """
+    run("echo 'pong'")
+
+
+@task
+def provision():
+    """
+    Update, provision, and deploy the site
+    """
+    execute(update_repo)
+    local("ansible-playbook ops/site.yml -i ops/production")
+    execute(collect_static)
+    execute(restart_app)
+
+
+@task
+def rebuild_index():
+    """
+    Rebuild the search index
+    """
+    _manage("rebuild_index --noinput")
+
+
+@task
+def restart_app():
+    """
+    Restart the web app (not gracefully)
+    """
+    sudo("restart web".format(**env))
+
+
+@task
+def run_migrations():
+    """
+    Run database migrations
+    """
+    _manage("migrate --noinput")
+
+
+@task
+def ssh():
+    """
+    SSH into the remote dev machine
+    """
+    try:
+        # catch the port number to pass to ssh
+        host, port = env.host_string.split(":")
+        local("ssh -p %s -A %s@%s" % (port, env.user, host))
+    except ValueError:
+        local("ssh -A %s@%s" % (env.user, env.host))
+
+
+@task
+def update_packages():
+    """
+    Update system level packages
+    """
+    sudo("apt-get update && apt-get upgrade")
+
+
+@task
+def update_repo():
+    """
+    Bring the remote repo up to date
+    """
+    if not exists(env.project_dir):
+        with cd("/"):
+            sudo("mkdir -p {site_dir}".format(**env))
+            sudo("chown -R {user}:{user} {site_dir}".format(**env))
+            sudo("apt-get update")
+            sudo("apt-get install -y git-core")
+
+        with cd(env.site_dir):
+            run("git clone {repo_url}".format(**env))
+
+    with cd(env.project_dir):
+        run("git remote prune origin && git fetch -p && git pull")
+        run("rm -f local_settings.py && cp conf/production.py local_settings.py")
+
+
+#
+# Helpers
+#
+
+def _manage(command):
+    """
+    Make it easy for tasks to call django management commands.
+    """
+    run("%sbin/python %smanage.py %s" % (
+        env.virtualenv_dir,
+        env.project_dir,
+        command,
+    ))

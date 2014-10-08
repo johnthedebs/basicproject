@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
 
-def index(request, template_name="index.html"):
-    return render(request, template_name, {})
+def app(request, path=None):
+    return render(request, "app.html", {})

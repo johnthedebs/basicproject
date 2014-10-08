@@ -1,0 +1,17 @@
+---
+# Use this to skip adding the java ppa (because it's slow) and selecting
+# the license (because it's considered change by ansible)
+- name: Check for java binary
+  stat: path=/usr/bin/java
+  register: java_binary
+
+- name: Add JRE ppa
+  apt_repository: repo="ppa:webupd8team/java" state=present
+  when: java_binary.stat.exists == False
+
+- name: Automatically select the Oracle License
+  shell: echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf-set-selections
+  when: java_binary.stat.exists == False
+
+- name: Install JRE
+  apt: pkg=oracle-java7-installer state=present
