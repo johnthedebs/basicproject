@@ -98,7 +98,7 @@ TEMPLATES = [
                 "django.template.loaders.app_directories.Loader",
             ],
         },
-    }
+    },
 ]
 
 MIDDLEWARE_CLASSES = (

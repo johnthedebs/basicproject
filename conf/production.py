@@ -20,12 +20,12 @@ IPYTHON_ARGUMENTS = [
 
 RAVEN_CONFIG = {}
 
-TEMPLATE_LOADERS = (
-    ("django.template.loaders.cached.Loader", (
+TEMPLATES[0]["OPTIONS"]["loaders"] = [
+    ["django.template.loaders.cached.Loader", [
         "django.template.loaders.filesystem.Loader",
         "django.template.loaders.app_directories.Loader",
-    )),
-)
+    ]],
+]
 
 LOGGING = {
     "version": 1,
