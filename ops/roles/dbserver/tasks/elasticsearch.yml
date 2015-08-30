@@ -23,7 +23,7 @@
   register: es_js_plugin
 
 - name: Install elasticsearch javascript scripting plugin
-  shell: ./plugin --install elasticsearch/elasticsearch-lang-javascript/2.4.1
+  shell: ./plugin --install elasticsearch/elasticsearch-lang-javascript/2.7.0
   args:
     chdir: /usr/share/elasticsearch/bin
   when: es_js_plugin.stat.exists == False

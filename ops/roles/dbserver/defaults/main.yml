@@ -1,4 +1,4 @@
 ---
-es_version: 1.4.0
+es_version: 1.7.1
 es_watcher_interval: 60s
 install_elasticsearch: False
