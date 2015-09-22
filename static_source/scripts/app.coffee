@@ -10,10 +10,6 @@ Router = require "react-router"
 Error404 = require "./components/error-404"
 
 
-# This is required for the react-devtools chrome extension
-window.React = React
-
-
 App = React.createClass
     displayName : "App"
 
