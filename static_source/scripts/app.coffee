@@ -1,12 +1,13 @@
-# TODO: Add CSRF token to template
-require "./csrf"
+_        = require "underscore"
+React    = require "react"
+ReactDOM = require("react-dom")
 
-_      = require "underscore"
-React  = require "react"
-Router = require "react-router"
+{ Route, Router }  = require("react-router")
+history  = require("history/lib/createBrowserHistory")()
 
-{ DefaultRoute, Link, NotFoundRoute, Route, RouteHandler } = Router
+require "./utils/underscoreMixins"
 
+API      = require "./api"
 Error404 = require "./components/error-404"
 
 
@@ -19,14 +20,9 @@ App = React.createClass
         </div>
 
 
-routes = (
-    <Route name="index" path="/" handler={App}>
-        <NotFoundRoute handler={Error404} />
-    </Route>
-)
-
-
-React.initializeTouchEvents true
-
-Router.run routes, Router.HistoryLocation, (Handler) ->
-    React.render(<Handler />, document.getElementById("content"))
+ReactDOM.render((
+    <Router history={history}>
+        <Route path="/" component={App} />
+        <Route path="*" component={Error404} />
+    </Router>
+), document.getElementById("content"))

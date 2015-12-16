@@ -1,3 +1,5 @@
+require("es6-promise").polyfill()
+
 gulp       = require "gulp"
 autoprefix = require "gulp-autoprefixer"
 concat     = require "gulp-concat"
@@ -42,8 +44,6 @@ paths =
     jsInput    :
         "global-deps.js" : [
             "./node_modules/raven-js/dist/raven.js"
-            "./node_modules/jquery/dist/jquery.js"
-            "./static_source/scripts/vendor/csrf.js"
         ]
     jsOutputDir : "./static_files/js/"
 
