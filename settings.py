@@ -26,6 +26,13 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         },
     },
+    "jobs": {
+        "BACKEND"  : "django_redis.cache.RedisCache",
+        "LOCATION" : "127.0.0.1:6379:3",
+        "OPTIONS"  : {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+    },
 }
 
 DATABASES = {
@@ -38,6 +45,13 @@ DATABASES = {
         "PORT"     : "",
     }
 }
+
+RQ_QUEUES = {
+    "default" : { "USE_REDIS_CACHE" : "jobs" },
+    "high"    : { "USE_REDIS_CACHE" : "jobs" },
+    "low"     : { "USE_REDIS_CACHE" : "jobs" }
+}
+
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "sessions"
@@ -130,6 +144,7 @@ INSTALLED_APPS = (
     "authtools",
     #"debug_toolbar",
     "django_extensions",
+    "django_rq",
     "raven.contrib.django.raven_compat",
     "rest_framework",
 
@@ -152,24 +167,36 @@ REST_FRAMEWORK = {
     )
 }
 
+RQ_SHOW_ADMIN_LINK = True
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
     "formatters": {
+        "rq_console": {
+            "format"  : "%(asctime)s %(message)s",
+            "datefmt" : "%H:%M:%S",
+        },
         "verbose": {
             "datefmt" : "%Y-%m-%d %H:%M:%S",
             "format"  : "[%(asctime)s] [%(levelname)s] [%(module)s] %(message)s",
         },
     },
     "handlers": {
-        "sentry": {
-            "level" : "INFO",
-            "class" : "raven.contrib.django.handlers.SentryHandler",
-        },
         "console": {
             "level"     : "DEBUG",
             "class"     : "logging.StreamHandler",
             "formatter" : "verbose",
+        },
+        "sentry": {
+            "level" : "INFO",
+            "class" : "raven.contrib.django.handlers.SentryHandler",
+        },
+        "rq_console": {
+            "level"     : "DEBUG",
+            "class"     : "rq.utils.ColorizingStreamHandler",
+            "formatter" : "rq_console",
+            "exclude"   : ["%(asctime)s"],
         },
     },
     "root": {
@@ -178,13 +205,17 @@ LOGGING = {
     },
     "loggers": {
         "django": {
-            "level"     : "INFO",
-            "handlers"  : ["sentry"],
+            "level"    : "INFO",
+            "handlers" : ["sentry"],
         },
         "raven": {
             "level"     : "WARNING",
             "handlers"  : ["console"],
             "propagate" : False,
+        },
+        "rq.worker": {
+            "handlers" : ["rq_console", "sentry"],
+            "level"    : "DEBUG"
         },
         "sentry.errors": {
             "level"     : "DEBUG",

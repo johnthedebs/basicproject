@@ -1,9 +1,18 @@
 ---
+
+- name: Add postgres apt key
+  apt_key: url="https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+           state=present
+
+- name: Add postgres apt repository
+  apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main"
+                  state=present update_cache=yes
+
 - name: Install PostgreSQL and PostGIS system packages
   apt: name={{ item }} state=present
   with_items:
-    - postgresql-9.3-postgis-2.1
-    - postgresql-server-dev-9.3
+    - postgresql-9.4-postgis-2.1
+    - postgresql-server-dev-9.4
     - gdal-bin
     - libproj-dev
     - libpq-dev
@@ -15,7 +24,7 @@
 
 - name: Install postgresql config file
   template: src="postgresql/pg_hba.conf" backup=yes
-            dest="/etc/postgresql/9.3/main/pg_hba.conf"
+            dest="/etc/postgresql/9.4/main/pg_hba.conf"
             owner=postgres group=postgres mode=0640
   register: postgresql_config
 

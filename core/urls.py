@@ -9,6 +9,7 @@ urlpatterns = patterns("",
     url(r"^$", app, name="app"),
 
     url(r"^admin/", include(admin.site.urls)),
+    url(r"^django-rq/", include("django_rq.urls")),
 
     # This needs to go at the end since it captures anything
     url(r"^(?P<path>.*)/$", app),
