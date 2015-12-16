@@ -1,5 +1,6 @@
 require("es6-promise").polyfill()
 
+_          = require "underscore"
 gulp       = require "gulp"
 autoprefix = require "gulp-autoprefixer"
 concat     = require "gulp-concat"
@@ -112,6 +113,9 @@ gulp.task "scripts", ->
             .pipe uglify()
             .pipe gulp.dest paths.jsOutputDir
 
+    if gutil.env.production
+        webpackConfig = _({}).extend(webpackConfig, { watch: false })
+
     gulp.src paths.appInput
         .pipe named()
         .pipe gwebpack webpackConfig
@@ -137,11 +141,12 @@ gulp.task "styles", ->
 
 
 gulp.task "watch", ->
-    gulp.watch paths.images, ["images"]
-    gulp.watch paths.styles, ["styles"]
+    if not gutil.env.production
+        gulp.watch paths.images, ["images"]
+        gulp.watch paths.styles, ["styles"]
 
-    livereload.listen()
-    gulp.watch("./templates/**/*.html").on "change", livereload.changed
+        livereload.listen()
+        gulp.watch("./templates/**/*.html").on "change", livereload.changed
 
 
 gulp.task "default", ["watch", "fonts", "images", "scripts", "styles"]

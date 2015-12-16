@@ -10,10 +10,10 @@
        state=present global=yes
   with_items:
     - name: npm
-      version: 2.14.4
+      version: 3.5.2
     - name: coffee-script
       version: 1.10.0
     - name: gulp
       version: 3.9.0
     - name: npm-check-updates
-      version: 2.5.1
+      version: 2.5.4
