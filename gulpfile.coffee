@@ -128,6 +128,7 @@ gulp.task "styles", ->
     sassOptions =
         errLogToConsole : true
         includePaths    : paths.sassIncludePaths
+        indentedSyntax  : true
         sourceComments  : "normal"
 
     gulp.src paths.sassInput

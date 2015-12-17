@@ -141,9 +141,9 @@ def rebuild_index():
 @task
 def restart_app():
     """
-    Restart the web app (not gracefully)
+    Restart the web app gracefully
     """
-    sudo("restart web".format(**env))
+    sudo("reload web".format(**env))
 
 
 @task
