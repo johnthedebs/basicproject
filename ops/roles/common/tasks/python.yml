@@ -13,15 +13,11 @@
   with_items:
     - name: virtualenv
       version: 13.1.2
-
     - name: virtualenvwrapper
       version: 4.7.1
-
     - name: pip
       version: 7.1.2
-
     - name: pip-review
       version: 0.4
-
     - name: mercurial
       version: 3.5
