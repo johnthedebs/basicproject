@@ -1,5 +1,4 @@
-_ = require "underscore"
-
+_          = require "underscore"
 classNames = require "classnames"
 
 

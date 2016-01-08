@@ -1,28 +1,33 @@
-_        = require "underscore"
-React    = require "react"
-ReactDOM = require("react-dom")
+_     = require "underscore"
+React = require "react"
 
-{ Route, Router }  = require("react-router")
+{ render }             = require "react-dom"
+{ Provider }           = require "react-redux"
+{ Route, Router }      = require "react-router"
+{ syncReduxAndRouter } = require "redux-simple-router"
+
 history  = require("history/lib/createBrowserHistory")()
 
 require "./utils/underscoreMixins"
 
-API      = require "./api"
+configureStore = require "./configureStore"
+
+App      = require "./components/app"
 Error404 = require "./components/error-404"
 
 
-App = React.createClass
-    displayName : "App"
+store = configureStore({
+  todos: []
+})
 
-    render: ->
-        <div>
-            <h2>Index</h2>
-        </div>
+syncReduxAndRouter(history, store)
 
 
-ReactDOM.render((
-    <Router history={history}>
-        <Route path="/" component={App} />
-        <Route path="*" component={Error404} />
-    </Router>
+render((
+    <Provider store={store}>
+        <Router history={history}>
+            <Route path="/" component={App} />
+            <Route path="*" component={Error404} />
+        </Router>
+    </Provider>
 ), document.getElementById("content"))

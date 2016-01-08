@@ -20,4 +20,4 @@
     - name: pip-review
       version: 0.4
     - name: mercurial
-      version: 3.5
+      version: 3.6.3
