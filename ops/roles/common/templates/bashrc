@@ -23,6 +23,7 @@ alias cdlogs="cd /var/log/"
 alias killzombies="sudo pkill -9 python; sudo pkill -9 gunicorn; echo 'All done.'"
 alias purge_pyc="find . -name '*.pyc' -exec rm -rf {} \;"
 alias runserver="python manage.py runserver"
+alias runworker="python manage.py rqworker"
 
 # Support for autocompletion of django management commands
 source $HOME/.django_bash_completion
