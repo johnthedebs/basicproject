@@ -1,3 +1,5 @@
 ---
 - include: system-setup.yml
 - include: python.yml
+- include: unattended-upgrades.yml
+  when: env != "development"

@@ -1,0 +1,10 @@
+---
+- name: Install unattended-upgrades package
+  apt: name=unattended-upgrades
+
+- name: Enable & configure unattended-upgrades
+  template: src=unattended-upgrades/{{ item }} dest=/etc/apt/apt.conf.d/{{ item }}
+            owner=root group=root mode=644
+  with_items:
+    - 10periodic
+    - 50unattended-upgrades

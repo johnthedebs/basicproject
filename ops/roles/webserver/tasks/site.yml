@@ -101,6 +101,8 @@
 
 - name: Start web server
   service: name=web state=started
+  when: env != "development"
 
 - name: Start worker
   service: name=worker state=started
+  when: env != "development"
