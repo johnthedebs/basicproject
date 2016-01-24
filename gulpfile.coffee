@@ -28,7 +28,7 @@ paths =
         "./node_modules/bootstrap-sass/assets/stylesheets/"
     ]
     sassInput   : [
-        "./static_source/styles/app.sass"
+        "./app/styles/app.sass"
     ]
     cssOutput   : "./dist/css/"
 
@@ -36,12 +36,12 @@ paths =
     fontOutput  : "./dist/fonts/"
 
     imageInput  : [
-        "./static_source/img/**/*.*"
+        "./app/img/**/*.*"
     ]
     imageOutput : "./dist/img/"
 
     appInput    : [
-        "./static_source/scripts/app.coffee"
+        "./app/scripts/app.coffee"
     ]
     jsInput    :
         "global-deps.js" : [
@@ -51,14 +51,14 @@ paths =
 
     # Watch paths
     images : [
-        "./static_source/img/**/*.*"
+        "./app/img/**/*.*"
     ]
     scripts : [
-        "./static_source/scripts/**/*.coffee"
+        "./app/scripts/**/*.coffee"
     ]
     styles : [
-        "./static_source/styles/**/*.sass"
-        "./static_source/styles/**/*.scss"
+        "./app/styles/**/*.sass"
+        "./app/styles/**/*.scss"
         "./node_modules/bootstrap-sass/assets/stylesheets/**/*.scss"
     ]
 
