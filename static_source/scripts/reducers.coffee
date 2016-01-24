@@ -1,15 +1,11 @@
-{
-    ADD_TODO
-    RECEIVE_TODOS
-} = require "./actions"
+{ handleActions } = require "redux-actions"
 
 
 module.exports =
-    todos: (state=[], action) ->
-        switch action.type
-            when ADD_TODO
-                return [state..., action.todo]
-            when RECEIVE_TODOS
-                return action.todos
-            else
-                return state
+    todos: handleActions {
+            ADD_TODO: (state, action) ->
+                [state..., action.payload]
+
+            RECEIVE_TODOS: (state, action) ->
+                action.payload
+        }, []

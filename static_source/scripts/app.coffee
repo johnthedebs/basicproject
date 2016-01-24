@@ -16,9 +16,7 @@ App      = require "./components/app"
 Error404 = require "./components/error-404"
 
 
-store = configureStore({
-  todos: []
-})
+store = configureStore({})
 
 syncReduxAndRouter(history, store)
 
