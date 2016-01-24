@@ -73,10 +73,10 @@
 
 # Install project requirements and run db migrations
 - name: Install python requirements in virtualenv
-  remote_user: "{{ ansible_ssh_user }}"
   pip: virtualenv=/var/www/envs/{{ site_name }}
        requirements={{ site_path }}requirements.txt
        extra_args="--exists-action=w"
+  remote_user: "{{ ansible_ssh_user }}"
   sudo_user: "{{ ansible_ssh_user }}"
 
 - name: Add .project file for virtualenv

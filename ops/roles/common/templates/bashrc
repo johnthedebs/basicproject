@@ -3,14 +3,13 @@
 # for examples
 
 # postgres settings
-export LD_LIBRARY_PATH=/usr/lib/postgresql/9.3/lib
-export PGDATA=/var/lib/postgresql/9.3/main
-export PATH=/usr/lib/postgresql/9.3/bin:$PATH
+export LD_LIBRARY_PATH=/usr/lib/postgresql/9.5/lib
+export PGDATA=/var/lib/postgresql/9.5/main
+export PATH=/usr/lib/postgresql/9.5/bin:$PATH
 
 # pip/virtualenvwrapper settings
 export WORKON_HOME=/var/www/envs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
-export PIP_RESPECT_VIRTUALENV=true
 export PIP_DOWNLOAD_CACHE=/tmp/pip
 
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
@@ -20,14 +19,14 @@ fi
 export PATH=$HOME/local/bin:$PATH
 export EDITOR=vim
 
-if [ -s /usr/local/rvm/scripts/rvm ]; then
-    source /usr/local/rvm/scripts/rvm;
-fi
-
 alias cdlogs="cd /var/www/{{ site_name }}/logs/"
 alias killzombies="sudo pkill -9 python; sudo pkill -9 gunicorn; echo 'All done.'"
 alias purge_pyc="find . -name '*.pyc' -exec rm -rf {} \;"
 alias runserver="python manage.py runserver"
+
+# Support for autocompletion of django management commands
+source $HOME/.django_bash_completion
+
 
 umask 0002
 
@@ -129,11 +128,6 @@ if [ -n "$PS1" ]; then
     fi
 fi
 
-cd /var/www/{{ site_name }}/{{ site_name }}/
-
 if [ -d /var/www/envs/{{ site_name }}/ ]; then
     source /var/www/envs/{{ site_name }}/bin/activate
 fi
-
-# Support for autocompletion of django management commands
-source $HOME/.django_bash_completion
