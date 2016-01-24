@@ -93,3 +93,14 @@
   template: src=upstart/web.conf dest=/etc/init/web.conf
             owner=root group=root mode=0644
   register: web_upstart_config
+
+- name: Install worker upstart config
+  template: src=upstart/worker.conf dest=/etc/init/worker.conf
+            owner=root group=root mode=0644
+
+
+- name: Start web server
+  service: name=web state=started
+
+- name: Start worker
+  service: name=worker state=started

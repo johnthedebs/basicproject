@@ -1,0 +1,6 @@
+---
+hostname: basicproject.com
+user: ubuntu
+
+ansible_ssh_host: ""
+ansible_ssh_user: ubuntu
