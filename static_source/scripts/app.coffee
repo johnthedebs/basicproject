@@ -1,31 +1,47 @@
-_     = require "underscore"
-React = require "react"
-
-{ render }             = require "react-dom"
-{ Provider }           = require "react-redux"
-{ Route, Router }      = require "react-router"
-{ syncReduxAndRouter } = require "redux-simple-router"
-
-history  = require("history/lib/createBrowserHistory")()
-
+_               = require "underscore"
 require "./utils/underscoreMixins"
 
-configureStore = require "./configureStore"
+React           = require "react"
+{ render }      = require "react-dom"
+{ Provider }    = require "react-redux"
+{ Router }      = require "react-router"
+createLogger    = require "redux-logger"
+thunkMiddleware = require "redux-thunk"
+history         = require("history/lib/createBrowserHistory")()
 
-App      = require "./components/app"
-Error404 = require "./components/error-404"
+{
+    routeReducer
+    syncReduxAndRouter
+} = require "redux-simple-router"
+
+{
+    applyMiddleware
+    combineReducers
+    createStore
+} = require "redux"
+
+Reducers = require "./core/reducers"
+Routes   = require "./core/routes"
 
 
-store = configureStore({})
+createStoreWithMiddleware = applyMiddleware(
+    thunkMiddleware,
+    createLogger(),
+)(createStore)
 
+rootReducer = combineReducers _({}).extend(
+    Reducers,
+    { routing: routeReducer }
+)
+
+store = createStoreWithMiddleware(rootReducer)
 syncReduxAndRouter(history, store)
 
 
 render((
     <Provider store={store}>
         <Router history={history}>
-            <Route path="/" component={App} />
-            <Route path="*" component={Error404} />
+            {Routes}
         </Router>
     </Provider>
 ), document.getElementById("content"))
