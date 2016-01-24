@@ -5,7 +5,6 @@
   with_items:
     - "{{ site_name }}/"
     - "{{ site_name }}/auth/"
-    - "{{ site_name }}/logs/"
     - "{{ site_name }}/email/"
     - "{{ site_name }}/site_media/media/"
 

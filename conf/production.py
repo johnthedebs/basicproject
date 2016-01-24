@@ -64,6 +64,10 @@ LOGGING = {
             "handlers"  : ["console"],
             "propagate" : False,
         },
+        "rq.worker": {
+            "level"    : "WARNING",
+            "handlers" : ["sentry"],
+        },
         "sentry.errors": {
             "level"     : "INFO",
             "handlers"  : ["console"],

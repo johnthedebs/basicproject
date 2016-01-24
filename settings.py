@@ -188,10 +188,6 @@ LOGGING = {
             "class"     : "logging.StreamHandler",
             "formatter" : "verbose",
         },
-        "sentry": {
-            "level" : "INFO",
-            "class" : "raven.contrib.django.handlers.SentryHandler",
-        },
         "rq_console": {
             "level"     : "DEBUG",
             "class"     : "rq.utils.ColorizingStreamHandler",
@@ -201,26 +197,16 @@ LOGGING = {
     },
     "root": {
         "level"    : "INFO",
-        "handlers" : ["sentry"],
+        "handlers" : ["console"],
     },
     "loggers": {
         "django": {
             "level"    : "INFO",
-            "handlers" : ["sentry"],
-        },
-        "raven": {
-            "level"     : "WARNING",
-            "handlers"  : ["console"],
-            "propagate" : False,
+            "handlers" : ["console"],
         },
         "rq.worker": {
-            "handlers" : ["rq_console", "sentry"],
-            "level"    : "DEBUG"
-        },
-        "sentry.errors": {
-            "level"     : "DEBUG",
-            "handlers"  : ["console"],
-            "propagate" : False,
+            "level"    : "DEBUG",
+            "handlers" : ["rq_console", "console"],
         },
     },
 }

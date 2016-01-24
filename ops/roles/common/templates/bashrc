@@ -19,7 +19,7 @@ fi
 export PATH=$HOME/local/bin:$PATH
 export EDITOR=vim
 
-alias cdlogs="cd /var/www/{{ site_name }}/logs/"
+alias cdlogs="cd /var/log/"
 alias killzombies="sudo pkill -9 python; sudo pkill -9 gunicorn; echo 'All done.'"
 alias purge_pyc="find . -name '*.pyc' -exec rm -rf {} \;"
 alias runserver="python manage.py runserver"
