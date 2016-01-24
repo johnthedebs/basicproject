@@ -129,5 +129,5 @@ if [ -n "$PS1" ]; then
 fi
 
 if [ -d /var/www/envs/{{ site_name }}/ ]; then
-    source /var/www/envs/{{ site_name }}/bin/activate
+    workon {{ site_name }}
 fi

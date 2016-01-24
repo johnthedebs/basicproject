@@ -29,15 +29,15 @@ paths =
     sassInput   : [
         "./static_source/styles/app.sass"
     ]
-    cssOutput   : "./static_files/css/"
+    cssOutput   : "./dist/css/"
 
     fontInput   : "./node_modules/bootstrap-sass/assets/fonts/**/*.*"
-    fontOutput  : "./static_files/fonts/"
+    fontOutput  : "./dist/fonts/"
 
     imageInput  : [
         "./static_source/img/**/*.*"
     ]
-    imageOutput : "./static_files/img/"
+    imageOutput : "./dist/img/"
 
     appInput    : [
         "./static_source/scripts/app.coffee"
@@ -46,7 +46,7 @@ paths =
         "global-deps.js" : [
             "./node_modules/raven-js/dist/raven.js"
         ]
-    jsOutputDir : "./static_files/js/"
+    jsOutputDir : "./dist/js/"
 
     # Watch paths
     images : [
