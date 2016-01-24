@@ -11,7 +11,7 @@ history         = require("history/lib/createBrowserHistory")()
 
 {
     routeReducer
-    syncReduxAndRouter
+    syncHistory
 } = require "redux-simple-router"
 
 {
@@ -25,8 +25,9 @@ Routes   = require "./core/routes"
 
 
 createStoreWithMiddleware = applyMiddleware(
-    thunkMiddleware,
     createLogger(),
+    syncHistory(history),
+    thunkMiddleware,
 )(createStore)
 
 rootReducer = combineReducers _({}).extend(
@@ -35,7 +36,6 @@ rootReducer = combineReducers _({}).extend(
 )
 
 store = createStoreWithMiddleware(rootReducer)
-syncReduxAndRouter(history, store)
 
 
 render((

@@ -1,4 +1,4 @@
-{% load static from staticfiles %}<!DOCTYPE html>
+{% load raven %}{% load static from staticfiles %}<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -19,6 +19,9 @@
 
     {% block prejs %}{% endblock %}
     <script src="{% static "js/global-deps.js" %}"></script>
+    {% if not debug %}
+    <script>Raven.config("{% sentry_public_dsn %}").install()</script>
+    {% endif %}
     <script src="{% static "js/app.js" %}"></script>
     {% block js %}{% endblock %}
 </body>
