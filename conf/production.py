@@ -1,3 +1,8 @@
+import os.path
+
+import raven
+
+
 ALLOWED_HOSTS = (
     #".example.com",
 )
@@ -18,14 +23,12 @@ IPYTHON_ARGUMENTS = [
     "--ext", "django_extensions.management.notebook_extension",
 ]
 
-RAVEN_CONFIG = {}
-
-TEMPLATES[0]["OPTIONS"]["loaders"] = [
-    ["django.template.loaders.cached.Loader", [
-        "django.template.loaders.filesystem.Loader",
-        "django.template.loaders.app_directories.Loader",
-    ]],
-]
+RAVEN_CONFIG = {
+    "dsn": "",
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    "release": raven.fetch_git_sha(os.path.dirname(__file__)),
+}
 
 LOGGING = {
     "version": 1,
