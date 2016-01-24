@@ -13,7 +13,7 @@
   user: name=www-data group=www-pub state=present
 
 - name: Add site user
-  user: name={{ site_user }} group=www-pub state=present
+  user: name={{ ansible_ssh_user }} group=www-pub state=present
 
 - name: Create directory for virtualenvs
   file: path=/var/www/envs/ state=directory

@@ -4,7 +4,6 @@
   sudo: yes
   gather_facts: no
   vars:
-    site_user: ubuntu
     enable_nginx_default_site: True
 
   roles:
