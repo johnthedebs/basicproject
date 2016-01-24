@@ -56,7 +56,7 @@ RQ_QUEUES = {
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "sessions"
 
-POSTGIS_VERSION = (2, 1, 2)
+POSTGIS_VERSION = (2, 2, 1)
 
 AUTH_USER_MODEL = "core.User"
 
