@@ -1,15 +1,16 @@
 require("es6-promise").polyfill()
 
 _          = require "underscore"
+autoprefix = require "autoprefixer"
+cssnano    = require "cssnano"
 gulp       = require "gulp"
-autoprefix = require "gulp-autoprefixer"
 concat     = require "gulp-concat"
 gutil      = require "gulp-util"
 gwebpack   = require "gulp-webpack"
 imagemin   = require "gulp-imagemin"
 livereload = require "gulp-livereload"
-minifyCss  = require "gulp-minify-css"
 newer      = require "gulp-newer"
+postcss    = require "gulp-postcss"
 rename     = require "gulp-rename"
 sass       = require "gulp-sass"
 uglify     = require "gulp-uglify"
@@ -131,16 +132,20 @@ gulp.task "styles", ->
         indentedSyntax  : true
         sourceComments  : "normal"
 
-    minifyCssOptions =
-      compatibility       : "ie8"
-      keepSpecialComments : 1
+    postCssOptions = [
+        autoprefix(browsers: [
+            "last 3 versions"
+            "> 1%"
+            "ie 8"
+        ])
+        cssnano()
+    ]
 
     gulp.src paths.sassInput
         .pipe sass sassOptions
         .pipe concat "app.css"
-        .pipe autoprefix "last 3 versions", "> 1%", "ie 8"
         .on "error", (e) -> gutil.log "Autoprefixing Error: ", e.message, e
-        .pipe if gutil.env.production then minifyCss(minifyCssOptions) else gutil.noop()
+        .pipe if gutil.env.production then postcss(postCssOptions) else gutil.noop()
         .pipe gulp.dest paths.cssOutput
         .pipe livereload()
 
