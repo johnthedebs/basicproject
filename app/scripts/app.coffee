@@ -24,19 +24,20 @@ Reducers = require "./core/reducers"
 Routes   = require "./core/routes"
 
 
-createStoreWithMiddleware = applyMiddleware(
-    createLogger(),
-    syncHistory(history),
-    thunkMiddleware,
-)(createStore)
-
 rootReducer = combineReducers _({}).extend(
     Reducers,
     { routing: routeReducer }
 )
 
-store = createStoreWithMiddleware(rootReducer)
-
+store = createStore(
+    rootReducer,
+    {},
+    applyMiddleware(
+        createLogger(),
+        syncHistory(history),
+        thunkMiddleware,
+    )
+)
 
 render((
     <Provider store={store}>
