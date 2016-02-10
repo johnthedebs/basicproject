@@ -16,8 +16,6 @@ SESSION_COOKIE_SECURE          = True
 SECURE_BROWSER_XSS_FILTER      = True
 SECURE_CONTENT_TYPE_NOSNIFF    = True
 SECURE_FRAME_DENY              = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_SECONDS            = 60 * 60
 
 IPYTHON_ARGUMENTS = [
     "--ext", "django_extensions.management.notebook_extension",

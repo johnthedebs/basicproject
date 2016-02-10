@@ -24,39 +24,25 @@ if gutil.env.production then process.env.NODE_ENV = "production"
 
 paths =
     # I/O paths
-    sassIncludePaths : [
-        "./node_modules/bootstrap-sass/assets/stylesheets/"
-    ]
-    sassInput   : [
-        "./app/styles/app.sass"
-    ]
-    cssOutput   : "./dist/css/"
+    sassIncludePaths : ["./node_modules/bootstrap-sass/assets/stylesheets/"]
+    sassInput        : ["./app/styles/app.sass"]
+    cssOutput        : "./dist/css/"
 
-    fontInput   : "./node_modules/bootstrap-sass/assets/fonts/**/*.*"
-    fontOutput  : "./dist/fonts/"
+    fontInput  : ["./node_modules/bootstrap-sass/assets/fonts/**/*.*"]
+    fontOutput : "./dist/fonts/"
 
-    imageInput  : [
-        "./app/img/**/*.*"
-    ]
+    imageInput  : ["./app/img/**/*.*"]
     imageOutput : "./dist/img/"
 
-    appInput    : [
-        "./app/scripts/app.coffee"
-    ]
-    jsInput    :
-        "global-deps.js" : [
-            "./node_modules/raven-js/dist/raven.js"
-        ]
-    jsOutputDir : "./dist/js/"
+    appInput : ["./app/scripts/app.coffee"]
+    jsInput  :
+        "global-deps.js" : ["./node_modules/raven-js/dist/raven.js"]
+    jsOutput : "./dist/js/"
 
     # Watch paths
-    images : [
-        "./app/img/**/*.*"
-    ]
-    scripts : [
-        "./app/scripts/**/*.coffee"
-    ]
-    styles : [
+    images  : ["./app/img/**/*.*"]
+    scripts : ["./app/scripts/**/*.coffee"]
+    styles  : [
         "./app/styles/**/*.sass"
         "./app/styles/**/*.scss"
         "./node_modules/bootstrap-sass/assets/stylesheets/**/*.scss"
@@ -64,15 +50,13 @@ paths =
 
 
 webpackConfig =
-    target: "web"
-    watch: true
-    debug: !gutil.env.production
-    plugins: [
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-    ]
-    resolve:
-        extensions: ["", ".js", ".cjsx", ".coffee"]
-        moduleDirectories: ["node_modules"]
+    target  : "web"
+    watch   : true
+    debug   : !gutil.env.production
+    plugins : [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)]
+    resolve :
+        extensions        : ["", ".js", ".cjsx", ".coffee"]
+        moduleDirectories : ["node_modules"]
     module:
         loaders: [
             {
@@ -112,7 +96,7 @@ gulp.task "scripts", ->
         gulp.src inputs
             .pipe concat output
             .pipe uglify()
-            .pipe gulp.dest paths.jsOutputDir
+            .pipe gulp.dest paths.jsOutput
 
     if gutil.env.production
         webpackConfig = _({}).extend(webpackConfig, { watch: false })
@@ -121,7 +105,7 @@ gulp.task "scripts", ->
         .pipe named()
         .pipe gwebpack webpackConfig
         .pipe if gutil.env.production then uglify() else gutil.noop()
-        .pipe gulp.dest paths.jsOutputDir
+        .pipe gulp.dest paths.jsOutput
         .pipe livereload()
 
 

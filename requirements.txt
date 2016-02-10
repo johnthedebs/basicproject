@@ -1,6 +1,6 @@
-Django==1.9.1
+Django==1.9.2
 Fabric==1.10.2
-Pillow==3.1.0
+Pillow==3.1.1
 
 bpython==0.15
 django-authtools==1.4.0
@@ -13,10 +13,10 @@ djangorestframework==3.3.2
 gunicorn==19.4.5
 ipython[notebook]==4.0.3
 pdbpp==0.8.3
-pytest==2.8.6
+pytest==2.8.7
 pytest-django==2.9.1
 psycopg2==2.6.1
 pytz==2015.7
-raven==5.10.1
+raven==5.10.2
 redis==2.10.5
 rq==0.5.6
