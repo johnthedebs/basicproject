@@ -17,6 +17,7 @@ uglify     = require "gulp-uglify"
 
 named      = require "vinyl-named"
 webpack    = require "webpack"
+WebpackNotifierPlugin = require "webpack-notifier"
 
 
 if gutil.env.production then process.env.NODE_ENV = "production"
@@ -34,10 +35,11 @@ paths =
     imageInput  : ["./app/img/**/*.*"]
     imageOutput : "./dist/img/"
 
-    appInput : ["./app/scripts/app.coffee"]
-    jsInput  :
+    coffeeScript : ["./app/scripts/**/*.coffee"]
+    appInput     : ["./app/scripts/app.coffee"]
+    jsInput      :
         "global-deps.js" : ["./node_modules/raven-js/dist/raven.js"]
-    jsOutput : "./dist/js/"
+    jsOutput     : "./dist/js/"
 
     # Watch paths
     images  : ["./app/img/**/*.*"]
@@ -49,15 +51,42 @@ paths =
     ]
 
 
+webpackPlugins = [
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    new WebpackNotifierPlugin()
+]
+
+if gutil.env.production
+    webpackPlugins.push new webpack.optimize.UglifyJsPlugin(
+        compress:
+            warnings: false
+    )
+    devtool = "#source-map"
+    preLoaders  = []
+    postLoaders = [
+        test   : /\.js$/
+        loader : "transform?envify"
+    ]
+else
+    devtool = "#inline-source-map"
+    preLoaders  = [
+        test    : /\.coffee$/
+        exclude : /node_modules/
+        loader  : "coffeelint-loader"
+    ]
+    postLoaders = []
+
 webpackConfig =
     target  : "web"
     watch   : true
     debug   : !gutil.env.production
-    plugins : [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)]
+    devtool : devtool
+    plugins : webpackPlugins
     resolve :
         extensions        : ["", ".js", ".cjsx", ".coffee"]
         moduleDirectories : ["node_modules"]
     module:
+        preLoaders: preLoaders
         loaders: [
             {
                 test    : /\.coffee$/
@@ -68,12 +97,12 @@ webpackConfig =
                 loaders : ["json"]
             }
         ]
-        postLoaders: [
-            {
-                test   : /\.js$/
-                loader : "transform?envify"
-            }
-        ]
+        postLoaders: postLoaders
+
+if gutil.env.production
+    _(webpackConfig).extend
+        output:
+            sourceMapFilename: "app.js.map"
 
 
 gulp.task "fonts", ->
@@ -104,7 +133,6 @@ gulp.task "scripts", ->
     gulp.src paths.appInput
         .pipe named()
         .pipe gwebpack webpackConfig
-        .pipe if gutil.env.production then uglify() else gutil.noop()
         .pipe gulp.dest paths.jsOutput
         .pipe livereload()
 

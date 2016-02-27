@@ -3,9 +3,9 @@
 
 module.exports =
     todos: handleActions {
-            ADD_TODO: (state, action) ->
-                [state..., action.payload]
+        ADD_TODO: (state, action) ->
+            [state..., action.payload]
 
-            RECEIVE_TODOS: (state, action) ->
-                action.payload
-        }, []
+        RECEIVE_TODOS: (state, action) ->
+            action.payload
+    }, []

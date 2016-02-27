@@ -1,4 +1,4 @@
-_               = require "underscore"
+_ = require "underscore"
 require "./utils/underscoreMixins"
 
 React           = require "react"
@@ -7,8 +7,8 @@ React           = require "react"
 createLogger    = require "redux-logger"
 thunkMiddleware = require "redux-thunk"
 
-{ browserHistory, Router }    = require "react-router"
-{ routeReducer, syncHistory } = require "react-router-redux"
+{ browserHistory, Router } = require "react-router"
+{ routerReducer, syncHistoryWithStore } = require "react-router-redux"
 {
     applyMiddleware
     combineReducers
@@ -21,7 +21,7 @@ Routes   = require "./core/routes"
 
 rootReducer = combineReducers _({}).extend(
     Reducers,
-    { routing: routeReducer },
+    { routing: routerReducer },
 )
 
 store = createStore(
@@ -29,14 +29,15 @@ store = createStore(
     {},
     applyMiddleware(
         createLogger(),
-        syncHistory(browserHistory),
         thunkMiddleware,
     )
 )
 
+history = syncHistoryWithStore(browserHistory, store)
+
 render((
     <Provider store={store}>
-        <Router history={browserHistory}>
+        <Router history={history}>
             {Routes}
         </Router>
     </Provider>
