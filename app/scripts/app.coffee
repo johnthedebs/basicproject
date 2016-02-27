@@ -1,6 +1,7 @@
 _ = require "underscore"
 require "./utils/underscoreMixins"
 
+Raven           = require "raven-js"
 React           = require "react"
 { render }      = require "react-dom"
 { Provider }    = require "react-redux"
@@ -18,6 +19,9 @@ thunkMiddleware = require "redux-thunk"
 Reducers = require "./core/reducers"
 Routes   = require "./core/routes"
 
+
+if window.sentry_public_dsn
+    Raven.config(window.sentry_public_dsn).install()
 
 rootReducer = combineReducers _({}).extend(
     Reducers,

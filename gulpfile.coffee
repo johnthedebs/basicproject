@@ -37,8 +37,7 @@ paths =
 
     coffeeScript : ["./app/scripts/**/*.coffee"]
     appInput     : ["./app/scripts/app.coffee"]
-    jsInput      :
-        "global-deps.js" : ["./node_modules/raven-js/dist/raven.js"]
+    #jsInput      : { "global-dependencies.js" : ["./node_modules/lib-js/dist/module.js"] }
     jsOutput     : "./dist/js/"
 
     # Watch paths

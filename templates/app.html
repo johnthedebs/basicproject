@@ -1,7 +1,19 @@
-{% extends "base.html" %}
-
-{% block title %}Index{% endblock %}
-
-{% block content %}
+{% load raven %}{% load static from staticfiles %}<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/app.css" %}" />
+</head>
+<body>
     <div id="content"></div>
-{% endblock content %}
+
+    {% if debug %}
+    <script src="http://localhost:35729/livereload.js"></script>
+    {% else %}
+    <script>window.sentry_public_dsn = "{% sentry_public_dsn %}";</script>
+    {% endif %}
+    <script src="{% static "js/app.js" %}"></script>
+</body>
+</html>
