@@ -4,6 +4,7 @@ React       = require "react"
 actions = require "../core/actions"
 
 
+
 module.exports = connect(
     (state) ->
         todos: state.todos
@@ -20,5 +21,13 @@ module.exports = connect(
             <button onClick={@props.addTodo}>
                 add todo
             </button>
+            {@renderDevTools()}
         </div>
+
+    renderDevTools: ->
+        if process.env.NODE_ENV == "production"
+            return null
+        else
+            DevTools = require "../utils/devtools"
+            return <DevTools />
 )

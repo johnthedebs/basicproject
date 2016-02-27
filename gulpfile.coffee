@@ -60,6 +60,9 @@ if gutil.env.production
         compress:
             warnings: false
     )
+    webpackPlugins.push new webpack.DefinePlugin({
+        "process.env.NODE_ENV": JSON.stringify("production")
+    })
     devtool = "#source-map"
     preLoaders  = []
     postLoaders = [

@@ -15,5 +15,5 @@
       version: 1.10.0
     - name: gulp
       version: 3.9.0
-    - name: npm-check-updates
-      version: 2.5.4
+    - name: npm-check
+      version: 4.1.4
