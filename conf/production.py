@@ -2,11 +2,7 @@ import os.path
 
 import raven
 
-
-ALLOWED_HOSTS = (
-    #".example.com",
-)
-
+CACHE_TEMPLATES = True
 DEBUG = False
 
 CSRF_COOKIE_HTTPONLY           = False # False for AJAX CSRF to work

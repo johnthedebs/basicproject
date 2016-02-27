@@ -3,10 +3,15 @@ import os.path
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
+CACHE_TEMPLATES = False
 DEBUG = True
 
 ADMINS = (
     # ("Your Name", "your_email@domain.com"),
+)
+
+ALLOWED_HOSTS = (
+    #".example.com",
 )
 
 MANAGERS = ADMINS
@@ -59,9 +64,6 @@ SESSION_CACHE_ALIAS = "sessions"
 POSTGIS_VERSION = (2, 2, 1)
 
 AUTH_USER_MODEL = "core.User"
-
-SILENCED_SYSTEM_CHECKS = [
-]
 
 SITE_ID = 1
 
@@ -215,3 +217,11 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+if CACHE_TEMPLATES:
+    TEMPLATES[0]["OPTIONS"]["loaders"] = [
+        ("django.template.loaders.cached.Loader", [
+            "django.template.loaders.filesystem.Loader",
+            "django.template.loaders.app_directories.Loader",
+        ]),
+    ]
