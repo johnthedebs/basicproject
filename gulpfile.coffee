@@ -11,7 +11,6 @@ imagemin   = require "gulp-imagemin"
 livereload = require "gulp-livereload"
 newer      = require "gulp-newer"
 postcss    = require "gulp-postcss"
-rename     = require "gulp-rename"
 sass       = require "gulp-sass"
 uglify     = require "gulp-uglify"
 
@@ -35,10 +34,9 @@ paths =
     imageInput  : ["./app/img/**/*.*"]
     imageOutput : "./dist/img/"
 
-    coffeeScript : ["./app/scripts/**/*.coffee"]
-    appInput     : ["./app/scripts/app.coffee"]
-    #jsInput      : { "global-dependencies.js" : ["./node_modules/lib-js/dist/module.js"] }
-    jsOutput     : "./dist/js/"
+    appInput : ["./app/scripts/app.coffee"]
+    #jsInput  : { "global-dependencies.js" : ["./node_modules/lib-js/dist/module.js"] }
+    jsOutput : "./dist/js/"
 
     # Watch paths
     images  : ["./app/img/**/*.*"]
