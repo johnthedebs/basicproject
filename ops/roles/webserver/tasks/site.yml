@@ -42,6 +42,23 @@
   sudo_user: postgres
 
 
+# PostgreSQL Backup
+- name: Install database backup script
+  template: src=postgresql/create_backup.py backup=yes
+            dest=/var/lib/postgresql/create_{{ site_name }}_backup.py
+            owner=postgres group=postgres mode=0744
+
+- name: Create site postgresql backup directory
+  file: path=/var/lib/postgresql/backups/{{ site_name }}
+        owner=postgres group=postgres mode=0755
+        state=directory
+
+- name: Schedule database backup script
+  cron: name="backup {{ site_name }} postgresql database"
+        job="cd /var/lib/postgresql/ && ./create_{{ site_name }}_backup.py"
+        minute="0" hour="0" user=postgres
+
+
 # Nginx Setup
 - name: Install site nginx config
   template: src=nginx/sites/{{ env }}.conf backup=yes

@@ -28,12 +28,9 @@ paths =
     cssOutput   : "./dist/css/"
 
     # Watch paths
-    images  : ["./app/img/**/*.*"]
-    scripts : ["./app/scripts/**/*.coffee"]
-    styles  : [
-        "./app/styles/**/*.sass"
-        "./app/styles/**/*.scss"
-    ]
+    images    : ["./app/img/**/*.*"]
+    styles    : ["./app/styles/**/*.{scss,sass}"]
+    templates : ["./templates/**/*.html"]
 
 
 ##
@@ -144,6 +141,6 @@ gulp.task "watch", ->
         gulp.watch paths.images, ["images"]
         gulp.watch paths.styles, ["styles"]
         livereload.listen()
-        gulp.watch("./templates/**/*.html").on "change", livereload.changed
+        gulp.watch(paths.templates).on "change", livereload.changed
 
 gulp.task "default", ["watch", "fonts", "images", "scripts", "styles"]
