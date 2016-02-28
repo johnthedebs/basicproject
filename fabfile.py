@@ -32,6 +32,15 @@ GITHUB_HOST_KEY = "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tU
 #
 
 @task
+def backup_database():
+    """
+    Run database backup script
+    """
+    with cd("/var/lib/postgresql"):
+        sudo("./create_{project_id}_backup.py".format(**env), user="postgres")
+
+
+@task
 def collect_static():
     """
     Collect static files
@@ -44,6 +53,7 @@ def deploy():
     """
     Run all deploy tasks
     """
+    execute(backup_database)
     execute(update_repo)
     execute(install_requirements)
     execute(run_migrations)
@@ -126,6 +136,7 @@ def provision():
     """
     Update, provision, and deploy the site
     """
+    execute(backup_database)
     execute(update_repo)
     local("ansible-playbook ops/site.yml -i ops/production")
     execute(collect_static)
