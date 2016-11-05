@@ -3,9 +3,9 @@
 # for examples
 
 # postgres settings
-export LD_LIBRARY_PATH=/usr/lib/postgresql/9.5/lib
-export PGDATA=/var/lib/postgresql/9.5/main
-export PATH=/usr/lib/postgresql/9.5/bin:$PATH
+export LD_LIBRARY_PATH=/usr/lib/postgresql/9.6/lib
+export PGDATA=/var/lib/postgresql/9.6/main
+export PATH=/usr/lib/postgresql/9.6/bin:$PATH
 
 # pip/virtualenvwrapper settings
 export WORKON_HOME=/var/www/envs

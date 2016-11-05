@@ -1,6 +1,11 @@
 ---
-- name: Add node.js apt repository
-  apt_repository: repo="ppa:chris-lea/node.js" state=present
+- name: Add nodesource apt key
+  apt_key: url="https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+           state=present
+
+- name: Add nodesource apt repository
+  apt_repository: repo="deb https://deb.nodesource.com/node_6.x xenial main"
+                  state=present update_cache=yes
 
 - name: Install node.js
   apt: name=nodejs state=present
@@ -10,10 +15,10 @@
        state=present global=yes
   with_items:
     - name: npm
-      version: 3.5.2
+      version: 3.10.9
     - name: coffee-script
-      version: 1.10.0
+      version: 1.11.1
     - name: gulp
-      version: 3.9.0
+      version: 3.9.1
     - name: npm-check
-      version: 4.1.4
+      version: 5.4.0

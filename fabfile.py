@@ -9,7 +9,7 @@ from fabric.api import (
 )
 from fabric.colors          import green, red
 from fabric.contrib.console import confirm
-from fabric.contrib.files   import exists
+from fabric.contrib.files   import exists, append
 from fabric.operations      import get
 
 
