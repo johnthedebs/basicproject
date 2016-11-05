@@ -1,7 +1,7 @@
 ---
 - hosts: all
   remote_user: ubuntu
-  sudo: yes
+  become: yes
   gather_facts: no
   vars:
     enable_nginx_default_site: True

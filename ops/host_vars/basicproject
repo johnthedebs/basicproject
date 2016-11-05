@@ -3,3 +3,4 @@
 hostname: basicproject.com
 ansible_ssh_host:
 ansible_ssh_user: ubuntu
+user: ubuntu

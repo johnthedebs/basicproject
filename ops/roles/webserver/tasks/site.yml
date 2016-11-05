@@ -17,13 +17,13 @@
 - name: Create site postgresql database
   postgresql_db: name={{ site_name }} encoding="UTF8"
                  lc_collate="en_US.UTF-8" lc_ctype="en_US.UTF-8"
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_user: postgres
 
 - name: Add database extensions
   shell: "psql {{ site_name }} -c 'CREATE EXTENSION IF NOT EXISTS {{ item }};'"
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_user: postgres
   with_items:
     - hstore
     - postgis
@@ -32,14 +32,14 @@
 - name: Create site postgresql user
   postgresql_user: name={{ site_name }} password={{ site_name }}
                    db={{ site_name }} priv=ALL
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_user: postgres
 
 - name: Set postgresql user privileges
   postgresql_user: name={{ site_name }}
                    role_attr_flags=SUPERUSER,CREATEDB,NOCREATEROLE
-  sudo: yes
-  sudo_user: postgres
+  become: yes
+  become_user: postgres
 
 
 # PostgreSQL Backup
@@ -92,7 +92,7 @@
   pip: virtualenv=/var/www/envs/{{ site_name }}
        requirements={{ site_path }}requirements.txt
        extra_args="--exists-action=w"
-  sudo_user: "{{ ansible_ssh_user }}"
+  become_user: "{{ ansible_ssh_user }}"
 
 - name: Add .project file for virtualenv
   template: src=project dest=/var/www/envs/{{ site_name }}/.project
