@@ -25,6 +25,7 @@ macOS
 2. To start the backend and watch for code changes, run the
    following in a terminal window:
 
+
     git clone https://github.com/johnthedebs/basicproject.git
     cd basicproject
     vagrant up
@@ -34,6 +35,7 @@ macOS
 
 3. To build the frontend and watch for code changes, run the
    following in a second terminal window:
+
 
     sudo npm install -g yarn gulp
     yarn
