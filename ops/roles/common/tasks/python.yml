@@ -14,7 +14,7 @@
     - name: virtualenv
       version: 15.0.3
     - name: virtualenvwrapper
-      version: 4.7.1
+      version: 4.7.2
     - name: pip
       version: 9.0.0
     - name: pip-review

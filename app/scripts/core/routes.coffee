@@ -1,5 +1,8 @@
-React     = require "react"
-{ IndexRoute, Route } = require "react-router"
+React = require "react"
+{
+    IndexRoute
+    Route
+} = require "react-router"
 
 Root     = require "../components/root"
 Error404 = require "../components/error-404"

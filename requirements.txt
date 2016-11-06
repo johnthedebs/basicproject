@@ -11,7 +11,7 @@ django-redis==4.6.0
 django-rq==0.9.3
 djangorestframework==3.5.2
 gunicorn==19.6.0
-ipython[notebook]==4.1.2
+ipython[notebook]==5.1.0
 pdbpp==0.8.3
 pytest==3.0.3
 pytest-django==3.0.0

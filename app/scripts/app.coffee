@@ -5,7 +5,7 @@ Raven           = require "raven-js"
 React           = require "react"
 { render }      = require "react-dom"
 { Provider }    = require "react-redux"
-thunkMiddleware = require "redux-thunk"
+thunkMiddleware = require("redux-thunk").default
 
 { browserHistory, Router } = require "react-router"
 { routerReducer, syncHistoryWithStore } = require "react-router-redux"
