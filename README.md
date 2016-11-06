@@ -13,12 +13,14 @@ macOS
 -----
 
 1. Install the following:
+
     * Latest version of XCode through the app store
     * [Vagrant](https://www.vagrantup.com/downloads.html)
     * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
     * [brew](http://brew.sh/)
     * Ansible - `brew install homebrew/versions/ansible20`
     * Node.js - `brew install homebrew/versions/node6-lts`
+
 
 2. To start the backend and watch for code changes, run the
    following in a terminal window:
@@ -29,12 +31,14 @@ macOS
     vagrant ssh
     runserver
 
+
 3. To build the frontend and watch for code changes, run the
    following in a second terminal window:
 
     sudo npm install -g yarn gulp
     yarn
     gulp
+
 
 4. Visit `localhost:8080` in a browser
 
