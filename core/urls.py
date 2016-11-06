@@ -1,4 +1,4 @@
-from django.conf.urls                import patterns, include, url
+from django.conf.urls                import include, url
 from django.contrib                  import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -11,7 +11,7 @@ router = routers.DefaultRouter()
 router.register("users", UserViewSet)
 
 
-urlpatterns = patterns("",
+urlpatterns = [
     url(r"^$", app, name="app"),
 
     url(r"^admin/", include(admin.site.urls)),
@@ -20,6 +20,6 @@ urlpatterns = patterns("",
 
     # This needs to go at the end since it captures anything
     url(r"^(?P<path>.*)/$", app),
-)
+]
 
 urlpatterns += staticfiles_urlpatterns()
