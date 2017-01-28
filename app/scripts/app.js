@@ -25,14 +25,13 @@ if (process.env.NODE_ENV === 'production') {
   enhancer = applyMiddleware(thunkMiddleware)
 } else {
   const createLogger = require('redux-logger') // eslint-disable-line
-  const DevTools = require('./utils/devtools') // eslint-disable-line
 
   enhancer = compose(
         applyMiddleware(
             createLogger(),
             thunkMiddleware
         ),
-        DevTools.instrument()
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() // eslint-disable-line
     )
 }
 

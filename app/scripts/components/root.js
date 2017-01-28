@@ -5,15 +5,6 @@ import { connect } from 'react-redux'
 
 import actions from '../core/actions'
 
-let devTools = null
-
-if (process.env.NODE_ENV !== 'production') {
-  const DevTools = require('../utils/devtools') // eslint-disable-line
-
-  devTools = <DevTools />
-}
-
-
 class Root extends React.Component {
   static displayName = 'Root'
 
@@ -34,7 +25,6 @@ class Root extends React.Component {
         <button onClick={addTodo}>
           add todo
         </button>
-        {devTools}
       </div>
     )
   }
