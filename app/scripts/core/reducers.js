@@ -9,6 +9,6 @@ export default {
 
     RECEIVE_TODOS(state, action) {
       return action.payload
-    }
-  }, [])
+    },
+  }, []),
 }

@@ -11,17 +11,20 @@ const API = {
     const p = new Promise((resolve, reject) => {
       const r = Request.get(url)
 
-      for (const k in options.data) {
-        const v = options.data[k]
+      _(options.data).each((v, k) => {
         if (_(v).isArray()) {
           _(v).each(item => r.query(`${k}[]`, item))
         } else {
           r.query(`${k}`, v)
         }
-      }
+      })
 
-      ({ url } = r)
-      _(r._query).each((arg, i) => url += `${i === 0 ? '?' : '&'}${arg}`)
+      url = r.url
+      _(r._query).each((arg, i) => { // eslint-disable-line
+        url += `${i === 0 ? '?' : '&'}${arg}`
+
+        return url
+      })
 
       return r.accept('application/json')
                 .on('error', () => reject('ERROR'))
@@ -107,7 +110,7 @@ const API = {
                 })
         )
     return p.catch(error => console.error(error))
-  }
+  },
 }
 
 

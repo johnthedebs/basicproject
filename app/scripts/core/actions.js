@@ -14,7 +14,7 @@ const Actions = {
               dispatch(Actions.receiveTodos(todos))
               return todos
             })
-  }
+  },
 }
 
 

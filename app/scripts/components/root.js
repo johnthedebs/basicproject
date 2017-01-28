@@ -1,4 +1,6 @@
-import React from 'react'
+import React, {
+  PropTypes,
+} from 'react'
 import { connect } from 'react-redux'
 
 import actions from '../core/actions'
@@ -12,24 +14,31 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-const Root = React.createClass({
-  displayName: 'Root',
+class Root extends React.Component {
+  static displayName = 'Root'
 
-  propTypes: {
-  },
+  static propTypes = {
+    todos: PropTypes.array,
+    addTodo: PropTypes.func.isRequired,
+  }
 
   render() {
+    const {
+      todos,
+      addTodo,
+    } = this.props
+
     return (
       <div>
-        {this.props.todos}
-        <button onClick={this.props.addTodo}>
+        {todos}
+        <button onClick={addTodo}>
           add todo
         </button>
         {devTools}
       </div>
     )
   }
-})
+}
 
 export default connect(
   state => ({ todos: state.todos })
@@ -38,6 +47,6 @@ export default connect(
     ({
       addTodo() {
         return dispatch(actions.addTodo('hello world'))
-      }
+      },
     })
 )(Root)
