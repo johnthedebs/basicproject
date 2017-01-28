@@ -3,30 +3,41 @@ import { connect } from 'react-redux'
 
 import actions from '../core/actions'
 
+let devTools = null
 
-export default connect(
-    state => ({ todos: state.todos })
-    ,
-    dispatch =>
-        ({
-          addTodo() {
-            return dispatch(actions.addTodo('hello world'))
-          }
-        })
-)(React.createClass({
+if (process.env.NODE_ENV !== 'production') {
+  const DevTools = require('../utils/devtools') // eslint-disable-line
+
+  devTools = <DevTools />
+}
+
+
+const Root = React.createClass({
   displayName: 'Root',
 
-  render() {
-    return <div>{this.props.todos}<button onClick={this.props.addTodo}>add todo</button>{this.renderDevTools()}</div>
+  propTypes: {
   },
 
-  renderDevTools() {
-    if (process.env.NODE_ENV === 'production') {
-      return null
-    } else {
-      const DevTools = require('../utils/devtools')
-      return <DevTools />
-    }
+  render() {
+    return (
+      <div>
+        {this.props.todos}
+        <button onClick={this.props.addTodo}>
+          add todo
+        </button>
+        {devTools}
+      </div>
+    )
   }
 })
-)
+
+export default connect(
+  state => ({ todos: state.todos })
+  ,
+  dispatch =>
+    ({
+      addTodo() {
+        return dispatch(actions.addTodo('hello world'))
+      }
+    })
+)(Root)

@@ -1,6 +1,4 @@
-import { Promise } from 'es6-promise'
 import { createAction } from 'redux-actions'
-import Request from 'superagent'
 
 import Api from '../utils/api'
 

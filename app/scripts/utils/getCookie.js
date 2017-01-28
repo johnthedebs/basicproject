@@ -1,7 +1,7 @@
 import _ from 'underscore'
 
 
-const getCookie = function (name) {
+const getCookie = (name) => {
   let cookieValue = null
   if (document.cookie && document.cookie !== '') {
     const cookies = document.cookie.split(';')
@@ -9,7 +9,8 @@ const getCookie = function (name) {
       cookie = cookie.trim()
             // Does this cookie string begin with the name we want?
       if (cookie.substring(0, name.length + 1) === (`${name}=`)) {
-        return cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+        return cookieValue
       }
     })
   }

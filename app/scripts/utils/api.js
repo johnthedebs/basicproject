@@ -28,9 +28,9 @@ const API = {
                 .end((err, res) => {
                   if (err || res.error) {
                     return reject([err, res])
-                  } else {
-                    return resolve(res)
                   }
+
+                  return resolve(res)
                 })
     })
     return p.catch(error => console.error(error))
@@ -47,9 +47,9 @@ const API = {
                 .end((err, res) => {
                   if (err || res.error) {
                     return reject([err, res])
-                  } else {
-                    return resolve(res)
                   }
+
+                  return resolve(res)
                 })
         )
     return p.catch(error => console.error(error))
@@ -82,9 +82,9 @@ const API = {
                   console.log('END')
                   if (err || res.error) {
                     return reject([err, res])
-                  } else {
-                    return resolve(res)
                   }
+
+                  return resolve(res)
                 })
     })
     return p.catch(error => console.error(error))
@@ -101,9 +101,9 @@ const API = {
                 .end((err, res) => {
                   if (err || res.error) {
                     return reject([err, res])
-                  } else {
-                    return resolve(res)
                   }
+
+                  return resolve(res)
                 })
         )
     return p.catch(error => console.error(error))

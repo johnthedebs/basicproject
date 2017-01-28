@@ -1,5 +1,5 @@
 import React from 'react'
-import { IndexRoute, Route } from 'react-router'
+import { Route } from 'react-router'
 
 import Root from '../components/root'
 import Error404 from '../components/error-404'

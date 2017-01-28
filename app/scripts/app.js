@@ -1,5 +1,4 @@
 import _ from 'underscore'
-import './utils/underscoreMixins'
 
 import Raven from 'raven-js'
 import React from 'react'
@@ -13,19 +12,22 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 
 import Reducers from './core/reducers'
 import Routes from './core/routes'
+import './utils/underscoreMixins'
 
 
 if (window.sentry_public_dsn) {
   Raven.config(window.sentry_public_dsn).install()
 }
 
-if (process.env.NODE_ENV === 'production') {
-  var enhancer = applyMiddleware(thunkMiddleware)
-} else {
-  const createLogger = require('redux-logger')
-  const DevTools = require('./utils/devtools')
+let enhancer
 
-  var enhancer = compose(
+if (process.env.NODE_ENV === 'production') {
+  enhancer = applyMiddleware(thunkMiddleware)
+} else {
+  const createLogger = require('redux-logger') // eslint-disable-line
+  const DevTools = require('./utils/devtools') // eslint-disable-line
+
+  enhancer = compose(
         applyMiddleware(
             createLogger(),
             thunkMiddleware
@@ -37,8 +39,7 @@ if (process.env.NODE_ENV === 'production') {
 const rootReducer = combineReducers(_({}).extend(
     Reducers,
     { routing: routerReducer }
-)
-)
+))
 
 const store = createStore(
     rootReducer,
