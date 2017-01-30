@@ -45,16 +45,5 @@
     "import",
     "react",
     "no-loops"
-  ],
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "moduleDirectory": [
-          "priv/static/vendor",
-          "shared",
-          "node_modules"
-        ]
-      }
-    }
-  }
+  ]
 }
