@@ -21,7 +21,7 @@
     "eslint-config-airbnb": "^13.0.0",
     "eslint-import-resolver-webpack": "^0.7.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.1",
+    "eslint-plugin-jsx-a11y": "2.2.3",
     "eslint-plugin-no-loops": "^0.3.0",
     "eslint-plugin-react": "^6.7.1",
     "expect": "^1.20.2",
@@ -44,7 +44,6 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "es6-promise": "^4.0.5",
-    "eslint-plugin-jsx-a11y": "2.2.3",
     "moment": "^2.15.2",
     "raven-js": "^3.8.0",
     "react": "^15.3.2",
