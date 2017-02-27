@@ -15,9 +15,9 @@
        state=present global=yes
   with_items:
     - name: npm
-      version: 3.10.9
+      version: 4.3.0
     - name: yarn
-      version: 0.16.1
+      version: 0.21.3
     - name: gulp
       version: 3.9.1
     - name: npm-check
