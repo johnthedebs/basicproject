@@ -1,0 +1,49 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "node": true
+  },
+  "rules": {
+    "no-console": 0,
+    semi: [2, "never"],
+    "max-len": ["error", { "code": 160 }],
+    "no-mixed-operators": 0,
+    "no-param-reassign": 0,
+    "consistent-return": 0,
+    "comma-dangle": ["error", "always-multiline"],
+    "no-use-before-define": 0,
+    "import/no-unresolved": [2, { "ignore": ["electron"] }],
+    "import/no-extraneous-dependencies": 0,
+    "react/prefer-es6-class": [2, "always"],
+    "react/jsx-no-bind": 0,
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": 0,
+    "react/forbid-prop-types": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "react/sort-comp": [1, {
+      order: [
+        'static-methods',
+        'lifecycle',
+        'render',
+        'everything-else'
+      ]
+    }],
+    "no-loops/no-loops": 2,
+    # https://github.com/eslint/eslint/issues/6274
+    "generator-star-spacing": 0,
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allowAfterThis": true
+      }
+    ]
+  },
+  "plugins": [
+    "import",
+    "react",
+    "no-loops"
+  ]
+}

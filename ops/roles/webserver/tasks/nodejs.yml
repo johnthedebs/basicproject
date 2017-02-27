@@ -18,8 +18,6 @@
       version: 3.10.9
     - name: yarn
       version: 0.16.1
-    - name: coffee-script
-      version: 1.11.1
     - name: gulp
       version: 3.9.1
     - name: npm-check
