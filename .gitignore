@@ -18,6 +18,7 @@ CACHE
 *.kpf
 *.old
 *.pyc
+*.retry
 *.sassc
 *.swp
 *.tmproj
