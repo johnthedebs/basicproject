@@ -14,11 +14,11 @@ macOS
 
 1. Install the following:
 
-    * Latest version of XCode through the app store
+    * Command Line Tools package - `xcode-select --install`
     * [Vagrant](https://www.vagrantup.com/downloads.html)
     * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
     * [Homebrew](http://brew.sh/)
-    * Ansible - `brew install homebrew/versions/ansible20`
+    * Ansible - `brew install ansible`
     * Node.js - `brew install homebrew/versions/node6-lts`
 
 
