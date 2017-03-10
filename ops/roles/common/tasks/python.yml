@@ -24,4 +24,4 @@
 
 - name: Set up pdb++ defaults
   template: src=pdbrc.py dest=/home/{{ ansible_ssh_user }}/.pdbrc.py
-            owner={{ ansible_ssh_user }} group=www-pub mode=664
+            owner={{ ansible_ssh_user }} group={{ ansible_ssh_user }} mode=664
