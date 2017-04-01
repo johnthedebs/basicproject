@@ -1,24 +1,30 @@
 ---
-- name: Add nodesource apt key
-  apt_key: url="https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
-           state=present
+- name: Check if node is already installed
+  stat: path=/usr/bin/node
+  register: node_installed
 
-- name: Add nodesource apt repository
-  apt_repository: repo="deb https://deb.nodesource.com/node_6.x xenial main"
-                  state=present update_cache=yes
+- block:
+    - name: Add nodesource apt key
+      apt_key: url="https://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+              state=present
 
-- name: Install node.js
-  apt: name=nodejs state=present
+    - name: Add nodesource apt repository
+      apt_repository: repo="deb https://deb.nodesource.com/node_6.x xenial main"
+                      state=present update_cache=yes
 
-- name: Install global node.js packages
-  npm: name={{ item.name }} version={{ item.version}}
-       state=present global=yes
-  with_items:
-    - name: npm
-      version: 4.3.0
-    - name: yarn
-      version: 0.21.3
-    - name: gulp
-      version: 3.9.1
-    - name: npm-check
-      version: 5.4.0
+    - name: Install node.js
+      apt: name=nodejs state=present
+
+  when: node_installed.stat.exists == false
+
+- name: Check if yarn is already installed
+  stat: path=/usr/bin/yarn
+  register: yarn_installed
+
+- name: Install yarn
+  shell: npm install --global yarn@{{ nodejs_yarn_version }}
+  when: yarn_installed.stat.exists == false
+
+- name: Install global packages
+  shell: yarn global add {{ " ".join(nodejs_global_packages) }}
+  when: nodejs_global_packages|length > 0
