@@ -1,3 +1,5 @@
+import os
+
 from fabric.api import (
     cd,
     env,
@@ -22,6 +24,7 @@ env.project_id     = "basicproject"
 env.project_dir    = "/var/www/{project_id}/{project_id}/".format(**env)
 env.site_dir       = "/var/www/{project_id}/".format(**env)
 env.virtualenv_dir = "/var/www/envs/{project_id}/".format(**env)
+env.ansible_config = "{}/ops/ansible.cfg".format(os.path.dirname(__file__))
 env.forward_agent  = True
 
 GITHUB_HOST_KEY = "github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ=="
@@ -138,7 +141,7 @@ def provision():
     """
     execute(backup_database)
     execute(update_repo)
-    local("ansible-playbook ops/site.yml -i ops/production")
+    local("ANSIBLE_CONFIG={ansible_config} ansible-playbook ops/site.yml -i ops/production".format(**env))
     execute(collect_static)
     execute(restart_app)
 
