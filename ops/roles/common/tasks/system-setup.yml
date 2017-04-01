@@ -5,22 +5,17 @@
 - name: Install system packages
   apt: name={{ item }} state=present update_cache=yes
   with_items:
+    # General
     - bash-completion
     - git
     - ntp
-
-- name: Install build packages
-  apt: name={{ item }} state=present
-  with_items:
+    # Build
     - build-essential
     - binutils-doc
     - autoconf
     - flex
     - bison
-
-- name: Install utility packages
-  apt: name={{ item }} state=present
-  with_items:
+    # Utility
     - htop
     - tig
     - tmux
@@ -33,17 +28,10 @@
   authorized_key: user={{ user }}
                   key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
 
-- name: Install bashrc
-  template: src=bashrc
-            dest="/home/{{ user }}/.bashrc"
+- name: Install shell config files
+  template: src={{ item }} dest=/home/{{ user }}/.{{ item }}
             owner={{ user }} group={{ user }} mode=0755
-
-- name: Install vimrc
-  template: src=vimrc
-            dest="/home/{{ user }}/.vimrc"
-            owner={{ user }} group={{ user }} mode=0755
-
-- name: Install django bash completion
-  copy: src=django_bash_completion
-        dest=/home/{{ user }}/.django_bash_completion
-        owner={{ user }} group={{ user }} mode=0755
+  with_items:
+    - bashrc
+    - vimrc
+    - django_bash_completion
