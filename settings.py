@@ -6,13 +6,13 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 CACHE_TEMPLATES = False
 DEBUG = True
 
-ADMINS = (
+ADMINS = [
     # ("Your Name", "your_email@domain.com"),
-)
+]
 
-ALLOWED_HOSTS = (
+ALLOWED_HOSTS = [
     #".example.com",
-)
+]
 
 MANAGERS = ADMINS
 
@@ -81,14 +81,14 @@ COMPRESS_URL = STATIC_URL
 MEDIA_ROOT   = os.path.join(BASE_DIR, os.pardir, "site_media", "media")
 STATIC_ROOT  = os.path.join(BASE_DIR, os.pardir, "site_media", "static")
 
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "dist"),
-)
+]
 
-STATICFILES_FINDERS = (
+STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-)
+]
 
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
@@ -117,7 +117,7 @@ TEMPLATES = [
     },
 ]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -126,13 +126,13 @@ MIDDLEWARE_CLASSES = (
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-)
+]
 
 ROOT_URLCONF = "core.urls"
 
 WSGI_APPLICATION = "wsgi.application"
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -152,7 +152,7 @@ INSTALLED_APPS = (
 
     # Internal apps
     "core",
-)
+]
 
 INTERNAL_IPS = ("127.0.0.1",)
 
