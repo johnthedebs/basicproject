@@ -26,5 +26,5 @@
   when: yarn_installed.stat.exists == false
 
 - name: Install global packages
-  shell: yarn global add {{ " ".join(nodejs_global_packages) }}
+  shell: npm install -g {{ " ".join(nodejs_global_packages) }}
   when: nodejs_global_packages|length > 0
