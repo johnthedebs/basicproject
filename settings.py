@@ -37,13 +37,12 @@ INSTALLED_APPS = [
     "core",
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.auth.middleware.SessionAuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -151,7 +150,9 @@ LOGGING = {
 }
 
 
+#
 # Misc Django config
+#
 AUTH_USER_MODEL = "core.User"
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -182,8 +183,6 @@ USE_L10N = False
 # TODO: https://docs.djangoproject.com/en/1.11/topics/i18n/timezones/#selecting-the-current-time-zone
 USE_TZ = True
 
-
-# Static file & media config
 MEDIA_URL   = "/media/"
 STATIC_URL  = "/static/"
 MEDIA_ROOT  = os.path.join(BASE_DIR, os.pardir, "site_media", "media")
@@ -196,7 +195,9 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
 
 
+#
 # 3rd-party config
+#
 INTERNAL_IPS = ("127.0.0.1",)
 
 DEBUG_TOOLBAR_CONFIG = { "INTERCEPT_REDIRECTS" : False }
