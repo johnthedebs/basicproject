@@ -93,7 +93,7 @@
   pip: virtualenv=/var/www/envs/{{ site_name }}
        requirements={{ site_path }}requirements.txt
        extra_args="--exists-action=w"
-  become_user: vagrant
+  become_user: "{{ deploy_user }}"
 
 - name: Add .project file for virtualenv
   template: src=project dest=/var/www/envs/{{ site_name }}/.project

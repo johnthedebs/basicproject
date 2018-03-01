@@ -21,6 +21,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.provision "ansible" do |ansible|
         ansible.playbook    = "ops/vagrant.yml"
         ansible.config_file = "ops/ansible.cfg"
+        ansible.extra_vars  = {
+          deploy_user: "vagrant",
+        }
         #ansible.verbose    = "vvvv"
     end
 end

@@ -141,7 +141,7 @@ def provision():
     """
     execute(backup_database)
     execute(update_repo)
-    local("ANSIBLE_CONFIG={ansible_config} ansible-playbook ops/site.yml -i ops/production".format(**env))
+    local("ANSIBLE_CONFIG={ansible_config} ansible-playbook ops/site.yml -i ops/production --extra-vars 'deploy_user={user}".format(**env))
     execute(collect_static)
     execute(restart_app)
 

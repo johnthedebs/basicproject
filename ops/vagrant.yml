@@ -1,6 +1,6 @@
 ---
 - hosts: default
-  remote_user: vagrant
+  remote_user: "{{ deploy_user }}"
   become: yes
   gather_facts: no
   vars:
