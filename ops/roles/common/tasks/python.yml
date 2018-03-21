@@ -1,12 +1,16 @@
 ---
+- name: Add python apt repository
+  apt_repository: repo="ppa:deadsnakes/ppa"
+                  state=present update_cache=yes
+
 - name: Install python system packages
   apt: name={{ item }} state=present
   with_items:
-    - python-dev
-    - python-setuptools
+    - python3.6
+    - python3.6-dev
 
-- name: Install pip with easy_install
-  easy_install: name=pip
+- name: Install pip for python3.6
+  shell: "curl https://bootstrap.pypa.io/get-pip.py | sudo python3.6"
 
 - name: Install system python packages
   pip: name={{ item.name }} version={{ item.version }}
@@ -14,11 +18,11 @@
     - name: virtualenv
       version: 15.1.0
     - name: virtualenvwrapper
-      version: 4.7.2
+      version: 4.8.2
     - name: pip
-      version: 9.0.1
+      version: 9.0.2
     - name: pip-review
-      version: 0.5.2
+      version: 1.0
 
 - name: Set up pdb++ defaults
   template: src=pdbrc.py dest=/home/{{ ansible_ssh_user }}/.pdbrc.py

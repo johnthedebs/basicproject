@@ -106,7 +106,7 @@ DATABASES = {
     }
 }
 
-# https://docs.djangoproject.com/en/1.11/topics/logging/
+# https://docs.djangoproject.com/en/2.0/topics/logging/
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
@@ -180,7 +180,7 @@ LANGUAGE_CODE = "en-us"
 USE_I18N = False
 USE_L10N = False
 
-# TODO: https://docs.djangoproject.com/en/1.11/topics/i18n/timezones/#selecting-the-current-time-zone
+# TODO: https://docs.djangoproject.com/en/2.0/topics/i18n/timezones/#selecting-the-current-time-zone
 USE_TZ = True
 
 MEDIA_URL   = "/media/"

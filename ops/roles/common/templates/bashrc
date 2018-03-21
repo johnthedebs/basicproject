@@ -9,6 +9,7 @@ export PATH=/usr/lib/postgresql/9.6/bin:$PATH
 
 # pip/virtualenvwrapper settings
 export WORKON_HOME=/var/www/envs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.6
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_DOWNLOAD_CACHE=/tmp/pip
 
