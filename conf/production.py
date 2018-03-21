@@ -23,34 +23,54 @@ RAVEN_CONFIG = {
     "release": raven.fetch_git_sha(os.path.dirname(__file__)),
 }
 
+ALLOWED_HOSTS = [
+    #".example.com",
+]
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
+]
+
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
     "formatters": {
         "verbose": {
             "datefmt" : "%Y-%m-%d %H:%M:%S",
-            "format"  : "[%(asctime)s] [%(levelname)s] [%(module)s] %(message)s",
+            "format"  : "[%(asctime)s] [%(name)s] [%(levelname)s] [%(module)s] %(message)s",
         },
     },
     "handlers": {
-        "sentry": {
-            "level" : "WARNING",
-            "class" : "raven.contrib.django.handlers.SentryHandler",
-        },
         "console": {
             "level"     : "DEBUG",
             "class"     : "logging.StreamHandler",
             "formatter" : "verbose",
         },
-    },
-    "root": {
-        "level"    : "WARNING",
-        "handlers" : ["sentry"],
+        "sentry": {
+            "level" : "WARNING",
+            "class" : "raven.contrib.django.handlers.SentryHandler",
+        },
     },
     "loggers": {
+        "": {
+            "level"    : "WARNING",
+            "handlers" : ["console", "sentry"],
+        },
         "django": {
             "level"     : "WARNING",
-            "handlers"  : ["sentry"],
+            "handlers"  : ["console", "sentry"],
+            "propagate" : False,
         },
         "raven": {
             "level"     : "INFO",

@@ -16,16 +16,17 @@ ALLOWED_HOSTS = [
 SECRET_KEY = "{{ secret_key }}"
 
 INSTALLED_APPS = [
+    # Django contrib apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
-    #"django.contrib.gis",
+    "django.contrib.gis",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.sites",
     "django.contrib.staticfiles",
 
-    # External apps
+    # 3rd-party apps
     "authtools",
     #"debug_toolbar",
     "django_extensions",
@@ -112,12 +113,12 @@ LOGGING = {
     "disable_existing_loggers": True,
     "formatters": {
         "rq_console": {
-            "format"  : "%(asctime)s %(message)s",
             "datefmt" : "%H:%M:%S",
+            "format"  : "%(asctime)s %(message)s",
         },
         "verbose": {
             "datefmt" : "%Y-%m-%d %H:%M:%S",
-            "format"  : "[%(asctime)s] [%(levelname)s] [%(module)s] %(message)s",
+            "format"  : "[%(asctime)s] [%(name)s] [%(levelname)s] [%(module)s] %(message)s",
         },
     },
     "handlers": {
@@ -133,18 +134,25 @@ LOGGING = {
             "exclude"   : ["%(asctime)s"],
         },
     },
-    "root": {
-        "level"    : "INFO",
-        "handlers" : ["console"],
-    },
     "loggers": {
-        "django": {
+        "": {
             "level"    : "INFO",
             "handlers" : ["console"],
         },
+        "django": {
+            "level"     : "INFO",
+            "handlers"  : ["console"],
+            "propagate" : False,
+        },
+        "raven": {
+            "level"    : "DEBUG",
+            "handlers" : [],
+            "propagate" : False,
+        },
         "rq.worker": {
             "level"    : "DEBUG",
-            "handlers" : ["rq_console", "console"],
+            "handlers" : ["console", "rq_console"],
+            "propagate" : False,
         },
     },
 }
@@ -159,17 +167,11 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
-POSTGIS_VERSION = (2, 3, 2)
+POSTGIS_VERSION = (2, 4, 3)
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "sessions"
