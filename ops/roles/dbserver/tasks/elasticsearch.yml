@@ -1,5 +1,5 @@
 ---
-- include: java.yml
+- include_tasks: java.yml
 
 - name: Download elasticsearch
   get_url: dest=/root/elasticsearch-{{ es_version }}.deb

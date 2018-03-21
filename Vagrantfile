@@ -25,5 +25,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           deploy_user: "vagrant",
         }
         #ansible.verbose    = "vvvv"
+        ansible.compatibility_mode = "2.0"
     end
 end

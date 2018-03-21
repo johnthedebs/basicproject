@@ -19,6 +19,6 @@
   file: path=/var/www/envs/ state=directory
         owner={{ ansible_ssh_user }} group=www-pub mode=0775
 
-- include: nodejs.yml
-- include: nginx.yml
-- include: site.yml
+- include_tasks: nodejs.yml
+- include_tasks: nginx.yml
+- include_tasks: site.yml
