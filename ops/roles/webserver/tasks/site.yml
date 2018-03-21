@@ -32,7 +32,7 @@
 
 - name: Create site postgresql user
   postgresql_user: name={{ site_name }} password={{ site_name }}
-                   db={{ site_name }} priv=ALL
+                   db={{ site_name }} priv=ALL encrypted=yes
   become: yes
   become_user: postgres
 
