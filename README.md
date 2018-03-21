@@ -19,7 +19,7 @@ macOS
     * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
     * [Homebrew](http://brew.sh/)
     * Ansible - `brew install ansible`
-    * Node.js - `brew install homebrew/versions/node6-lts`
+    * Node.js - `brew install node@8`
 
 
 2. To start the backend and watch for code changes, run the
