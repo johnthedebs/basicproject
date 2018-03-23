@@ -1,3 +1,4 @@
+from django.conf                     import settings
 from django.contrib                  import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls                     import include, path, re_path
@@ -21,5 +22,11 @@ urlpatterns = [
     # This needs to go at the end since it matches anything
     re_path(r"^(?P<path>.*)/$", app),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path("__debug__/", include(debug_toolbar.urls)),
+    ] + urlpatterns
 
 urlpatterns += staticfiles_urlpatterns()

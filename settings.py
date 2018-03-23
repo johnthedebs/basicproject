@@ -28,7 +28,7 @@ INSTALLED_APPS = [
 
     # 3rd-party apps
     "authtools",
-    #"debug_toolbar",
+    "debug_toolbar",
     "django_extensions",
     "django_rq",
     "raven.contrib.django.raven_compat",
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -202,8 +203,6 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesSto
 #
 INTERNAL_IPS = ("127.0.0.1",)
 
-DEBUG_TOOLBAR_CONFIG = { "INTERCEPT_REDIRECTS" : False }
-
 IPYTHON_ARGUMENTS = [
     "--ext", "django_extensions.management.notebook_extension",
     "--ip", "0.0.0.0",
@@ -216,7 +215,6 @@ REST_FRAMEWORK = {
 }
 
 RQ_SHOW_ADMIN_LINK = True
-
 RQ_QUEUES = {
     "default" : { "USE_REDIS_CACHE" : "jobs" },
     "high"    : { "USE_REDIS_CACHE" : "jobs" },
