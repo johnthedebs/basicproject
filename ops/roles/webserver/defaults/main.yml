@@ -1,9 +1,8 @@
 ---
 enable_nginx_default_site: False
 
-nodejs_yarn_version: "0.21.3"
 nodejs_global_packages: [
     "npm@4.3.0",
     "gulp@3.9.1",
-    "npm-check@5.4.0",
+    "npm-check@5.7.1",
 ]

@@ -38,8 +38,8 @@ macOS
    following in a second terminal window:
 
     ```
-    sudo npm install -g yarn gulp
-    yarn
+    sudo npm install -g gulp
+    npm install
     gulp
     ```
 

@@ -9,21 +9,13 @@
               state=present
 
     - name: Add nodesource apt repository
-      apt_repository: repo="deb https://deb.nodesource.com/node_8.x xenial main"
+      apt_repository: repo="deb https://deb.nodesource.com/node_8.x bionic main"
                       state=present update_cache=yes
 
     - name: Install node.js
       apt: name=nodejs state=present
 
   when: node_installed.stat.exists == false
-
-- name: Check if yarn is already installed
-  stat: path=/usr/bin/yarn
-  register: yarn_installed
-
-- name: Install yarn
-  shell: npm install --global yarn@{{ nodejs_yarn_version }}
-  when: yarn_installed.stat.exists == false
 
 - name: Install global packages
   shell: npm install -g {{ " ".join(nodejs_global_packages) }}
