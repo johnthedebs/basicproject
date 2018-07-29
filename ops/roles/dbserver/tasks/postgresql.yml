@@ -18,6 +18,9 @@
     - libgeoip1
     - python-psycopg2 # Needed for Ansible provisioning
 
+- name: Install psycopg2 for other ansible tasks
+  pip: name=psycopg2
+
 - name: Make sure postgresql is running
   service: name=postgresql state=started enabled=yes
 

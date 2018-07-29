@@ -2,5 +2,5 @@
 # Used to configure the machine
 hostname: basicproject.com
 ansible_ssh_host:
-ansible_ssh_user: ubuntu
-user: ubuntu
+ansible_python_interpreter: "/usr/bin/python3"
+user: deploy

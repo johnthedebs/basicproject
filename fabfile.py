@@ -9,7 +9,7 @@ from fabric.api import (
     sudo,
     task,
 )
-from fabric.colors          import green, red
+from fabric.colors          import green, red, yellow
 from fabric.contrib.console import confirm
 from fabric.contrib.files   import exists, append
 from fabric.operations      import get
@@ -40,7 +40,11 @@ def backup_database():
     Run database backup script
     """
     with cd("/var/lib/postgresql"):
-        sudo("./create_{project_id}_backup.py".format(**env), user="postgres")
+        backup_script = "./create_{project_id}_backup.py".format(**env)
+        if exists(backup_script):
+            sudo(backup_script, user="postgres")
+        else:
+            print(yellow("No backup script exists; not running backup.\n"))
 
 
 @task
@@ -141,7 +145,7 @@ def provision():
     """
     execute(backup_database)
     execute(update_repo)
-    local("ANSIBLE_CONFIG={ansible_config} ansible-playbook ops/site.yml -i ops/production --extra-vars 'deploy_user={user}".format(**env))
+    local("ANSIBLE_CONFIG={ansible_config} ansible-playbook ops/site.yml -i ops/production --extra-vars 'deploy_user={user}'".format(**env))
     execute(collect_static)
     execute(restart_app)
 
@@ -159,7 +163,7 @@ def restart_app():
     """
     Restart the web app gracefully
     """
-    sudo("reload web".format(**env))
+    sudo("service web reload".format(**env))
 
 
 @task

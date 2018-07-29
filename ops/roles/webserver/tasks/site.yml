@@ -105,20 +105,22 @@
                  virtualenv=/var/www/envs/{{ site_name }}
 
 
-- name: Install web server upstart config
-  template: src=upstart/web.conf dest=/etc/init/web.conf
-            owner=root group=root mode=0644
-  register: web_upstart_config
-
-- name: Install worker upstart config
-  template: src=upstart/worker.conf dest=/etc/init/worker.conf
+- name: Install web server systemd config
+  template: src=web.service dest=/lib/systemd/system/web.service
             owner=root group=root mode=0644
 
+- name: Install worker systemd config
+  template: src=worker.service dest=/lib/systemd/system/worker.service
+            owner=root group=root mode=0644
 
-- name: Start web server
-  service: name=web state=started
-  when: env != "development"
+- name: Force systemd to reread configs
+  systemd: daemon_reload=yes
 
-- name: Start worker
-  service: name=worker state=started
+
+- block:
+  - name: Start web server
+    service: name=web state=started
+
+  - name: Start worker
+    service: name=worker state=started
   when: env != "development"

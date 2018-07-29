@@ -1,0 +1,17 @@
+[Unit]
+Description={{ site_name }} worker service
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=10
+
+User=www-data
+Group=www-pub
+
+WorkingDirectory=/var/www/{{ site_name }}/{{ site_name }}/
+
+ExecStart=/var/www/envs/{{ site_name }}/bin/python manage.py rqworker
+
+[Install]
+WantedBy=multi-user.target

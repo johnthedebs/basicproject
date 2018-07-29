@@ -12,6 +12,12 @@
 - name: Install pip for python3.7
   shell: "curl https://bootstrap.pypa.io/get-pip.py | sudo python3.7"
 
+- name: Install pip for system python
+  apt: name=python3-pip
+
+- name: Install psycopg2 for system python
+  command: "python3 -m pip install psycopg2==2.7.5"
+
 - name: Install system python packages
   pip: name={{ item.name }} version={{ item.version }}
   with_items:
