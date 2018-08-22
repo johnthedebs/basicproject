@@ -1,18 +1,12 @@
 {
   "presets": [
-    "es2015",
-    "stage-0",
+    "env",
     "react"
   ],
-  "plugins": [],
-  "env": {
-    "production": {
-      "presets": [
-        "react-optimize"
-      ],
-      "plugins": [
-        "dev-expression"
-      ]
-    }
-  }
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-do-expressions",
+    "transform-object-rest-spread"
+  ]
 }

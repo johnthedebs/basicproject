@@ -38,9 +38,8 @@ macOS
    following in a second terminal window:
 
     ```
-    sudo npm install -g gulp
     npm install
-    gulp
+    npm start
     ```
 
 

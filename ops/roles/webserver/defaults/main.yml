@@ -2,7 +2,5 @@
 enable_nginx_default_site: False
 
 nodejs_global_packages: [
-    "npm@4.3.0",
-    "gulp@3.9.1",
-    "npm-check@5.7.1",
+    "npm-check@5.8.0",
 ]
