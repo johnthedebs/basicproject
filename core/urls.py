@@ -20,7 +20,7 @@ urlpatterns = [
     path("django-rq/", include("django_rq.urls")),
 
     # This needs to go at the end since it matches anything
-    re_path(r"^(?P<path>.*)/$", app),
+    re_path(r"^(?P<path>.*)$", app),
 ]
 
 if settings.DEBUG:

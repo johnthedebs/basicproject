@@ -58,4 +58,4 @@ New Deploy Checklist
 * Set remote_user in ops/site.yml
 * In conf/production.py
     * Set ALLOWED_HOSTS, ADMINS, RAVEN_CONFIG dsn
-* https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
+* https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/

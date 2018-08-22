@@ -28,7 +28,7 @@ INSTALLED_APPS = [
 
     # 3rd-party apps
     "authtools",
-    "debug_toolbar",
+    # "debug_toolbar",
     "django_extensions",
     "django_rq",
     "raven.contrib.django.raven_compat",
@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -108,7 +108,7 @@ DATABASES = {
     }
 }
 
-# https://docs.djangoproject.com/en/2.0/topics/logging/
+# https://docs.djangoproject.com/en/2.1/topics/logging/
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
@@ -183,7 +183,7 @@ LANGUAGE_CODE = "en-us"
 USE_I18N = False
 USE_L10N = False
 
-# TODO: https://docs.djangoproject.com/en/2.0/topics/i18n/timezones/#selecting-the-current-time-zone
+# TODO: https://docs.djangoproject.com/en/2.1/topics/i18n/timezones/#selecting-the-current-time-zone
 USE_TZ = True
 
 MEDIA_URL   = "/media/"
