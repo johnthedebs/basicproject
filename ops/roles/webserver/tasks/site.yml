@@ -89,10 +89,16 @@
 
 
 # Install project requirements and run db migrations
+- name: Create virtualenv
+  shell: "source ~/.bashrc && mkvirtualenv {{ site_name }}"
+  args:
+    executable: /bin/bash
+  become_user: "{{ deploy_user }}"
+
 - name: Install python requirements in virtualenv
-  pip: virtualenv=/var/www/envs/{{ site_name }}
-       requirements={{ site_path }}requirements.txt
-       extra_args="--exists-action=w"
+  shell: /var/www/envs/{{ site_name }}/bin/pip install -r requirements.txt
+  args:
+    chdir: /var/www/{{ site_name }}/{{ site_name }}
   become_user: "{{ deploy_user }}"
 
 - name: Add .project file for virtualenv

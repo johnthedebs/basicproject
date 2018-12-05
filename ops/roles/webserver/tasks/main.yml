@@ -1,10 +1,11 @@
 ---
 - name: Install site dependencies
-  apt: name={{ item }} state=present
-  with_items:
-    - libffi-dev
-    - libjpeg62-dev
-    - libxml2-dev
+  apt:
+    state: present
+    name:
+      - libffi-dev
+      - libjpeg62-dev
+      - libxml2-dev
 
 - name: Add www-pub group
   group: name=www-pub state=present

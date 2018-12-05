@@ -3,23 +3,25 @@
   hostname: name={{ hostname }}
 
 - name: Install system packages
-  apt: name={{ item }} state=present
-  with_items:
-    # General
-    - bash-completion
-    - git
-    - ntp
-    # Build
-    - build-essential
-    - binutils-doc
-    - autoconf
-    - flex
-    - bison
-    # Utility
-    - htop
-    - tig
-    - tmux
-    - vim
+  apt:
+    state: present
+    name: [
+      # General
+      "bash-completion",
+      "git",
+      "ntp",
+      # Build
+      "build-essential",
+      "binutils-doc",
+      "autoconf",
+      "flex",
+      "bison",
+      # Utility
+      "htop",
+      "tig",
+      "tmux",
+      "vim",
+    ]
 
 - name: Create deploy user
   user: name={{ user }} shell=/bin/bash
