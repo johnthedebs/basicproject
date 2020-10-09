@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     # "debug_toolbar",
     "django_extensions",
     "django_rq",
-    "raven.contrib.django.raven_compat",
     "rest_framework",
 
     # Internal apps
