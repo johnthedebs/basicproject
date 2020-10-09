@@ -9,7 +9,7 @@ export PATH=/usr/lib/postgresql/10/bin:$PATH
 
 # pip/virtualenvwrapper settings
 export WORKON_HOME=/var/www/envs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.7
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.8
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_DOWNLOAD_CACHE=/tmp/pip
 
@@ -28,6 +28,11 @@ alias runworker="python manage.py rqworker"
 
 # Support for autocompletion of django management commands
 source $HOME/.django_bash_completion
+
+
+if [ -f /lib/systemd/system/redis-server.service ]; then
+    sudo service redis-server start
+fi
 
 
 umask 0002

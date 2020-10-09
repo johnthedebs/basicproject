@@ -1,6 +1,11 @@
 import os
-import raven
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.redis import RedisIntegration
+from sentry_sdk.integrations.rq import RqIntegration
 
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = False
 
@@ -16,12 +21,18 @@ IPYTHON_ARGUMENTS = [
     "--ext", "django_extensions.management.notebook_extension",
 ]
 
-RAVEN_CONFIG = {
-    "dsn": "",
-    # If you are using git, you can also automatically configure the
-    # release based on the git info.
-    "release": raven.fetch_git_sha(os.path.dirname(__file__)),
-}
+SENTRY_DSN = ""
+
+sentry_sdk.init(
+    dsn=SENTRY_DSN,
+    integrations=[
+        DjangoIntegration(),
+        RedisIntegration(),
+        RqIntegration(),
+    ],
+    environment="production",
+    send_default_pii=True,
+)
 
 ALLOWED_HOSTS = [
     #".example.com",
@@ -46,6 +57,10 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
     "formatters": {
+        "rq_console": {
+            "datefmt" : "%H:%M:%S",
+            "format"  : "%(asctime)s %(message)s",
+        },
         "verbose": {
             "datefmt" : "%Y-%m-%d %H:%M:%S",
             "format"  : "[%(asctime)s] [%(name)s] [%(levelname)s] [%(module)s] %(message)s",
@@ -57,34 +72,52 @@ LOGGING = {
             "class"     : "logging.StreamHandler",
             "formatter" : "verbose",
         },
-        "sentry": {
-            "level" : "WARNING",
-            "class" : "raven.contrib.django.handlers.SentryHandler",
+        "rq_console": {
+            "level"     : "DEBUG",
+            "class"     : "rq.utils.ColorizingStreamHandler",
+            "formatter" : "rq_console",
+            "exclude"   : ["%(asctime)s"],
         },
     },
     "loggers": {
         "": {
             "level"    : "WARNING",
-            "handlers" : ["console", "sentry"],
+            "handlers" : ["console"],
         },
         "django": {
             "level"     : "WARNING",
-            "handlers"  : ["console", "sentry"],
-            "propagate" : False,
-        },
-        "raven": {
-            "level"     : "INFO",
             "handlers"  : ["console"],
             "propagate" : False,
         },
         "rq.worker": {
             "level"    : "WARNING",
-            "handlers" : ["sentry"],
-        },
-        "sentry.errors": {
-            "level"     : "INFO",
-            "handlers"  : ["console"],
-            "propagate" : False,
+            "handlers" : ["console", "rq_console"],
         },
     },
 }
+
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates"),
+        ],
+        "OPTIONS": {
+            "debug": DEBUG,
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.template.context_processors.static",
+                "django.contrib.messages.context_processors.messages",
+                "core.context_processors.settings",
+            ],
+            "loaders": [
+                ("django.template.loaders.cached.Loader", [
+                    "django.template.loaders.filesystem.Loader",
+                    "django.template.loaders.app_directories.Loader",
+                ]),
+            ],
+        },
+    },
+]

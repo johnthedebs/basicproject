@@ -4,15 +4,15 @@
            state=present
 
 - name: Add postgres apt repository
-  apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main"
+  apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main"
                   state=present update_cache=yes
 
 - name: Install PostgreSQL and PostGIS system packages
   apt:
     state: present
     name:
-    - postgresql-10-postgis-2.4
-    - postgresql-server-dev-10
+    - postgresql-13-postgis-3
+    - postgresql-server-dev-13
     - gdal-bin
     - libproj-dev
     - libpq-dev
@@ -20,14 +20,14 @@
     - python-psycopg2 # Needed for Ansible provisioning
 
 - name: Install psycopg2 for other ansible tasks
-  command: "python3 -m pip install psycopg2==2.7.5"
+  command: "python3 -m pip install psycopg2==2.8.6"
 
 - name: Make sure postgresql is running
   service: name=postgresql state=started enabled=yes
 
 - name: Install postgresql config file
   template: src="postgresql/pg_hba.conf" backup=yes
-            dest="/etc/postgresql/10/main/pg_hba.conf"
+            dest="/etc/postgresql/13/main/pg_hba.conf"
             owner=postgres group=postgres mode=0640
   register: postgresql_config
 

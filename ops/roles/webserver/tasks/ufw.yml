@@ -1,0 +1,36 @@
+---
+
+- name: Install UFW
+  apt:
+    name: ufw
+    state: present
+
+- name: Allow SSH
+  ufw:
+    rule: allow
+    name: OpenSSH
+
+- name: Allow web traffic
+  ufw:
+    rule: allow
+    name: Nginx Full
+
+- name: Allow Postgres
+  ufw:
+    rule: allow
+    port: 5432
+    proto: tcp
+    from_ip: "{{ worker_ip }}"
+  when: worker_ip is defined
+
+- name: Allow Redis
+  ufw:
+    rule: allow
+    port: 6379
+    proto: tcp
+    from_ip: "{{ worker_ip }}"
+  when: worker_ip is defined
+
+- name: Enable UFW
+  ufw:
+    state: enabled

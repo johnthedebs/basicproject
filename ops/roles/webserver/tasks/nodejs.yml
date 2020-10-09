@@ -9,7 +9,7 @@
               state=present
 
     - name: Add nodesource apt repository
-      apt_repository: repo="deb https://deb.nodesource.com/node_8.x bionic main"
+      apt_repository: repo="deb https://deb.nodesource.com/node_10.x focal main"
                       state=present update_cache=yes
 
     - name: Install node.js

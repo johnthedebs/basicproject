@@ -1,6 +1,6 @@
 ---
-- name: Add nginx apt repository
-  apt_repository: repo="ppa:nginx/stable" state=present
+#- name: Add nginx apt repository
+  #apt_repository: repo="ppa:nginx/stable" state=present
 
 - name: Install nginx
   apt: name=nginx state=present
