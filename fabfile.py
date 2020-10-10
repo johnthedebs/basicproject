@@ -39,12 +39,9 @@ def backup_database():
     """
     Run database backup script
     """
-    with cd("/var/lib/postgresql"):
-        backup_script = "./create_{project_id}_backup.py".format(**env)
-        if exists(backup_script):
-            sudo(backup_script, user="postgres")
-        else:
-            print(yellow("No backup script exists; not running backup.\n"))
+    backup_script = "/var/lib/postgresql/create_{project_id}_backup.py".format(**env)
+    if exists(backup_script):
+        local("ansible all -i '{host},' -u deploy -b --become-user postgres -m shell -a 'python {backup_script}'".format(backup_script=backup_script, **env))
 
 
 @task
@@ -164,6 +161,7 @@ def restart_app():
     Restart the web app gracefully
     """
     sudo("service web reload".format(**env))
+    sudo("service worker reload".format(**env))
 
 
 @task
