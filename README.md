@@ -6,6 +6,7 @@ I created it to get started on new projects more quickly and stay
 up-to-date on the tools I like to use. I'm hoping you'll get something
 out of it too.
 
+
 Getting Started
 ---------------
 
@@ -19,7 +20,7 @@ macOS
     * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
     * [Homebrew](http://brew.sh/)
     * Ansible - `brew install ansible`
-    * Node.js - `brew install node@8`
+    * Node.js - `brew install node@10`
 
 
 2. To start the backend and watch for code changes, run the
@@ -44,6 +45,12 @@ macOS
 
 
 4. Visit `localhost:8080` in a browser
+
+
+Testing
+-------
+
+Cypress tests with `npm run test` or `npm run test-headless`.
 
 
 New Deploy Checklist
