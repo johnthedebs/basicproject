@@ -1,4 +1,6 @@
 ---
+ansible_python_interpreter: /usr/bin/python3
+
 # Used to deploy the site
 site_host: basicproject.com
 site_name: basicproject
