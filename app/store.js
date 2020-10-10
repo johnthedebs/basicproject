@@ -1,6 +1,6 @@
 import { action, configure, computed, observable, toJS } from "mobx"
 
-configure({ enforceActions: true })
+configure({ enforceActions: "observed" })
 
 
 class Store {

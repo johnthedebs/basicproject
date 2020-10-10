@@ -1,0 +1,15 @@
+{
+  "name": "basicproject-tests",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:johnthedebs/basicproject.git"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/cypress open",
+    "test-headless": "./node_modules/.bin/cypress run --headless"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "5.3.0"
+  }
+}

@@ -1,7 +1,7 @@
 const webpack = require("webpack")
 const LiveReloadPlugin = require("webpack-livereload-plugin")
 
-const SENTRY_PUBLIC_DSN = ""
+const SENTRY_DSN = ""
 
 
 module.exports = {
@@ -34,10 +34,27 @@ module.exports = {
             loader: "sass-loader",
           },
         ],
+      }, {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: "babel-loader",
+          },
+          {
+            loader: "react-svg-loader",
+            options: {
+              jsx: true,
+            },
+          },
+        ],
       },
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(false),
+      SENTRY_DSN: null,
+    }),
     new LiveReloadPlugin(),
   ],
 }

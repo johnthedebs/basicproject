@@ -13,11 +13,13 @@ class App extends Component {
     return (
       <div>
         <h1>Cool Counter</h1>
-        <p>Counter is at: {store.counter}</p>
+        <p className="counter-state">Counter is at: {store.counter}</p>
         <button onClick={store.incrementCounter}>
           Increment counter
         </button>
-        <p>Clicking the button will set the counter to: {store.counterPlusOne}</p>
+        <p className="next-counter-state">
+          Clicking the button will set the counter to: {store.counterPlusOne}
+        </p>
       </div>
     )
   }
