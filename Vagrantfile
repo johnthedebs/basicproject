@@ -12,9 +12,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.ssh.forward_agent = true
 
     config.vm.provider :virtualbox do |vb|
+        vb.memory = 1024
+        vb.cpus = 2
         vb.customize [
-            "modifyvm", :id,
-            "--memory", "512"
+            "guestproperty", "set", :id,
+            "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000
         ]
     end
 
