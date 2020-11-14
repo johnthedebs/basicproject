@@ -1,6 +1,8 @@
 import { observer } from "mobx-react-lite"
 import styled from "styled-components"
 
+import "./app.sass"
+
 
 const Header = styled.h1`
   color: purple;
@@ -9,7 +11,7 @@ const Header = styled.h1`
 
 const App = observer(({store}) => {
   return (
-    <div>
+    <div className="box">
       <Header>Cool Counter</Header>
       <p className="counter-state">Counter is at: {store.counter}</p>
       <button onClick={store.incrementCounter}>

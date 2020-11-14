@@ -1,5 +1,5 @@
 const webpack = require("webpack")
-const LiveReloadPlugin = require("webpack-livereload-plugin")
+const CopyPlugin = require("copy-webpack-plugin")
 
 const SENTRY_DSN = ""
 
@@ -8,6 +8,7 @@ module.exports = {
   entry: "./app/index.js",
   output: {
     filename: "app.js",
+    path: __dirname + "/dist",
   },
   module: {
     rules: [
@@ -30,22 +31,19 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/,
+        test: /\.s?[ac]ss$/i,
         use: [
-          {
-            loader: "style-loader",
-          },
-          {
-            loader: "css-loader",
-          },
-          {
-            loader: "postcss-loader",
-          },
-          {
-            loader: "sass-loader",
-          },
+          // Creates `style` nodes from JS strings
+          "style-loader",
+          // Translates CSS into CommonJS
+          "css-loader",
+          // Compiles Sass to CSS
+          "sass-loader",
+          // Postcss does its thing
+          "postcss-loader",
         ],
-      }, {
+      },
+      {
         test: /\.svg$/,
         use: [
           {
@@ -62,10 +60,17 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
-      PRODUCTION: JSON.stringify(false),
-      SENTRY_DSN: null,
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "./app/public",
+          to: "public",
+        },
+      ],
     }),
-    new LiveReloadPlugin(),
+    new webpack.DefinePlugin({
+      PRODUCTION: JSON.stringify(true),
+      SENTRY_DSN: JSON.stringify(SENTRY_DSN),
+    }),
   ],
 }

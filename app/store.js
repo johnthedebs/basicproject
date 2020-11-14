@@ -4,8 +4,8 @@ configure({ enforceActions: "observed" })
 
 
 class Store {
+  //
   // STATE
-
   counter = 1
 
   constructor() {
@@ -13,15 +13,15 @@ class Store {
   }
 
 
+  //
   // COMPUTED VALUES
-
   get counterPlusOne () {
     return this.counter + 1
   }
 
 
+  //
   // ACTIONS
-
   incrementCounter = () => {
     this.counter++
   }

@@ -195,7 +195,7 @@ MEDIA_ROOT  = os.path.join(BASE_DIR, os.pardir, "site_media", "media")
 STATIC_ROOT = os.path.join(BASE_DIR, os.pardir, "site_media", "static")
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "dist"),
+    os.path.join(BASE_DIR, "dist-dev"),
 ]
 
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"

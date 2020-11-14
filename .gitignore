@@ -5,11 +5,14 @@ syntax: glob
 dist
 
 # Directories
+_local
+dist-dev
 node_modules
 site_media
-search_index
-.sass-cache
 CACHE
+ops/tf/.terraform
+tests/cypress/screenshots
+tests/cypress/videos
 
 # Files
 *~
@@ -18,13 +21,10 @@ CACHE
 *.kpf
 *.old
 *.pyc
-*.retry
-*.sassc
 *.swp
 *.tmproj
 .vagrant
 local_settings.py
-pip-log.txt
 
 # Mac stuff
 .DS_Store

@@ -52,6 +52,8 @@ Testing
 
 Cypress tests with `npm run test` or `npm run test-headless`.
 
+https://docs.cypress.io/guides/getting-started/writing-your-first-test.html#Write-your-first-test
+
 
 New Deploy Checklist
 --------------------

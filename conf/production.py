@@ -96,6 +96,10 @@ LOGGING = {
     },
 }
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "dist"),
+]
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
