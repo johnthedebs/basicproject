@@ -1,34 +1,32 @@
-import { action, configure, computed, observable, toJS } from "mobx"
+import { configure, makeAutoObservable, toJS } from "mobx"
 
 configure({ enforceActions: "observed" })
 
 
 class Store {
-  //
   // STATE
-  //
 
-  @observable counter = 1
+  counter = 1
+
+  constructor() {
+    makeAutoObservable(this)
+  }
 
 
-  //
   // COMPUTED VALUES
-  //
 
-  @computed get counterPlusOne() {
+  get counterPlusOne () {
     return this.counter + 1
   }
 
 
-  //
   // ACTIONS
-  //
 
- @action incrementCounter = () => {
+  incrementCounter = () => {
     this.counter++
   }
 
-  @action addToCounter = (value) => {
+  addToCounter = (value) =>{
     this.counter += value
   }
 }
