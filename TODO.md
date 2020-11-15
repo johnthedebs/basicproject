@@ -4,7 +4,6 @@ TODO
 * Upgrade fabfile to latest version of Fabric/Invoke
 * Add terraform basics
 * Add basic django tests
-* Finish adding basic cypress tests
 * Support staging environment
 * Fix typing in python debugger
 

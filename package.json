@@ -5,9 +5,9 @@
     "url": "git@github.com:johnthedebs/basicproject.git"
   },
   "scripts": {
-    "start": "webpack --watch --mode development --config webpack.config.dev.js",
+    "start": "webpack --watch --mode development --config conf/webpack.config.dev.js",
     "dev": "webpack --mode development",
-    "build": "webpack --mode production --config webpack.config.js",
+    "build": "webpack --mode production --config conf/webpack.config.js",
     "test": "cd tests && ./node_modules/.bin/cypress open",
     "test-headless": "cd tests && ./node_modules/.bin/cypress run --headless"
   },
