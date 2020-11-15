@@ -176,6 +176,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 POSTGIS_VERSION = (2, 4, 3)
+CSRF_FAILURE_VIEW = "core.views.error_403"
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "sessions"

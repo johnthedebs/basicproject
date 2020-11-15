@@ -1,16 +1,18 @@
-{% load static from staticfiles %}<!DOCTYPE html>
+{% load static %}<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title></title>
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <div id="root"></div>
+    <div id="root">{% block content %}{% endblock %}</div>
 
     {% if debug %}
     <script src="http://localhost:35729/livereload.js"></script>
     {% endif %}
+    {% block script %}
     <script src="{% static "app.js" %}"></script>
+    {% endblock %}
 </body>
 </html>
