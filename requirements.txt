@@ -3,7 +3,6 @@ Fabric==1.14.0
 Pillow==7.2.0
 
 bpython==0.19
-django-authtools==1.7.0
 django-debug-toolbar==3.1
 django-extensions==3.0.9
 django-localflavor==3.0.1

@@ -27,13 +27,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     # 3rd-party apps
-    "authtools",
     # "debug_toolbar",
     "django_extensions",
     "django_rq",
     "rest_framework",
 
     # Internal apps
+    "accounts",
     "core",
 ]
 
@@ -165,7 +165,7 @@ LOGGING = {
 #
 # Misc Django config
 #
-AUTH_USER_MODEL = "core.User"
+AUTH_USER_MODEL = "accounts.User"
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
