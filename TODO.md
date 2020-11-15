@@ -6,8 +6,6 @@ TODO
 * Add basic django tests
 * Finish adding basic cypress tests
 * Support staging environment
-* Upgrade JS everything
-* Replace / integrate django-authtools & upgrade Django
 * Fix typing in python debugger
 
 
