@@ -1,4 +1,4 @@
-import { observer } from "mobx-react-lite"
+import { observer } from "mobx-react"
 import styled from "styled-components"
 
 import "./app.sass"

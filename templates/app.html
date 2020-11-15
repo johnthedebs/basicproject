@@ -3,6 +3,15 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    {% comment %}
+    {% block socialmeta %}
+        <meta name="description" content="">
+        <meta property="og:title" content="">
+        <meta property="og:description" content="">
+        <meta property="og:image" content="">
+    {% endblock %}
+    {% endcomment %}
+    {% block css %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -11,6 +20,8 @@
     {% if debug %}
     <script src="http://localhost:35729/livereload.js"></script>
     {% endif %}
+    {# Uncomment if using jQuery #}
+    {#{% include "includes/csrf.html" %}#}
     {% block script %}
     <script src="{% static "app.js" %}"></script>
     {% endblock %}

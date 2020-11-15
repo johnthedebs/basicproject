@@ -9,14 +9,13 @@
               state=present
 
     - name: Add nodesource apt repository
-      apt_repository: repo="deb https://deb.nodesource.com/node_10.x focal main"
+      apt_repository: repo="deb https://deb.nodesource.com/node_15.x focal main"
                       state=present update_cache=yes
 
-    - name: Install node.js
+    - name: Install node
       apt: name=nodejs state=present
-
   when: node_installed.stat.exists == false
 
-- name: Install global packages
+- name: Install global node packages
   shell: npm install -g {{ " ".join(nodejs_global_packages) }}
   when: nodejs_global_packages|length > 0

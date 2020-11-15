@@ -60,10 +60,10 @@ TEMPLATES = [
             "debug": DEBUG,
             "context_processors": [
                 "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.template.context_processors.static",
-                "django.contrib.messages.context_processors.messages",
             ],
             "loaders": [
                 "django.template.loaders.filesystem.Loader",
@@ -79,21 +79,21 @@ WSGI_APPLICATION = "wsgi.application"
 CACHES = {
     "default": {
         "BACKEND"  : "django_redis.cache.RedisCache",
-        "LOCATION" : "127.0.0.1:6379:1",
+        "LOCATION" : "redis://127.0.0.1:6379/1",
         "OPTIONS"  : {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         },
     },
     "sessions": {
         "BACKEND"  : "django_redis.cache.RedisCache",
-        "LOCATION" : "127.0.0.1:6379:2",
+        "LOCATION" : "redis://127.0.0.1:6379/2",
         "OPTIONS"  : {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         },
     },
     "jobs": {
         "BACKEND"  : "django_redis.cache.RedisCache",
-        "LOCATION" : "127.0.0.1:6379:3",
+        "LOCATION" : "redis://127.0.0.1:6379/3",
         "OPTIONS"  : {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         },
@@ -148,11 +148,6 @@ LOGGING = {
             "handlers"  : ["console"],
             "propagate" : False,
         },
-        "raven": {
-            "level"    : "DEBUG",
-            "handlers" : [],
-            "propagate" : False,
-        },
         "rq.worker": {
             "level"    : "DEBUG",
             "handlers" : ["console", "rq_console"],
@@ -175,8 +170,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-POSTGIS_VERSION = (2, 4, 3)
 CSRF_FAILURE_VIEW = "core.views.error_403"
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# DEFAULT_FROM_EMAIL = "Example <noreply@example.com>"
+# SERVER_EMAIL = ""
+
+POSTGIS_VERSION = (3, 0, 2)
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
 SESSION_CACHE_ALIAS = "sessions"
@@ -189,6 +189,7 @@ USE_L10N = False
 
 # TODO: https://docs.djangoproject.com/en/2.1/topics/i18n/timezones/#selecting-the-current-time-zone
 USE_TZ = True
+TIME_ZONE = "America/New_York"
 
 MEDIA_URL   = "/media/"
 STATIC_URL  = "/static/"
@@ -212,6 +213,8 @@ IPYTHON_ARGUMENTS = [
     "--ip", "0.0.0.0",
 ]
 
+SHELL_PLUS = "bpython"
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
@@ -230,3 +233,7 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+if DEBUG:
+    for queueConfig in iter(RQ_QUEUES.values()):
+        queueConfig["ASYNC"] = False

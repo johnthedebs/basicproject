@@ -66,5 +66,6 @@ New Deploy Checklist
 * Set hostname, site_name, site_path in group_vars
 * Set remote_user in ops/site.yml
 * In conf/production.py
-    * Set ALLOWED_HOSTS, ADMINS, RAVEN_CONFIG dsn
+    * Set ALLOWED_HOSTS, ADMINS, SENTRY_DSN
+* Set SENTRY_DSN in webpack.config.js
 * https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
