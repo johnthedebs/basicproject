@@ -9,7 +9,7 @@
               state=present
 
     - name: Add nodesource apt repository
-      apt_repository: repo="deb https://deb.nodesource.com/node_15.x focal main"
+      apt_repository: repo="deb https://deb.nodesource.com/node_14.x focal main"
                       state=present update_cache=yes
 
     - name: Install node

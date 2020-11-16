@@ -21,6 +21,7 @@ tests/cypress/videos
 *.kpf
 *.old
 *.pyc
+*.retry
 *.swp
 *.tmproj
 .vagrant
