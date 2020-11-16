@@ -20,7 +20,7 @@ macOS
     * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
     * [Homebrew](http://brew.sh/)
     * Ansible - `brew install ansible`
-    * Node.js - `brew install node@10`
+    * Node.js - `brew install node@14`
 
 
 2. To start the backend and watch for code changes, run the
@@ -71,5 +71,5 @@ New Deploy Checklist
 * Set remote_user in ops/site.yml
 * In conf/production.py
     * Set ALLOWED_HOSTS, ADMINS, SENTRY_DSN
-* Set SENTRY_DSN in webpack.config.js
-* https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
+* Set SENTRY_DSN in conf/webpack.config.js
+* https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/

@@ -1,5 +1,6 @@
 import os
 
+# https://docs.djangoproject.com/en/3.1/ref/settings/
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -111,7 +112,7 @@ DATABASES = {
     }
 }
 
-# https://docs.djangoproject.com/en/2.1/topics/logging/
+# https://docs.djangoproject.com/en/3.1/topics/logging/
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
@@ -187,7 +188,7 @@ LANGUAGE_CODE = "en-us"
 USE_I18N = False
 USE_L10N = False
 
-# TODO: https://docs.djangoproject.com/en/2.1/topics/i18n/timezones/#selecting-the-current-time-zone
+# TODO: https://docs.djangoproject.com/en/3.1/topics/i18n/timezones/#selecting-the-current-time-zone
 USE_TZ = True
 TIME_ZONE = "America/New_York"
 
