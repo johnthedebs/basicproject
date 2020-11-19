@@ -3,6 +3,8 @@ syntax: glob
 
 # NOTE: Delete this and commit production-compiled assets before deploying
 dist
+# NOTE: Delete this to save 'lets' customization
+ops/lets/config/settings.js
 
 # Directories
 _local
