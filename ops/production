@@ -1,2 +1,3 @@
-[production]
-basicproject
+[web]
+
+[worker]

@@ -1,0 +1,10 @@
+---
+- name: Get commit {{ role }} {{ stage }}
+  hosts: "{{ role }}"
+  gather_facts: false
+  remote_user: "{{ ssh_user }}"
+  become: true
+
+  tasks:
+    - name: Get current deploy commit
+      shell: git rev-parse HEAD

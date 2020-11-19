@@ -1,0 +1,19 @@
+{
+  "name": "lets",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Ops Swiss Army Knife",
+  "main": "index.js",
+  "repository": "https://github.com/johnthedebs/basicproject",
+  "author": "John Debs <johnthedebs@gmail.com>",
+  "license": "UNLICENSED",
+  "bin": {
+    "lets": "index.js"
+  },
+  "dependencies": {
+    "chalk": "4.1.0",
+    "inquirer": "7.3.3",
+    "jsonfile": "6.1.0",
+    "yargs": "16.1.1"
+  }
+}
