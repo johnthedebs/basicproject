@@ -1,7 +1,7 @@
 module.exports = {
-  "parser": "postcss-syntax",
-  "map": false,
-  "plugins": {
-    "postcss-plugin": {}
+  map: false,
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {}
   }
 }
