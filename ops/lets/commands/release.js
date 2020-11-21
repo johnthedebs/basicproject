@@ -1,6 +1,7 @@
 const { execSync } = require("child_process")
 
 const execute = require("../helpers/execute")
+const settings = require("../config/settings")
 
 const chalk = require("chalk")
 
@@ -29,6 +30,7 @@ module.exports = {
   description: "",
   run: (args, config) => {
     const { version } = args
+    const { pushRelease } = settings
 
     const version_label = `v${version}`
     const commitMessage = `'Release ${version_label}'`
@@ -41,8 +43,11 @@ module.exports = {
       "git pull --rebase=false",
       `git merge develop --no-ff -m "${commitMessage}"`,
       `git tag -f "${version_label}"`,
+      pushRelease ? "git push" : null,
+      pushRelease ? "git push --tags" : null,
       "git checkout develop",
       "git merge master",
+      pushRelease ? "git push" : null,
     ]
 
     execute(gitCommands, logSuccess)

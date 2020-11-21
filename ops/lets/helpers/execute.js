@@ -14,9 +14,20 @@ const execute = (commands, cb) => {
     commands = [commands]
   }
 
-  let child = spawn("sh", ["-c", commands[0]], { stdio: "inherit" })
+  const nextCommand = () => {
+    const newCommands = commands.slice(1)
+    if (newCommands.length > 0) {
+      execute(newCommands, cb)
+    } else {
+      if (cb) cb()
+    }
+  }
+
+  if (!commands[0]) nextCommand()
 
   process.stdout.write(chalk.blue(`==> Executing command:\n${commands[0]}\n`))
+
+  let child = spawn("sh", ["-c", commands[0]], { stdio: "inherit" })
 
   // Catch ctrl-c and wait for children to clean up before exiting
   process.on("SIGINT", () => {
@@ -29,13 +40,7 @@ const execute = (commands, cb) => {
     process.stdout.write("\n")
     process.removeAllListeners("SIGINT")
     if (code === 0) {
-      const newCommands = commands.slice(1)
-
-      if (newCommands.length > 0) {
-        execute(newCommands, cb)
-      } else {
-        if (cb) { cb() }
-      }
+      nextCommand()
     } else {
       process.stderr.write(chalk.red(`Command:\n${commands[0]}\nexited with code: ${code}\n`))
       process.exit(1)
