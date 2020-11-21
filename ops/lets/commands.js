@@ -1,6 +1,7 @@
 module.exports = {
   "ssh"              : require("./commands/ssh"),
   "tail-logs"        : require("./commands/tail-logs"),
+  "backup-database"  : require("./commands/backup-database"),
   "deploy"           : require("./commands/deploy"),
   "release"          : require("./commands/release"),
   "get-commit"       : require("./commands/get-commit"),
