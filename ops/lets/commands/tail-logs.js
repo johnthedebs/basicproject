@@ -13,9 +13,7 @@ module.exports = {
     const { tailLogCommands, servers } = settings
 
     const server_address = servers[stage][role]
-    const ssh_opts = [
-      "-A",
-    ].join(" ")
+    const ssh_opts = [ "-A", ].join(" ")
 
     const hosts = [{name: `${stage}-${role}`, address: server_address}]
 

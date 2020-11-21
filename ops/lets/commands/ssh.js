@@ -1,6 +1,6 @@
+const execute = require("../helpers/execute")
 const prompts = require("../config/prompts")
 const settings = require("../config/settings")
-const execute = require("../helpers/execute")
 
 const chalk = require("chalk")
 
@@ -11,9 +11,7 @@ module.exports = {
   run: (args, config) => {
     const { role, stage } = args
     const server_address = settings.servers[stage][role]
-    const ssh_opts = [
-      "-A",
-    ].join(" ")
+    const ssh_opts = [ "-A", ].join(" ")
     const command = `ssh ${ssh_opts} ${config.ssh_user}@${server_address}`
 
     const msg = `Connecting to ${stage} ${role}`
