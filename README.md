@@ -63,12 +63,11 @@ New Deploy Checklist
 --------------------
 
 * Set SECRET_KEY in settings.py
-* Set host and user in fabfile
 * Rename ops/host_vars/basicproject
     * Set hostname, user, ansile_ssh_host, and ansible_ssh_user
     * Change ops/production to reflect host_vars file name
 * Set hostname, site_name, site_path in group_vars
-* Set remote_user in ops/site.yml
+* Fill out `ops/lets/config/example-settings.js` and rename to `settings.js`
 * In conf/production.py
     * Set ALLOWED_HOSTS, ADMINS, SENTRY_DSN
 * Set SENTRY_DSN in conf/webpack.config.js

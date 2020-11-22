@@ -10,7 +10,7 @@ module.exports = {
   description: "",
   run: (args, config) => {
     const { stage } = args
-    const { projectName, servers, resetStagingDbCommands } = settings
+    const { projectName, servers } = settings
 
     const server_address = servers[stage]["web"]
     backup_script = `/var/lib/postgresql/create_${projectName}_backup.py`

@@ -9,7 +9,9 @@ const executeRemote = (userAtHost, commands, cb) => {
   const ssh_opts = ["-A", "-t", "-q"].join(" ")
 
   const callRemoteCommands = (commands, i=0) => {
-    if (i >= commands.length) return
+    if (i >= commands.length) {
+      if (cb) { cb() } else { return }
+    }
     const command = `ssh ${ssh_opts} ${userAtHost} '${commands[i]}'`
     execute(command, () => {
       callRemoteCommands(commands, i+1)
