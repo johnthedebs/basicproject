@@ -37,8 +37,6 @@ fi
 
 umask 0002
 
-# NOTE: default bashrc exits on non-interactive
-# logins which is problematic for Fabric usage
 if [ -n "$PS1" ]; then
 
     # don't put duplicate lines in the history. See bash(1) for more options
