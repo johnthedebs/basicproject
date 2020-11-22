@@ -1,7 +1,7 @@
 const execute = require("./execute")
 
 
-const executeRemote = (userAtHost, commands) => {
+const executeRemote = (userAtHost, commands, cb) => {
   if (Object.prototype.toString.call(commands) !== '[object Array]') {
     commands = [commands]
   }

@@ -8,5 +8,6 @@ module.exports = {
   "shell"            : require("./commands/shell"),
   "list-servers"     : require("./commands/list-servers"),
   "reset-staging-db" : require("./commands/reset-staging-db"),
+  "provision"        : require("./commands/provision")
   "setup"            : require("./commands/setup"),
 }

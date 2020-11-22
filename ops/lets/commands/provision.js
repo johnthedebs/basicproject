@@ -3,6 +3,9 @@ const settings = require("../config/settings")
 const executeRemote = require("../helpers/executeRemote")
 
 
+ansibleRunFullPlaybook
+
+
 module.exports = {
   args: [prompts["stage"]],
   description: "",
@@ -19,8 +22,7 @@ module.exports = {
     const backup_database = `sudo runuser -l postgres -c "python ${backup_script}"`
     const update_repo = `cd ${project_dir} && git remote prune origin && git fetch -p && git pull`
     const update_settings = `cd ${project_dir} && rm -f local_settings.py && cp conf/production.py local_settings.py`
-    const install_requirements = `${virtualenv_dir}bin/pip install -r ${project_dir}requirements.txt --exists-action=w`
-    const run_migrations = `${manage_cmd} migrate --noinput`
+    const run_ansible = `ANSIBLE_CONFIG={ansible_config} ansible-playbook ops/site.yml -i ${process.cwd()}/../${stage} --extra-vars 'deploy_user=${config.ssh_user}'`
     const collect_static = `${manage_cmd} collectstatic --noinput`
     const restart_app = "sudo service web reload; sudo service worker reload"
 
@@ -28,8 +30,7 @@ module.exports = {
       backup_database,
       update_repo,
       update_settings,
-      install_requirements,
-      run_migrations,
+      run_ansible
       collect_static,
       restart_app,
     ]
