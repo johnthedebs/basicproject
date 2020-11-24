@@ -30,7 +30,7 @@ macOS
     git clone https://github.com/johnthedebs/basicproject.git
     cd basicproject
     # OR
-    django-admin startproject <project_name> --template https://github.com/johnthedebs/basicproject/archive/master.zip
+    django-admin startproject <project_name> --template https://github.com/johnthedebs/basicproject/archive/main.zip
     cd <project_name>
 
     vagrant up

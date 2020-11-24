@@ -8,7 +8,7 @@ const chalk = require("chalk")
 
 const logSuccess = () => {
   console.log(chalk.green("\nFinished generating release. No changes have been pushed to origin yet."))
-  console.log(chalk.green("Review master and develop branches and tags, then push if they look good."))
+  console.log(chalk.green("Review main and staging branches and tags, then push if they look good."))
 }
 
 
@@ -39,14 +39,14 @@ module.exports = {
       "git checkout staging",
       "git fetch -p",
       "git pull --rebase=false",
-      "git checkout master",
+      "git checkout main",
       "git pull --rebase=false",
-      `git merge develop --no-ff -m "${commitMessage}"`,
+      `git merge staging --no-ff -m "${commitMessage}"`,
       `git tag -f "${version_label}"`,
       pushRelease ? "git push" : null,
       pushRelease ? "git push --tags" : null,
-      "git checkout develop",
-      "git merge master",
+      "git checkout staging",
+      "git merge main",
       pushRelease ? "git push" : null,
     ]
 
