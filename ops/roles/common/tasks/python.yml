@@ -25,7 +25,7 @@
     - name: virtualenvwrapper
       version: 4.8.4
     - name: pip
-      version: 20.2.3
+      version: 20.3.3
 
 - name: Set up pdb++ defaults
   template: src=pdbrc.py dest=/home/{{ ansible_ssh_user }}/.pdbrc.py
