@@ -1,4 +1,4 @@
-import { configure, makeAutoObservable, toJS } from "mobx"
+import { configure, makeAutoObservable } from "mobx"
 
 configure({ enforceActions: "observed" })
 
@@ -26,7 +26,7 @@ class Store {
     this.counter++
   }
 
-  addToCounter = (value) =>{
+  addToCounter = (value: number) => {
     this.counter += value
   }
 }

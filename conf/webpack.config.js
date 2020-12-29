@@ -5,15 +5,19 @@ const SENTRY_DSN = ""
 
 
 module.exports = {
-  entry: "./app/index.js",
+  entry: "./app/index.tsx",
   output: {
     filename: "app.js",
     path: __dirname + "/../dist",
   },
+  stats: "minimal",
+  resolve: {
+      extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -21,10 +25,11 @@ module.exports = {
             presets: [
               "@babel/preset-env",
               ["@babel/preset-react", { "runtime": "automatic" }],
+              "@babel/preset-typescript",
             ],
             plugins: [
-              "@babel/plugin-proposal-object-rest-spread",
               ["@babel/plugin-proposal-class-properties", { "loose": true }],
+              "@babel/plugin-proposal-object-rest-spread",
               "babel-plugin-styled-components",
             ],
             cacheDirectory: true,

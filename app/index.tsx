@@ -1,13 +1,11 @@
 import * as Sentry from "@sentry/browser"
-if (PRODUCTION) { Sentry.init({dsn: SENTRY_DSN}) }
-
 import ReactDOM from "react-dom"
-
 import App from "./app"
-import store from "./store"
+
+if (PRODUCTION) { Sentry.init({dsn: SENTRY_DSN}) }
 
 
 ReactDOM.render(
-  <App store={store} />,
+  <App />,
   document.getElementById("root")
 )
