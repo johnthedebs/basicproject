@@ -7,6 +7,13 @@ const LiveReloadPlugin = require("webpack-livereload-plugin")
 
 const SENTRY_DSN = ""
 
+// https://webpack.js.org/configuration/devtool/
+// Less high quality, faster than 'eval-source-map'
+//config.devtool = "eval-cheap-module-source-map"
+
+// High quality, slow build / fast rebuild
+//config.devtool = "eval-source-map"
+
 config.cache = { type: "filesystem" }
 config.output.path = __dirname + "/../dist-dev"
 config.plugins = [

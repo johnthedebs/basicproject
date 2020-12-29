@@ -67,6 +67,7 @@ New Deploy Checklist
     * Set hostname, user, ansile_ssh_host, and ansible_ssh_user
     * Change ops/production to reflect host_vars file name
 * Set hostname, site_name, site_path in group_vars
+* `npm install` in `ops/lets` directory
 * Fill out `ops/lets/config/example-settings.js` and rename to `settings.js`
 * In conf/production.py
     * Set ALLOWED_HOSTS, ADMINS, SENTRY_DSN
