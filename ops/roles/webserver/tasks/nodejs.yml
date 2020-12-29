@@ -1,6 +1,7 @@
 ---
 - name: Check if node is already installed
-  stat: path=/usr/bin/node
+  stat: 
+    path: /usr/bin/node
   register: node_installed
 
 - block:
@@ -9,11 +10,14 @@
               state=present
 
     - name: Add nodesource apt repository
-      apt_repository: repo="deb https://deb.nodesource.com/node_14.x focal main"
-                      state=present update_cache=yes
+      apt_repository: 
+        repo: "deb https://deb.nodesource.com/node_14.x focal main"
+        state: present 
 
     - name: Install node
-      apt: name=nodejs state=present
+      apt:
+        name: nodejs
+        state: present
   when: node_installed.stat.exists == false
 
 - name: Install global node packages

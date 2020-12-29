@@ -14,8 +14,9 @@
       line: "{{ github_host_key }}"
 
   - name: Clone repo
-    repo: "{{ repo_url }}"
-    dest: "/var/www/{{ site_name }}/{{ site_name}}/"
+    git:
+      repo: "{{ repo_url }}"
+      dest: "/var/www/{{ site_name }}/{{ site_name}}/"
   when: env != "development"
 
 
