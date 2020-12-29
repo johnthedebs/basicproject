@@ -25,7 +25,9 @@ const execute = (commands, cb) => {
 
   if (!commands[0]) nextCommand()
 
-  process.stdout.write(chalk.blue(`==> Executing command:\n${commands[0]}\n`))
+  process.stdout.write(chalk.blue(`==> Executing command:\n`))
+  process.stdout.write(chalk.green("$ "))
+  process.stdout.write(chalk.yellow(`${commands[0]}\n`))
 
   let child = spawn("sh", ["-c", commands[0]], { stdio: "inherit" })
 

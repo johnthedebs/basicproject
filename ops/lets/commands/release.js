@@ -50,6 +50,6 @@ module.exports = {
       pushRelease ? "git push" : null,
     ]
 
-    execute(gitCommands, logSuccess)
+    execute(gitCommands, pushRelease ? null : logSuccess)
   },
 }
