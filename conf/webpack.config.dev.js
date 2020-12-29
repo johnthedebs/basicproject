@@ -7,6 +7,7 @@ const LiveReloadPlugin = require("webpack-livereload-plugin")
 
 const SENTRY_DSN = ""
 
+config.cache = { type: "filesystem" }
 config.output.path = __dirname + "/../dist-dev"
 config.plugins = [
   new CopyPlugin({

@@ -5,11 +5,12 @@
     "url": "git@github.com:johnthedebs/basicproject.git"
   },
   "scripts": {
-    "start": "webpack --watch --mode development --config conf/webpack.config.dev.js",
+    "start": "webpack --watch --mode development --config ./conf/webpack.config.dev.js",
     "dev": "webpack --mode development",
-    "build": "NODE_ENV=production webpack --mode production --config conf/webpack.config.js",
+    "build": "NODE_ENV=production webpack --mode production --config ./conf/webpack.config.js",
     "test": "cd tests && ./node_modules/.bin/cypress open",
-    "test-headless": "cd tests && ./node_modules/.bin/cypress run --headless"
+    "test-headless": "cd tests && ./node_modules/.bin/cypress run --headless",
+    "postinstall": "rm -rf ./node_modules/.cache/webpack"
   },
   "dependencies": {
     "@sentry/browser": "5.27.4",
