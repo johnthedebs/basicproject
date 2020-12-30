@@ -12,7 +12,7 @@ module.exports = {
   },
   stats: "minimal",
   resolve: {
-      extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
+      extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   module: {
     rules: [

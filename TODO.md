@@ -8,6 +8,4 @@ TODO
 * Support staging environment
 * Set up django async view (asgi?)
 * Fix typing in python debugger
-
-* Try using typescript?
-* Try using containers?
+* Try using containers
