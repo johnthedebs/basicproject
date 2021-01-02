@@ -5,7 +5,7 @@ import store from "./store"
 
 const App = () => {
   return (
-    <div tw="p-4 m-5" css={`background: blue;`}>
+    <div tw="p-4 m-5">
       <h1 tw="mb-4 text-3xl font-semibold">Cool Counter</h1>
       <p>Counter is at: {store.counter}</p>
       <button

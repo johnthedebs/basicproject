@@ -24,14 +24,17 @@ module.exports = {
           options: {
             presets: [
               "@babel/preset-env",
-              ["@babel/preset-react", { "runtime": "automatic" }],
+              ["@babel/preset-react", {
+                "runtime": "automatic",
+                "importSource": "@emotion/react",
+              }],
               "@babel/preset-typescript",
             ],
             plugins: [
               ["@babel/plugin-proposal-class-properties", { "loose": true }],
               "@babel/plugin-proposal-object-rest-spread",
               "babel-plugin-macros",
-              "babel-plugin-styled-components",
+              "@emotion/babel-plugin",
             ],
             cacheDirectory: true,
             cacheCompression: false,
