@@ -1,0 +1,52 @@
+{% extends "app.html" %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block css %}
+<style>
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="center page-column">
+    <form class="form" action="{% url "signup" %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}" method="post">
+        {% csrf_token %}
+
+        <h2>Create Account</h2>
+
+        {% if error == "user-exists" %}
+            <ul class="errorlist nonfield">
+                <li>
+                    A user exists with the email address you entered.
+                    <a href="{% url "login" %}">Click here to sign in instead</a>.
+                </li>
+            </ul>
+        {% endif %}
+        {% if error == "bad-password" %}
+            <ul class="errorlist nonfield">
+                {% for message in error_messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {{ form }}
+        <input type="hidden" name="next" value="{{ request.GET.next }}" />
+
+        <button class="submit-button" type="submit">Create Account</button>
+    </form>
+
+    <div class="extra-actions">
+        <div class="action-row">
+            Already have an account? <a href="{% url "login" %}">Sign in</a>.
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script>
+</script>
+{% endblock %}

@@ -1,16 +1,22 @@
 from django import forms
 from django.contrib.auth.forms import (
-    ReadOnlyPasswordHashField,
     ReadOnlyPasswordHashWidget,
     PasswordResetForm as OldPasswordResetForm,
     UserChangeForm as DjangoUserChangeForm,
-    AuthenticationForm as DjangoAuthenticationForm,
 )
 from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.hashers import identify_hasher, UNUSABLE_PASSWORD_PREFIX
 from django.utils.html import format_html
 
 User = get_user_model()
+
+
+class SignupForm(forms.Form):
+    required_css_class = "required"
+
+    full_name = forms.CharField(max_length=255)
+    email = forms.EmailField()
+    password = forms.CharField(max_length=40, widget=forms.PasswordInput())
 
 
 def is_password_usable(pw):

@@ -2,9 +2,11 @@ import settings
 from django.contrib                  import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls                     import include, path, re_path
+from django.contrib.auth.views       import LoginView
 
 from rest_framework import routers
 
+from accounts import views as accounts_views
 from core import views
 
 
@@ -14,6 +16,10 @@ router.register("users", views.UserViewSet)
 
 urlpatterns = [
     path("", views.app, name="app"),
+
+    path("signup/", accounts_views.signup, name="signup"),
+    path("login/", LoginView.as_view(template_name="login.html"), name="login"),
+    path("logout/", accounts_views.logout, name="logout"),
 
     path("admin/", admin.site.urls),
     path("api/", include(router.urls)),
