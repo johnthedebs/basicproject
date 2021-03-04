@@ -4,6 +4,7 @@
 
 - name: Install system packages
   apt:
+    update_cache: yes
     state: present
     name: [
       # General
