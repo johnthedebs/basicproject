@@ -9,6 +9,7 @@ module.exports = {
   output: {
     filename: "app.js",
     path: __dirname + "/../dist",
+    clean: true,
   },
   stats: "minimal",
   resolve: {

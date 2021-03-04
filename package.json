@@ -6,7 +6,7 @@
   },
   "scripts": {
     "start": "webpack --watch --mode development --config ./conf/webpack.config.dev.js",
-    "dev": "webpack --mode development",
+    "dev": "webpack serve --open --mode development --config ./conf/webpack.config.dev-no-backend.js",
     "build": "NODE_ENV=production webpack --mode production --config ./conf/webpack.config.js",
     "test": "cd tests && ./node_modules/.bin/cypress open",
     "test-headless": "cd tests && ./node_modules/.bin/cypress run --headless",
@@ -52,6 +52,7 @@
     "typescript": "4.2.2",
     "webpack": "5.24.2",
     "webpack-cli": "4.5.0",
+    "webpack-dev-server": "3.11.2",
     "webpack-livereload-plugin": "3.0.0"
   }
 }
