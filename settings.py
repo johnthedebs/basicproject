@@ -173,6 +173,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 CSRF_FAILURE_VIEW = "core.views.error_403"
 
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # DEFAULT_FROM_EMAIL = "Example <noreply@example.com>"
 # SERVER_EMAIL = ""
