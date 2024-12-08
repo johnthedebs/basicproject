@@ -29,7 +29,7 @@ urlpatterns = [
     path("500/", views.error_500),
 
     # This needs to go at the end since it matches anything
-    re_path(r"^(?P<path>.*)$", views.app),
+    re_path(r"^(?P<path>.*)/$", views.app),
 ]
 
 handler403 = "core.views.error_403"

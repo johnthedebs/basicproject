@@ -1,5 +1,0 @@
----
-enable_nginx_default_site: False
-
-nodejs_global_packages: [
-]

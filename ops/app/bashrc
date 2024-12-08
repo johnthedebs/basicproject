@@ -2,14 +2,9 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# postgres settings
-export LD_LIBRARY_PATH=/usr/lib/postgresql/13/lib
-export PGDATA=/var/lib/postgresql/13/main
-export PATH=/usr/lib/postgresql/13/bin:$PATH
-
 # pip/virtualenvwrapper settings
 export WORKON_HOME=/var/www/envs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.8
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3.10
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_DOWNLOAD_CACHE=/tmp/pip
 
@@ -23,16 +18,8 @@ export EDITOR=vim
 alias cdlogs="cd /var/log/"
 alias killzombies="sudo pkill -9 python; sudo pkill -9 gunicorn; echo 'All done.'"
 alias purge_pyc="find . -name '*.pyc' -exec rm -rf {} \;"
-alias runserver="python manage.py runserver"
+alias runserver="python manage.py runserver 0.0.0.0:8000"
 alias runworker="python manage.py rqworker"
-
-# Support for autocompletion of django management commands
-source $HOME/.django_bash_completion
-
-
-if [ -f /lib/systemd/system/redis-server.service ]; then
-    sudo service redis-server start
-fi
 
 
 umask 0002
@@ -132,8 +119,4 @@ if [ -n "$PS1" ] || [ -n "$PROMPT" ]; then
     if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
         . /etc/bash_completion
     fi
-fi
-
-if [ -d /var/www/envs/{{ site_name }}/ ]; then
-    workon {{ site_name }}
 fi

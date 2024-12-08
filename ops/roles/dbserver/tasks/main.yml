@@ -1,5 +1,0 @@
----
-- include_tasks: elasticsearch.yml
-  when: install_elasticsearch
-- include_tasks: postgresql.yml
-- include_tasks: redis.yml

@@ -104,11 +104,11 @@ CACHES = {
 DATABASES = {
     "default": {
         "ENGINE"   : "django.contrib.gis.db.backends.postgis",
-        "NAME"     : "basicproject",
-        "USER"     : "basicproject",
-        "PASSWORD" : "basicproject",
-        "HOST"     : "",
-        "PORT"     : "",
+        "NAME"     : "postgres",
+        "USER"     : "postgres",
+        "PASSWORD" : "postgres",
+        "HOST"     : "postgres",
+        "PORT"     : "5432",
     }
 }
 

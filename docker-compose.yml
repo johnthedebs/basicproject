@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      dockerfile: ./ops/app/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - site_media:/site_media
+    working_dir: /app
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+  postgres:
+    build:
+      context: ./ops/postgres
+      dockerfile: Dockerfile
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  site_media:
+  postgres_data:
+  redis_data:
