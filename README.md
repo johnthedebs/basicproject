@@ -2,9 +2,8 @@ basicproject
 ============
 
 This is a Django/React starter project with lots of batteries included.
-I created it to get started on new projects more quickly and stay
-up-to-date on the tools I like to use. I'm hoping you'll get something
-out of it too.
+I created it to get started on new projects more quickly and stay up-to-date on
+the tools I like to use. I hope you'll get something out of it too.
 
 
 Getting Started
@@ -16,11 +15,9 @@ macOS
 1. Install the following:
 
     * Command Line Tools package - `xcode-select --install`
-    * [Vagrant](https://www.vagrantup.com/downloads.html)
-    * [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
     * [Homebrew](http://brew.sh/)
-    * Ansible - `brew install ansible`
-    * Node.js - `brew install node@14`
+    * [Docker](https://docs.docker.com/get-docker/)
+    * Node.js - `brew install node@22`
 
 
 2. To start the backend and watch for code changes, run the
@@ -33,9 +30,9 @@ macOS
     django-admin startproject <project_name> --template https://github.com/johnthedebs/basicproject/archive/main.zip
     cd <project_name>
 
-    vagrant up
-    vagrant ssh
-    runserver
+    docker-compose up -d
+    docker-compose exec -it app bash
+    $ runserver
     ```
 
 
@@ -48,7 +45,7 @@ macOS
     ```
 
 
-4. Visit `localhost:8080` in a browser
+4. Visit `localhost:8000` in a browser
 
 
 Testing
@@ -63,13 +60,7 @@ New Deploy Checklist
 --------------------
 
 * Set SECRET_KEY in settings.py
-* Rename ops/host_vars/basicproject
-    * Set hostname, user, ansile_ssh_host, and ansible_ssh_user
-    * Change ops/production to reflect host_vars file name
-* Set hostname, site_name, site_path in group_vars
 * `npm install` in `ops/lets` directory
 * Fill out `ops/lets/config/example-settings.js` and rename to `settings.js`
-* In conf/production.py
-    * Set ALLOWED_HOSTS, ADMINS, SENTRY_DSN
-* Set SENTRY_DSN in conf/webpack.config.js
-* https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+* Set SENTRY_DSN in vite.config.ts
+* https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
