@@ -16,14 +16,22 @@
 </head>
 <body>
     <div id="root">{% block content %}{% endblock %}</div>
-
+    {% block script %}
     {% if debug %}
-    <script src="http://localhost:35729/livereload.js"></script>
+        <script type="module">
+            import RefreshRuntime from 'http://localhost:3000/@react-refresh'
+            RefreshRuntime.injectIntoGlobalHook(window)
+            window.$RefreshReg$ = () => {}
+            window.$RefreshSig$ = () => (type) => type
+            window.__vite_plugin_react_preamble_installed__ = true
+        </script>
+        <script type="module" src="http://localhost:3000/@vite/client"></script>
+        <script type="module" src="http://localhost:3000/index.tsx"></script>
+    {% else %}
+        <script src="{% static "app.js" %}"></script>
     {% endif %}
     {# Uncomment if using jQuery #}
     {#{% include "includes/csrf.html" %}#}
-    {% block script %}
-    <script src="{% static "app.js" %}"></script>
     {% endblock %}
 </body>
 </html>

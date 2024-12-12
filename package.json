@@ -1,15 +1,15 @@
 {
   "name": "basicproject",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git@github.com:johnthedebs/basicproject.git"
   },
   "scripts": {
-    "start": "vite build --watch",
-    "build": "NODE_ENV=production vite build",
+    "start": "vite",
+    "build": "ENV=production vite build",
     "test": "cd tests && ./node_modules/.bin/cypress open",
-    "test-headless": "cd tests && ./node_modules/.bin/cypress run --headless",
-    "postinstall": "rm -rf ./node_modules/.cache/webpack"
+    "test-headless": "cd tests && ./node_modules/.bin/cypress run --headless"
   },
   "babelMacros": {
     "twin": {

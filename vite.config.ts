@@ -7,7 +7,15 @@ const SENTRY_DSN = ""
 // https://vitejs.dev/config/
 export default defineConfig({
   root: './app',
-  base: '/static/',
+  base: '',
+  server: {
+    port: 3000,
+    strictPort: true,
+    origin: 'http://localhost:3000',
+    hmr: {
+      host: 'localhost'
+    }
+  },
   plugins: [
     react({
       jsxImportSource: '@emotion/react',
@@ -25,10 +33,9 @@ export default defineConfig({
     SENTRY_DSN: JSON.stringify(SENTRY_DSN)
   },
   build: {
-    outDir: '../dist-dev',
+    outDir: '../dist',
     emptyOutDir: true,
     manifest: true,
-    watch: {},
     rollupOptions: {
       input: './app/index.tsx',
       output: {

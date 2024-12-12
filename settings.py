@@ -200,7 +200,7 @@ MEDIA_ROOT  = os.path.join(BASE_DIR, os.pardir, "site_media", "media")
 STATIC_ROOT = os.path.join(BASE_DIR, os.pardir, "site_media", "static")
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "dist-dev"),
+    os.path.join(BASE_DIR, "dist"),
 ]
 
 STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"
@@ -209,7 +209,10 @@ STATICFILES_STORAGE = "django.contrib.staticfiles.storage.ManifestStaticFilesSto
 #
 # 3rd-party config
 #
-INTERNAL_IPS = ("127.0.0.1",)
+INTERNAL_IPS = (
+    "127.0.0.1",  # Localhost
+    "172.19.0.1", # Docker container
+)
 
 IPYTHON_ARGUMENTS = [
     "--ext", "django_extensions.management.notebook_extension",
