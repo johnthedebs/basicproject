@@ -1,15 +1,17 @@
 import * as Sentry from "@sentry/browser"
-import ReactDOM from "react-dom"
+import { createRoot } from "react-dom/client"
 import {GlobalStyles} from "twin.macro"
 import App from "./app"
 
 if (PRODUCTION) { Sentry.init({dsn: SENTRY_DSN}) }
 
+const container = document.getElementById("root")
+if (!container) throw new Error("Failed to find root element")
 
-ReactDOM.render(
+const root = createRoot(container)
+root.render(
   <>
     <GlobalStyles />
     <App />
-  </>,
-  document.getElementById("root")
+  </>
 )
