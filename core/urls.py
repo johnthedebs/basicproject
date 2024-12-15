@@ -4,14 +4,9 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls                     import include, path, re_path
 from django.contrib.auth.views       import LoginView
 
-from rest_framework import routers
-
 from accounts import views as accounts_views
 from core import views
-
-
-router = routers.DefaultRouter()
-router.register("users", views.UserViewSet)
+from core.api import api
 
 
 urlpatterns = [
@@ -22,7 +17,7 @@ urlpatterns = [
     path("logout/", accounts_views.logout, name="logout"),
 
     path("admin/", admin.site.urls),
-    path("api/", include(router.urls)),
+    path("api/", api.urls),
     path("django-rq/", include("django_rq.urls")),
 
     path("404/", views.error_404),

@@ -9,10 +9,11 @@ const App = () => {
       <h1 tw="mb-4 text-3xl font-semibold">Cool Counter</h1>
       <p>Counter is at: {store.counter}</p>
       <button
-        tw="p-1 px-4 text-white bg-blue-600 rounded active:bg-blue-500 hover:bg-blue-700 transition-colors"
+        tw="p-1 px-4 text-white bg-blue-600 rounded active:bg-blue-500 hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         onClick={store.incrementCounter}
+        disabled={store.loading}
       >
-        Increment counter
+        {store.loading ? "Incrementing..." : "Increment counter"}
       </button>
       <p>
         Clicking the button will set the counter to: {store.counterPlusOne}
