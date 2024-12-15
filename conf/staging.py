@@ -3,6 +3,8 @@ import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.redis import RedisIntegration
 from sentry_sdk.integrations.rq import RqIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
+import logging
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -25,13 +27,23 @@ SENTRY_DSN = ""
 
 sentry_sdk.init(
     dsn=SENTRY_DSN,
+    traces_sample_rate=0.2,
+    profiles_sample_rate=0.2,
     integrations=[
-        DjangoIntegration(),
+        DjangoIntegration(
+            transaction_style='url',
+            middleware_spans=True,
+        ),
         RedisIntegration(),
         RqIntegration(),
+        LoggingIntegration(
+            level=logging.INFO,
+            event_level=logging.ERROR
+        ),
     ],
-    environment="production",
+    environment="staging",
     send_default_pii=True,
+    enable_tracing=True,
 )
 
 ALLOWED_HOSTS = [
@@ -74,9 +86,8 @@ LOGGING = {
         },
         "rq_console": {
             "level"     : "DEBUG",
-            "class"     : "rq.utils.ColorizingStreamHandler",
+            "class"     : "logging.StreamHandler",
             "formatter" : "rq_console",
-            "exclude"   : ["%(asctime)s"],
         },
     },
     "loggers": {
