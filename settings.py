@@ -241,5 +241,5 @@ except ImportError:
     pass
 
 if DEBUG:
-    for queueConfig in iter(RQ_QUEUES.values()):
+    for queueConfig in RQ_QUEUES.values():
         queueConfig["ASYNC"] = False
