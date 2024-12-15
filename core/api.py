@@ -18,4 +18,13 @@ def increment_counter(request):
         counter = Counter.objects.create()
     counter.value += 1
     counter.save()
+    return {"value": counter.value}
+
+@api.post("/counter/reset")
+def reset_counter(request):
+    counter = Counter.objects.first()
+    if not counter:
+        counter = Counter.objects.create()
+    counter.value = 1
+    counter.save()
     return {"value": counter.value} 

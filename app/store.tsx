@@ -61,6 +61,31 @@ class Store {
       })
     }
   }
+
+  resetCounter = async () => {
+    if (this.loading) return
+    
+    this.loading = true
+    try {
+      const response = await fetch("/api/counter/reset", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRFToken": getCookie("csrftoken") || "",
+        },
+      })
+      const data = await response.json()
+      runInAction(() => {
+        this.counter = data.value
+        this.loading = false
+      })
+    } catch (error) {
+      console.error("Failed to reset counter:", error)
+      runInAction(() => {
+        this.loading = false
+      })
+    }
+  }
 }
 
 
